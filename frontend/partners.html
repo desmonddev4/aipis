@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partners | AIPIS 2027</title>
+  <meta name="description" content="AIPIS convenors, founding government partners and founding industry partner.">
+  <meta name="theme-color" content="#0D3D26">
+  <meta property="og:title" content="Partners | AIPIS 2027">
+  <meta property="og:description" content="AIPIS convenors, founding government partners and founding industry partner.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="js/components/scroll-effects.js"></script>
+  <style>
+    :root { --green-950: #082a1a; --green-900: #0d3d26; --green-700: #1a5c2a; --green-600: #237a38; --green-100: #dcebe0; --green-50: #eef6f0; --orange-500: #f4a24c; --orange-400: #f7b36b; --orange-300: #ffc98a; --orange-100: #ffeed9; --orange-50: #fff8ef; --ink: #10261a; --ink-soft: #35493d; --white: #fff; --bg: #fbfaf6; --radius: 20px; --shadow: 0 10px 30px rgba(13, 61, 38, 0.1); --shadow-lg: 0 20px 50px rgba(13, 61, 38, 0.18); --font-head: "Archivo", system-ui, sans-serif; --font-body: "Source Sans 3", system-ui, sans-serif; --nav-h: 72px; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: var(--font-body); font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem); line-height: 1.65; color: var(--ink); background: var(--bg); overflow-x: hidden; }
+    img, svg { max-width: 100%; display: block; }
+    a { color: var(--green-700); text-underline-offset: 3px; }
+    a:hover { color: var(--green-900); }
+    button { font: inherit; cursor: pointer; }
+    h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0 0 0.6em; color: var(--green-900); letter-spacing: -0.01em; }
+    h1 { font-size: clamp(2.5rem, 1.6rem + 4.6vw, 5rem); font-weight: 800; }
+    h2 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.1rem); font-weight: 800; }
+    h3 { font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); font-weight: 700; }
+    p { margin: 0 0 1em; }
+    :focus-visible { outline: 3px solid var(--orange-500); outline-offset: 3px; border-radius: 6px; }
+    .container { width: min(1180px, 100% - 2.5rem); margin-inline: auto; }
+    .hp { position: absolute !important; left: -9999px; opacity: 0; height: 0; width: 0; }
+    .glass { background: rgba(255, 255, 255, 0.72); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); border: 1px solid rgba(26, 92, 42, 0.14); box-shadow: var(--shadow); }
+    .glass-light { background: rgba(255, 255, 255, 0.94); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: var(--shadow-lg); color: var(--ink); }
+    .card { border-radius: var(--radius); padding: clamp(1.4rem, 1rem + 1.2vw, 2rem); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(244, 162, 76, 0.7); }
+    .card h3 { margin-bottom: 0.5em; }
+    .card p:last-child { margin-bottom: 0; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.8rem 1.5rem; border-radius: 999px; border: 2px solid transparent; font-family: var(--font-head); font-weight: 700; font-size: 1rem; line-height: 1.2; text-align: center; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0) scale(0.98); }
+    .btn-lg { padding: 1rem 1.9rem; font-size: 1.08rem; }
+    .btn-sm { padding: 0.55rem 1.1rem; font-size: 0.95rem; }
+    .btn-primary { background: var(--orange-500); color: var(--green-950); box-shadow: 0 8px 20px rgba(244, 162, 76, 0.4); }
+    .btn-primary:hover { background: var(--orange-400); color: var(--green-950); box-shadow: 0 12px 26px rgba(244, 162, 76, 0.55); }
+    .btn-outline { background: transparent; color: var(--green-900); border-color: var(--green-700); }
+    .btn-outline:hover { background: var(--green-700); color: #fff; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.4rem; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase; color: #a35a0c; margin-bottom: 0.9rem; }
+    .section { position: relative; padding: clamp(4.5rem, 3rem + 6vw, 8rem) 0; }
+    .grid { display: grid; gap: 1.4rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .plain-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+    .plain-list li { padding-left: 1.4rem; position: relative; font-weight: 500; }
+    .plain-list li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 8px; height: 8px; border-radius: 50%; background: var(--orange-500); }
+    .field { display: grid; gap: 0.35rem; margin-bottom: 1rem; }
+    label { font-weight: 700; color: var(--green-900); font-size: 0.98rem; }
+    input, select, textarea { width: 100%; font: inherit; color: var(--ink); background: #fff; border: 2px solid rgba(26, 92, 42, 0.28); border-radius: 14px; padding: 0.8rem 1rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--orange-500); box-shadow: 0 0 0 4px rgba(244, 162, 76, 0.3); }
+    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: #b3261e; }
+    .field-error { color: #b3261e; font-weight: 600; font-size: 0.92rem; }
+    .form-status { min-height: 1.4em; font-weight: 600; margin: 0.4rem 0 0.6rem; }
+    .form-status.ok { color: var(--green-700); }
+    .form-status.err { color: #b3261e; }
+    .form-status a { color: inherit; }
+    button[disabled] { opacity: 0.65; cursor: wait; transform: none; }
+    @media (max-width: 1040px) {
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      :root { --nav-h: 64px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .btn-row .btn { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    .page-hero { position: relative; padding: calc(var(--nav-h) + 80px) 0 clamp(2.5rem, 5vw, 4rem); background: linear-gradient(180deg, #fff, var(--orange-50)); border-bottom: 1px solid rgba(26, 92, 42, 0.12); overflow: hidden; }
+    .page-hero::before { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; background: var(--orange-300); opacity: 0.35; filter: blur(80px); top: -140px; right: -100px; }
+    .page-hero::after { content: ""; position: absolute; width: 360px; height: 360px; border-radius: 50%; background: var(--green-100); filter: blur(70px); bottom: -180px; left: -100px; }
+    .page-hero .container { position: relative; z-index: 1; }
+    .page-hero h1 { font-size: clamp(2.2rem, 1.4rem + 3.6vw, 4rem); max-width: 22ch; }
+    .page-hero + .section { padding-top: clamp(2.5rem, 2rem + 3vw, 4.5rem); }
+    .crumbs { display: flex; gap: 0.6rem; align-items: center; font-weight: 600; font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 1rem; }
+    .crumbs a { color: var(--green-700); }
+    .cta { padding: clamp(3rem, 6vw, 5rem) 0; }
+    .cta-box { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--green-900), var(--green-700)); border-radius: 28px; padding: clamp(1.8rem, 4vw, 3.2rem); display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; box-shadow: var(--shadow-lg); }
+    .cta-box::after { content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: var(--orange-500); opacity: 0.28; filter: blur(70px); right: -60px; top: -100px; }
+    .cta-box > * { position: relative; z-index: 1; }
+    .cta-box h2 { color: #fff; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); margin: 0 0 0.3em; }
+    .cta-box p { color: #eaf3ed; margin: 0; }
+    .cta-box .btn-row { margin: 0; }
+    @media (max-width: 600px) {
+      .cta-box .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <script src="js/components/navbar.js"></script>
+
+  <main id="main">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container">
+        <p class="crumbs reveal"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>Partners</span></p>
+        <p class="eyebrow reveal">Partners</p>
+        <h1 id="page-title" class="reveal" data-delay="1">Convenors and founding partners</h1>
+      </div>
+    </section>
+
+    <section class="section" id="partners">
+      <div class="container">
+        <div class="grid grid-3">
+          <article class="glass card partner-card reveal" data-delay="1">
+            <h3>Convenors</h3>
+            <ul class="plain-list">
+              <li>College of Art and Built Environment and Department of Construction Technology and Management, Kwame Nkrumah University of Science and Technology (KNUST)</li>
+              <li>African Institute of Project Assurance and Forensics (AIPAF)</li>
+              <li>Green Communities International (GCI)</li>
+            </ul>
+          </article>
+          <article class="glass card partner-card reveal" data-delay="2">
+            <h3>Founding Government Partners</h3>
+            <ul class="plain-list">
+              <li>Ministry of Finance</li>
+              <li>Ministry of Works and Housing</li>
+              <li>Ministry of Trade, Agribusiness and Industry</li>
+              <li>Ministry of Energy and Green Transition</li>
+              <li>24-Hour Economy and Accelerated Export Development Secretariat</li>
+            </ul>
+          </article>
+          <article class="glass card partner-card reveal" data-delay="3">
+            <h3>Founding Industry Partner</h3>
+            <ul class="plain-list">
+              <li>Top Business Brokers Consult Limited</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div>
+            <h2>Partner with AIPIS</h2>
+            <p>Partners are recognised at the summit and in its published outputs.</p>
+          </div>
+          <div class="btn-row">
+          <a class="btn btn-primary btn-lg" href="partner-with-us.html">View partnership packages</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/components/footer.js"></script>
+
+  <script src="js/config.js"></script>
+  <script src="js/lib/form-api.js"></script>
+  <script src="js/components/form-modal.js"></script>
+</body>
+</html>

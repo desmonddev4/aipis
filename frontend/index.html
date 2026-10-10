@@ -7,61 +7,147 @@
   <meta name="description" content="AIPIS measures African infrastructure by its results. The first edition takes place at KNUST, Kumasi, Ghana, from 24 to 27 August 2027.">
   <meta name="theme-color" content="#0D3D26">
   <meta property="og:title" content="AIPIS 2027 | Africa Infrastructure, Prosperity and Industrialisation Summit">
-  <meta property="og:description" content="From financial close to prosperity close. KNUST, Kumasi, Ghana, 24 to 27 August 2027.">
+  <meta property="og:description" content="AIPIS measures African infrastructure by its results. The first edition takes place at KNUST, Kumasi, Ghana, from 24 to 27 August 2027.">
   <meta property="og:type" content="website">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add("js");</script>
-  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/components/scroll-effects.js"></script>
+  <style>
+    :root { --green-950: #082a1a; --green-900: #0d3d26; --green-700: #1a5c2a; --green-600: #237a38; --green-100: #dcebe0; --green-50: #eef6f0; --orange-500: #f4a24c; --orange-400: #f7b36b; --orange-300: #ffc98a; --orange-100: #ffeed9; --orange-50: #fff8ef; --ink: #10261a; --ink-soft: #35493d; --white: #fff; --bg: #fbfaf6; --radius: 20px; --shadow: 0 10px 30px rgba(13, 61, 38, 0.1); --shadow-lg: 0 20px 50px rgba(13, 61, 38, 0.18); --font-head: "Archivo", system-ui, sans-serif; --font-body: "Source Sans 3", system-ui, sans-serif; --nav-h: 72px; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: var(--font-body); font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem); line-height: 1.65; color: var(--ink); background: var(--bg); overflow-x: hidden; }
+    img, svg { max-width: 100%; display: block; }
+    a { color: var(--green-700); text-underline-offset: 3px; }
+    a:hover { color: var(--green-900); }
+    button { font: inherit; cursor: pointer; }
+    h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0 0 0.6em; color: var(--green-900); letter-spacing: -0.01em; }
+    h1 { font-size: clamp(2.5rem, 1.6rem + 4.6vw, 5rem); font-weight: 800; }
+    h2 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.1rem); font-weight: 800; }
+    h3 { font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); font-weight: 700; }
+    p { margin: 0 0 1em; }
+    :focus-visible { outline: 3px solid var(--orange-500); outline-offset: 3px; border-radius: 6px; }
+    .container { width: min(1180px, 100% - 2.5rem); margin-inline: auto; }
+    .hp { position: absolute !important; left: -9999px; opacity: 0; height: 0; width: 0; }
+    .glass { background: rgba(255, 255, 255, 0.72); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); border: 1px solid rgba(26, 92, 42, 0.14); box-shadow: var(--shadow); }
+    .glass-light { background: rgba(255, 255, 255, 0.94); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: var(--shadow-lg); color: var(--ink); }
+    .glass-dark { background: rgba(255, 255, 255, 0.09); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); border: 1px solid rgba(255, 255, 255, 0.22); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); }
+    .card { border-radius: var(--radius); padding: clamp(1.4rem, 1rem + 1.2vw, 2rem); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(244, 162, 76, 0.7); }
+    .card h3 { margin-bottom: 0.5em; }
+    .card p:last-child { margin-bottom: 0; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.8rem 1.5rem; border-radius: 999px; border: 2px solid transparent; font-family: var(--font-head); font-weight: 700; font-size: 1rem; line-height: 1.2; text-align: center; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0) scale(0.98); }
+    .btn-lg { padding: 1rem 1.9rem; font-size: 1.08rem; }
+    .btn-sm { padding: 0.55rem 1.1rem; font-size: 0.95rem; }
+    .btn-primary { background: var(--orange-500); color: var(--green-950); box-shadow: 0 8px 20px rgba(244, 162, 76, 0.4); }
+    .btn-primary:hover { background: var(--orange-400); color: var(--green-950); box-shadow: 0 12px 26px rgba(244, 162, 76, 0.55); }
+    .btn-outline { background: transparent; color: var(--green-900); border-color: var(--green-700); }
+    .btn-outline:hover { background: var(--green-700); color: #fff; }
+    .btn-glass-light { background: rgba(255, 255, 255, 0.14); color: #fff; border-color: rgba(255, 255, 255, 0.7); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+    .btn-glass-light:hover { background: #fff; color: var(--green-900); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.4rem; }
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: center; padding: calc(var(--nav-h) + 70px) 0 70px; background: linear-gradient(160deg, var(--green-950), var(--green-900) 55%, #145230); overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; animation: float 14s ease-in-out infinite; }
+    .orb-1 { width: 460px; height: 460px; background: var(--orange-500); top: -120px; right: -80px; opacity: 0.4; }
+    .orb-2 { width: 380px; height: 380px; background: var(--green-600); bottom: -100px; left: -100px; animation-delay: -5s; }
+    .orb-3 { width: 260px; height: 260px; background: var(--orange-300); bottom: 12%; right: 22%; opacity: 0.18; animation-delay: -9s; }
+    .hero-pillars { position: absolute; right: 5%; bottom: 0; height: 62%; width: min(380px, 34vw); display: flex; align-items: flex-end; gap: 4%; opacity: 0.28; }
+    .hero-pillars span { flex: 1; height: var(--h); border-radius: 18px 18px 0 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.05)); transform-origin: bottom; animation: rise 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .hero-pillars span:nth-child(2) { animation-delay: 0.15s; background: linear-gradient(180deg, rgba(244, 162, 76, 0.9), rgba(244, 162, 76, 0.05)); }
+    .hero-pillars span:nth-child(3) { animation-delay: 0.3s; }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero h1 { color: #fff; max-width: 15ch; margin-bottom: 0.4em; }
+    .hero h1 .accent { color: var(--orange-300); }
+    .hero-full { color: var(--orange-300); font-weight: 600; letter-spacing: 0.01em; margin-bottom: 0.9rem; }
+    .hero-intro { max-width: 62ch; color: #f1f7f3; font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem); }
+    .hero-tagline { color: #fff; font-family: var(--font-head); font-weight: 700; font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase; color: #a35a0c; margin-bottom: 0.9rem; }
+    .eyebrow-light { color: var(--orange-300); }
+    .hero .eyebrow-light { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.28); padding: 0.45rem 1rem; border-radius: 999px; color: #fff; letter-spacing: 0.06em; text-transform: none; font-size: 1rem; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange-500); display: inline-block; }
+    .facts { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .facts li { border-radius: 18px; padding: 1.2rem 1.4rem; display: flex; flex-direction: column; gap: 0.2rem; }
+    .facts strong { font-family: var(--font-head); font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem); color: var(--orange-300); }
+    .facts span { color: #fff; font-size: 1rem; }
+    .section { position: relative; padding: clamp(4.5rem, 3rem + 6vw, 8rem) 0; }
+    .section-tint { background: linear-gradient(180deg, var(--orange-50), var(--green-50)); }
+    .section-head { max-width: 800px; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+    .lead { font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem); color: var(--ink-soft); }
+    .split { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+    .grid { display: grid; gap: 1.4rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .theme-box { background: var(--green-900); border-radius: var(--radius); padding: 1.4rem 1.6rem; margin: 1.6rem 0; border-left: 6px solid var(--orange-500); }
+    .theme-box .eyebrow { color: var(--orange-300); margin-bottom: 0.4rem; font-size: 0.82rem; }
+    .theme-box p { color: #fff; font-family: var(--font-head); font-weight: 600; font-size: 1.2rem; margin: 0; line-height: 1.4; }
+    .definitions { display: flex; flex-direction: column; align-items: stretch; gap: 0.6rem; }
+    .def { position: relative; padding-left: 5rem; }
+    .def-step { position: absolute; left: 1.4rem; top: 1.4rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; background: var(--green-100); color: var(--green-900); }
+    .def-accent { background: var(--orange-100); border-color: rgba(244, 162, 76, 0.6); }
+    .def-accent .def-step { background: var(--orange-500); color: var(--green-950); }
+    .def-arrow { align-self: center; color: var(--orange-500); animation: bob 2s ease-in-out infinite; }
+    .field { display: grid; gap: 0.35rem; margin-bottom: 1rem; }
+    label { font-weight: 700; color: var(--green-900); font-size: 0.98rem; }
+    input, select, textarea { width: 100%; font: inherit; color: var(--ink); background: #fff; border: 2px solid rgba(26, 92, 42, 0.28); border-radius: 14px; padding: 0.8rem 1rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--orange-500); box-shadow: 0 0 0 4px rgba(244, 162, 76, 0.3); }
+    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: #b3261e; }
+    .field-error { color: #b3261e; font-weight: 600; font-size: 0.92rem; }
+    .form-status { min-height: 1.4em; font-weight: 600; margin: 0.4rem 0 0.6rem; }
+    .form-status.ok { color: var(--green-700); }
+    .form-status.err { color: #b3261e; }
+    .form-status a { color: inherit; }
+    button[disabled] { opacity: 0.65; cursor: wait; transform: none; }
+    @media (max-width: 1040px) {
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .hero-pillars { opacity: 0.16; }
+    }
+    @media (max-width: 860px) {
+      .split { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      :root { --nav-h: 64px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .btn-row .btn { width: 100%; }
+      .hero { padding-top: calc(var(--nav-h) + 50px); min-height: auto; }
+      .def { padding-left: 4.4rem; }
+      .def-step { left: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    .explore { display: flex; flex-direction: column; text-decoration: none; color: var(--ink); }
+    .explore h3 { color: var(--green-900); }
+    .explore p { flex: 1; color: var(--ink-soft); }
+    .explore .more { font-family: var(--font-head); font-weight: 700; color: var(--green-700); display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; }
+    .explore .more svg { transition: transform 0.2s; }
+    .explore:hover .more svg { transform: translateX(5px); }
+    .explore:hover { color: var(--ink); }
+    .cta { padding: clamp(3rem, 6vw, 5rem) 0; }
+    .cta-box { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--green-900), var(--green-700)); border-radius: 28px; padding: clamp(1.8rem, 4vw, 3.2rem); display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; box-shadow: var(--shadow-lg); }
+    .cta-box::after { content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: var(--orange-500); opacity: 0.28; filter: blur(70px); right: -60px; top: -100px; }
+    .cta-box > * { position: relative; z-index: 1; }
+    .cta-box h2 { color: #fff; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); margin: 0 0 0.3em; }
+    .cta-box p { color: #eaf3ed; margin: 0; }
+    .cta-box .btn-row { margin: 0; }
+    @media (max-width: 600px) {
+      .cta-box .btn { width: 100%; }
+    }
+    @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -40px); } }
+    @keyframes rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    @keyframes bob { 50% { transform: translateY(6px); } }
+  </style>
 </head>
-<body id="top">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="progress" id="progress" aria-hidden="true"></div>
-
-  <header class="nav-wrap">
-    <nav class="nav glass" id="nav" aria-label="Main">
-      <a class="brand" href="#top" aria-label="AIPIS home">
-        <img src="assets/logo.svg" alt="" width="40" height="40">
-        <span class="brand-text">
-          <strong>AIPIS</strong>
-          <small>Africa Infrastructure, Prosperity and Industrialisation Summit</small>
-        </span>
-      </a>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#programme">Programme</a></li>
-        <li><a href="#innovations">Innovations</a></li>
-        <li class="has-dropdown">
-          <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">Call for Speakers
-            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <ul class="dropdown">
-            <li><a href="#speakers">All roles</a></li>
-            <li><a href="#keynote">Distinguished Keynote Speakers</a></li>
-            <li><a href="#guest">Special Guest Speakers</a></li>
-            <li><a href="#technical">Technical Keynote Presenters</a></li>
-            <li><a href="#posters">Poster Presenters</a></li>
-            <li><a href="#exhibitors">Exhibitors</a></li>
-          </ul>
-        </li>
-        <li><a href="#participants">Who attends</a></li>
-        <li><a href="#partners">Partners</a></li>
-        <li><a href="#partner">Partner with us</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="nav-cta"><a class="btn btn-primary btn-sm" href="#register">Register</a></li>
-      </ul>
-    </nav>
-  </header>
+<body>
+  <script src="js/components/navbar.js"></script>
 
   <main id="main">
-    <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-bg" aria-hidden="true">
         <span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span>
@@ -76,8 +162,8 @@
         <p class="hero-intro reveal" data-delay="3">The Africa Infrastructure, Prosperity and Industrialisation Summit (AIPIS) is an annual summit that measures African infrastructure by what it delivers: industrial output, jobs and better living standards.</p>
         <p class="hero-tagline reveal" data-delay="3">Building infrastructure. Powering industry. Delivering prosperity.</p>
         <div class="btn-row reveal" data-delay="4">
-          <a class="btn btn-primary btn-lg" href="#register">Register to attend</a>
-          <a class="btn btn-glass-light btn-lg" href="#partner">Become a partner</a>
+          <a class="btn btn-primary btn-lg" href="register.html">Register to attend</a>
+          <a class="btn btn-glass-light btn-lg" href="partner-with-us.html">Become a partner</a>
         </div>
 
         <ul class="facts reveal" data-delay="5">
@@ -88,19 +174,17 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
+    <section class="section" id="why">
       <div class="container split">
         <div>
           <p class="eyebrow reveal">About</p>
           <h2 class="reveal">Why AIPIS</h2>
           <p class="lead reveal">Africa has made strong progress in raising finance for infrastructure. Governments, development finance institutions, pension funds and private investors now plan and fund projects with growing skill.</p>
-          <p class="reveal">Problems remain after the funding is secured. Many projects stall, run over budget, or are completed without the industrial growth that justified them. AIPIS follows projects through construction and operation and measures what they deliver for industry and citizens.</p>
           <div class="theme-box reveal">
             <span class="eyebrow">Strategic theme, 2027 to 2031</span>
             <p>Infrastructure that Delivers: Turning Africa’s Investment into Industry and Shared Prosperity</p>
           </div>
-          <p class="reveal">Every edition asks one question: has infrastructure spending in Africa produced working industries and better lives?</p>
+          <a class="btn btn-outline btn-lg" href="about.html">Read more about AIPIS</a>
         </div>
         <div class="definitions">
           <article class="glass card def reveal" data-delay="1">
@@ -120,382 +204,67 @@
       </div>
     </section>
 
-    <!-- PROGRAMME -->
-    <section class="section section-tint" id="programme">
+    <section class="section section-tint" id="explore">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow reveal">Programme</p>
-          <h2 class="reveal">Four days in Kumasi</h2>
-          <p class="lead reveal">The 2027 theme is From Financial Close to Prosperity Close: Delivering Infrastructure that Builds African Industry. Each conference day covers one thematic area, and the fourth day is spent in the field.</p>
-        </div>
-
-        <div class="grid grid-4">
-          <article class="glass card day reveal" data-delay="1">
-            <span class="day-badge">Day 1</span>
-            <p class="day-date">Tuesday 24 August</p>
-            <h3>Building infrastructure</h3>
-            <p>Opening ceremony and launch of the Africa Infrastructure Prosperity Index; Unfinished Projects Forensic Clinic; Land, Traditional Authority and Infrastructure Roundtable.</p>
-          </article>
-          <article class="glass card day reveal" data-delay="2">
-            <span class="day-badge">Day 2</span>
-            <p class="day-date">Wednesday 25 August</p>
-            <h3>Powering industry</h3>
-            <p>Plenary on energy for industry; Build-with-Africa Procurement Exchange; transport corridors, special economic zones and industrial parks; round-the-clock production under the 24-Hour Economy.</p>
-          </article>
-          <article class="glass card day reveal" data-delay="3">
-            <span class="day-badge">Day 3</span>
-            <p class="day-date">Thursday 26 August</p>
-            <h3>Delivering prosperity</h3>
-            <p>Prosperity Close Standard; Finance and Investor Forum; research and practice papers; signing of the Kumasi Delivery Compact and closing ceremony.</p>
-          </article>
-          <article class="glass card day day-field reveal" data-delay="4">
-            <span class="day-badge">Day 4</span>
-            <p class="day-date">Friday 27 August</p>
-            <h3>Site-to-Summit Field Day</h3>
-            <p>Visits to live projects, industrial sites and local manufacturers in the Ashanti Region.</p>
-          </article>
-        </div>
-
-        <p class="topics reveal">Four topics run through every session:
-          <span class="chip">Project assurance</span><span class="chip">Green delivery</span><span class="chip">Skills</span><span class="chip">Land and community</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- INNOVATIONS -->
-    <section class="section section-dark" id="innovations">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow eyebrow-light reveal">Innovations</p>
-          <h2 class="reveal">The AIPIS Distinction: Seven Innovations</h2>
-          <p class="lead reveal">Each innovation builds on expertise the convenors already hold.</p>
+          <p class="eyebrow reveal">Explore</p>
+          <h2 class="reveal">Everything about AIPIS 2027</h2>
         </div>
         <div class="grid grid-3">
-          <article class="glass-dark card inno reveal" data-delay="1"><span class="num">01</span><h3>Prosperity Close Standard</h3><p>A published standard that defines when a project has delivered measurable benefits: firms served, jobs sustained, local content achieved and reliable service.</p></article>
-          <article class="glass-dark card inno reveal" data-delay="2"><span class="num">02</span><h3>Africa Infrastructure Prosperity Index</h3><p>An annual ranking by KNUST and GCI of how well African countries turn infrastructure spending into industrial and social results.</p></article>
-          <article class="glass-dark card inno reveal" data-delay="3"><span class="num">03</span><h3>Unfinished Projects Forensic Clinic</h3><p>Led by AIPAF. Panels of engineers, quantity surveyors, lawyers and auditors examine stalled projects and set out the causes and a recovery plan.</p></article>
-          <article class="glass-dark card inno reveal" data-delay="1"><span class="num">04</span><h3>Build-with-Africa Procurement Exchange</h3><p>Pre-arranged meetings between project owners, contractors and African manufacturers of steel, cement, cables and building materials.</p></article>
-          <article class="glass-dark card inno reveal" data-delay="2"><span class="num">05</span><h3>Site-to-Summit Field Day</h3><p>A full day at live projects, industrial sites and local suppliers in the Ashanti Region.</p></article>
-          <article class="glass-dark card inno reveal" data-delay="3"><span class="num">06</span><h3>Land, Traditional Authority and Infrastructure Roundtable</h3><p>Traditional authorities, land agencies, developers and financiers discuss rights of way, compensation and benefit sharing.</p></article>
-          <article class="glass-dark card inno inno-wide reveal" data-delay="1"><span class="num">07</span><h3>Commitments Tracker and Kumasi Delivery Compact</h3><p>Every pledge is recorded publicly and reported at the next edition. The summit closes with the signing of the Kumasi Delivery Compact.</p></article>
+          <a class="glass card explore reveal" href="programme.html">
+            <h3>Four days in Kumasi</h3>
+            <p>Each conference day covers one thematic area, and the fourth day is spent in the field.</p>
+            <span class="more">Learn more <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="glass card explore reveal" href="innovations.html">
+            <h3>Seven Innovations</h3>
+            <p>Each innovation builds on expertise the convenors already hold.</p>
+            <span class="more">Learn more <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="glass card explore reveal" href="speakers.html">
+            <h3>Call for Speakers</h3>
+            <p>AIPIS 2027 invites nominations and applications for speakers, presenters and exhibitors.</p>
+            <span class="more">Learn more <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="glass card explore reveal" href="who-attends.html">
+            <h3>Who attends</h3>
+            <p>AIPIS brings together the people who finance, build, operate and audit infrastructure, and the communities it serves.</p>
+            <span class="more">Learn more <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="glass card explore reveal" href="partner-with-us.html">
+            <h3>Partner with AIPIS</h3>
+            <p>Partners are recognised at the summit and in its published outputs, which remain in use after each edition.</p>
+            <span class="more">Learn more <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="glass card explore reveal" href="register.html">
+            <h3>Register to attend</h3>
+            <p>Fees cover all conference sessions, lunches and refreshments, summit materials and the field day.</p>
+            <span class="more">Learn more <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- CALL FOR SPEAKERS -->
-    <section class="section" id="speakers">
+    <section class="cta">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Call for Speakers</p>
-          <h2 class="reveal">Call for speakers, presenters and exhibitors</h2>
-          <p class="lead reveal">AIPIS 2027 invites nominations and applications for the roles below. Submission deadlines and requirements will be published with the full call. To express interest now, use the button under each role.</p>
-        </div>
-
-        <div class="grid grid-3 roles">
-          <article class="glass card role reveal" id="keynote" data-delay="1">
-            <h3>Distinguished Keynote Speakers</h3>
-            <p>Heads of state and government, ministers, heads of development finance institutions and other leaders of international standing. They open each conference day and set out the direction on infrastructure, industry and prosperity in Africa. Distinguished Keynote Speakers are invited by the Summit Steering Committee; nominations are welcome.</p>
-            <button class="btn btn-primary" data-form="keynote">Nominate a Distinguished Keynote Speaker</button>
-          </article>
-          <article class="glass card role reveal" id="guest" data-delay="2">
-            <h3>Special Guest Speakers</h3>
-            <p>Senior figures from government, traditional authority, industry, finance and civil society. They speak at plenaries, roundtables and the Finance and Investor Forum, sharing first-hand experience of planning, funding and delivering infrastructure.</p>
-            <button class="btn btn-primary" data-form="guest">Propose a Special Guest Speaker</button>
-          </article>
-          <article class="glass card role reveal" id="technical" data-delay="3">
-            <h3>Technical Keynote Presenters</h3>
-            <p>Leading researchers and practitioners who present evidence and lessons on project delivery, assurance and forensics, energy, industrial policy and sustainability. Their presentations anchor the peer-reviewed research and practice stream and are published in the summit proceedings.</p>
-            <button class="btn btn-primary" data-form="technical">Apply as a Technical Keynote Presenter</button>
-          </article>
-          <article class="glass card role reveal" id="posters" data-delay="1">
-            <h3>Poster Presenters</h3>
-            <p>Researchers, postgraduate students and young professionals who present research, case studies or project results in the poster exhibition. Posters are on display throughout the summit and give delegates a direct way to discuss new work with the authors.</p>
-            <button class="btn btn-primary" data-form="poster">Submit a poster abstract</button>
-          </article>
-          <article class="glass card role reveal" id="exhibitors" data-delay="2">
-            <h3>Exhibitors</h3>
-            <p>Contractors, manufacturers, consultants, public agencies, universities and technology providers who show their products, services and projects in the exhibition area. An exhibition booth of 6 sq m costs USD 5,000 and includes 2 delegate passes and a listing in the exhibitor directory. Thirty booths are available.</p>
-            <button class="btn btn-primary" data-form="exhibitor">Book an exhibition booth</button>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SDGs -->
-    <section class="section section-tint" id="sdgs">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">SDGs</p>
-          <h2 class="reveal">Linked to the Sustainable Development Goals</h2>
-          <p class="lead reveal">AIPIS is built around SDG 9 (Industry, Innovation and Infrastructure) and contributes to SDGs 1, 6, 7, 8, 11, 12, 13, 16 and 17. Every session, output and commitment is linked to SDG targets. The 2030 edition in Kumasi will review progress in the SDG target year.</p>
-        </div>
-        <ul class="sdg-grid">
-          <li class="glass sdg sdg-main reveal"><span class="sdg-num">9</span><span>Industry, Innovation and Infrastructure</span></li>
-          <li class="glass sdg reveal" data-delay="1"><span class="sdg-num">1</span><span>No Poverty</span></li>
-          <li class="glass sdg reveal" data-delay="2"><span class="sdg-num">6</span><span>Clean Water and Sanitation</span></li>
-          <li class="glass sdg reveal" data-delay="3"><span class="sdg-num">7</span><span>Affordable and Clean Energy</span></li>
-          <li class="glass sdg reveal" data-delay="1"><span class="sdg-num">8</span><span>Decent Work and Economic Growth</span></li>
-          <li class="glass sdg reveal" data-delay="2"><span class="sdg-num">11</span><span>Sustainable Cities and Communities</span></li>
-          <li class="glass sdg reveal" data-delay="3"><span class="sdg-num">12</span><span>Responsible Consumption and Production</span></li>
-          <li class="glass sdg reveal" data-delay="1"><span class="sdg-num">13</span><span>Climate Action</span></li>
-          <li class="glass sdg reveal" data-delay="2"><span class="sdg-num">16</span><span>Peace, Justice and Strong Institutions</span></li>
-          <li class="glass sdg reveal" data-delay="3"><span class="sdg-num">17</span><span>Partnerships for the Goals</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- WHO ATTENDS -->
-    <section class="section" id="participants">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Who attends</p>
-          <h2 class="reveal">Who will be in the room</h2>
-          <p class="lead reveal">AIPIS brings together the people who finance, build, operate and audit infrastructure, and the communities it serves.</p>
-        </div>
-        <div class="grid grid-4">
-          <article class="glass card who reveal" data-delay="1"><h3>Governments and public agencies</h3><p>Ministers and officials responsible for roads, energy, works and housing, trade and industry, finance and project delivery.</p></article>
-          <article class="glass card who reveal" data-delay="2"><h3>Financiers</h3><p>Development finance institutions, commercial banks, pension and insurance funds, sovereign wealth funds and infrastructure fund managers.</p></article>
-          <article class="glass card who reveal" data-delay="3"><h3>Contractors and consultants</h3><p>Construction firms, engineers, quantity surveyors, project managers and cost consultants.</p></article>
-          <article class="glass card who reveal" data-delay="4"><h3>Industry</h3><p>Manufacturers, building materials producers, industrial park operators and chambers of commerce.</p></article>
-          <article class="glass card who reveal" data-delay="1"><h3>Assurance and oversight bodies</h3><p>Auditors, forensic specialists, procurement authorities, regulators and anti-corruption agencies.</p></article>
-          <article class="glass card who reveal" data-delay="2"><h3>Traditional authorities and communities</h3><p>Chiefs, customary land secretariats and civil society groups.</p></article>
-          <article class="glass card who reveal" data-delay="3"><h3>Universities and young professionals</h3><p>Researchers, postgraduate students and early-career practitioners from across Africa.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PARTNERS -->
-    <section class="section section-tint" id="partners">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Partners</p>
-          <h2 class="reveal">Convenors and founding partners</h2>
-        </div>
-        <div class="grid grid-3">
-          <article class="glass card partner-card reveal" data-delay="1">
-            <h3>Convenors</h3>
-            <ul class="plain-list">
-              <li>College of Art and Built Environment and Department of Construction Technology and Management, Kwame Nkrumah University of Science and Technology (KNUST)</li>
-              <li>African Institute of Project Assurance and Forensics (AIPAF)</li>
-              <li>Green Communities International (GCI)</li>
-            </ul>
-          </article>
-          <article class="glass card partner-card reveal" data-delay="2">
-            <h3>Founding Government Partners</h3>
-            <ul class="plain-list">
-              <li>Ministry of Finance</li>
-              <li>Ministry of Works and Housing</li>
-              <li>Ministry of Trade, Agribusiness and Industry</li>
-              <li>Ministry of Energy and Green Transition</li>
-              <li>24-Hour Economy and Accelerated Export Development Secretariat</li>
-            </ul>
-          </article>
-          <article class="glass card partner-card reveal" data-delay="3">
-            <h3>Founding Industry Partner</h3>
-            <ul class="plain-list">
-              <li>Top Business Brokers Consult Limited</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PARTNER WITH US -->
-    <section class="section section-dark" id="partner">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow eyebrow-light reveal">Partner with us</p>
-          <h2 class="reveal">Partner with AIPIS</h2>
-          <p class="lead reveal">Partners are recognised at the summit and in its published outputs, which remain in use after each edition. Fees are in US dollars and payable in Ghana cedis at the Bank of Ghana rate on the date of payment. Founding Partners hold first right of renewal for the 2028 to 2031 editions.</p>
-        </div>
-
-        <div class="table-card glass-light reveal">
-          <div class="table-scroll">
-            <table class="table stack">
-              <caption class="sr-only">Partnership packages</caption>
-              <thead><tr><th>Package</th><th>Fee (USD)</th><th>Slots</th><th>Main benefits</th><th><span class="sr-only">Action</span></th></tr></thead>
-              <tbody>
-                <tr><td data-label="Package"><strong>Founding Partner</strong></td><td data-label="Fee (USD)" class="num-cell">150,000</td><td data-label="Slots">3</td><td data-label="Main benefits">Recognition on all materials and report covers; opening keynote; International Advisory Board seat; roundtable with the Founding Government Partners; 10 VIP passes; 36 sq m exhibition space</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Founding Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Prosperity Index Partner</strong></td><td data-label="Fee (USD)" class="num-cell">100,000</td><td data-label="Slots">1</td><td data-label="Main benefits">Sole sponsor credit on the Prosperity Index; speaking role at its launch; Index Technical Reference Group seat; 8 VIP passes; 18 sq m exhibition space</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Prosperity Index Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Strategic Partner</strong></td><td data-label="Fee (USD)" class="num-cell">60,000</td><td data-label="Slots">4</td><td data-label="Main benefits">Naming of one main session; panel speaking slot; logo on stage and materials; 6 passes; 18 sq m exhibition space</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Strategic Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Knowledge Partner</strong></td><td data-label="Fee (USD)" class="num-cell">35,000 or in kind</td><td data-label="Slots">4</td><td data-label="Main benefits">Co-author credit on a summit report; one research session; Scientific Committee seat; 4 passes</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Knowledge Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Industry Partner</strong></td><td data-label="Fee (USD)" class="num-cell">25,000</td><td data-label="Slots">8</td><td data-label="Main benefits">Procurement Exchange priority with up to 15 buyer meetings; field day hosting option; 9 sq m exhibition space; 3 passes</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Industry Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Session Partner</strong></td><td data-label="Fee (USD)" class="num-cell">15,000</td><td data-label="Slots">10</td><td data-label="Main benefits">Naming of one session, roundtable or award; one speaker or moderator role; 2 passes</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Session Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Exhibitor</strong></td><td data-label="Fee (USD)" class="num-cell">5,000</td><td data-label="Slots">30</td><td data-label="Main benefits">6 sq m booth; 2 passes; exhibitor directory listing</td><td class="act"><button class="btn btn-outline btn-sm" data-form="exhibitor">Book</button></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <h3 class="sub-title reveal">Special packages</h3>
-        <div class="table-card glass-light reveal">
-          <div class="table-scroll">
-            <table class="table stack">
-              <caption class="sr-only">Special partnership packages</caption>
-              <thead><tr><th>Package</th><th>Fee (USD)</th><th>Slots</th><th>Benefits</th><th><span class="sr-only">Action</span></th></tr></thead>
-              <tbody>
-                <tr><td data-label="Package"><strong>Gala Dinner Partner</strong></td><td data-label="Fee (USD)" class="num-cell">25,000</td><td data-label="Slots">1</td><td data-label="Benefits">Naming of the Gala Dinner; welcome address; 10 dinner seats; 3 passes</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Gala Dinner Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Field Day Partner</strong></td><td data-label="Fee (USD)" class="num-cell">20,000</td><td data-label="Slots">1</td><td data-label="Benefits">Branding on field day transport and materials; remarks at one site; 3 passes</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Field Day Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Student and Young Professional Bursary Partner</strong></td><td data-label="Fee (USD)" class="num-cell">10,000</td><td data-label="Slots">3</td><td data-label="Benefits">Funds 40 bursaries; named bursary scheme; 2 passes</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Student and Young Professional Bursary Partner">Enquire</button></td></tr>
-                <tr><td data-label="Package"><strong>Delegate Kit and Digital Partner</strong></td><td data-label="Fee (USD)" class="num-cell">10,000</td><td data-label="Slots">1</td><td data-label="Benefits">Branding on delegate kits, lanyards and the summit app; 2 passes</td><td class="act"><button class="btn btn-outline btn-sm" data-form="partnership" data-package="Delegate Kit and Digital Partner">Enquire</button></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <p class="note reveal">Partner bookings received by 30 April 2027 receive full recognition in all summit materials. Packages can be adjusted to suit each partner. All fees are indicative and subject to approval by the Summit Steering Committee.</p>
-        <div class="btn-row reveal">
-          <button class="btn btn-primary btn-lg" data-form="partnership">Request the partnership prospectus</button>
-          <a class="btn btn-glass-light btn-lg" href="assets/AIPIS_2027_Brochure.pdf" download>Download the brochure</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- REGISTER -->
-    <section class="section" id="register">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Register</p>
-          <h2 class="reveal">Register to attend</h2>
-        </div>
-
-        <div class="split split-top">
+        <div class="cta-box reveal">
           <div>
-            <div class="table-card glass reveal">
-              <div class="table-scroll">
-                <table class="table stack">
-                  <caption class="sr-only">Registration fees</caption>
-                  <thead><tr><th>Category</th><th>Standard fee (USD)</th><th>Early fee (USD), paid by 31 May 2027</th></tr></thead>
-                  <tbody>
-                    <tr><td data-label="Category"><strong>International delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">750</td><td data-label="Early fee (USD), paid by 31 May 2027" class="num-cell early">640</td></tr>
-                    <tr><td data-label="Category"><strong>African delegate (outside Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">500</td><td data-label="Early fee (USD), paid by 31 May 2027" class="num-cell early">425</td></tr>
-                    <tr><td data-label="Category"><strong>Ghanaian delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">350</td><td data-label="Early fee (USD), paid by 31 May 2027" class="num-cell early">300</td></tr>
-                    <tr><td data-label="Category"><strong>Public sector and university staff (Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">200</td><td data-label="Early fee (USD), paid by 31 May 2027" class="num-cell early">170</td></tr>
-                    <tr><td data-label="Category"><strong>Student or young professional (under 35)</strong></td><td data-label="Standard fee (USD)" class="num-cell">75</td><td data-label="Early fee (USD), paid by 31 May 2027" class="num-cell early">60</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <p class="note reveal">Fees cover all conference sessions, lunches and refreshments, summit materials and the field day. Organisations registering five or more delegates receive a 10 percent discount.</p>
-            <div class="btn-row reveal">
-              <button class="btn btn-primary btn-lg" data-form="registration">Register by email</button>
-            </div>
+            <h2>Join AIPIS in Kumasi</h2>
+            <p>24 to 27 August 2027, KNUST, Kumasi, Ghana.</p>
           </div>
-
-          <aside class="side-stack">
-            <div class="glass card reveal" data-delay="1">
-              <h3>Key dates</h3>
-              <ul class="dates">
-                <li><time>30 April 2027</time><span>Partner bookings close for full recognition</span></li>
-                <li><time>31 May 2027</time><span>Early registration closes</span></li>
-                <li><time>24 to 26 August 2027</time><span>Conference days, KNUST, Kumasi</span></li>
-                <li><time>27 August 2027</time><span>Site-to-Summit Field Day</span></li>
-              </ul>
-            </div>
-            <div class="glass card accent-card reveal" data-delay="2">
-              <h3>Contribute to the programme</h3>
-              <p>To speak, present a paper or poster, or exhibit, see the Call for Speakers. Project owners, auditors and agencies can also nominate a stalled or abandoned project for review at the Unfinished Projects Forensic Clinic.</p>
-              <div class="btn-row">
-                <a class="btn btn-primary" href="#speakers">See the Call for Speakers</a>
-                <button class="btn btn-outline" data-form="forensic">Nominate a project for the Forensic Clinic</button>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- FUTURE EDITIONS -->
-    <section class="section section-tint" id="rotation">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Future editions</p>
-          <h2 class="reveal">Future editions</h2>
-          <p class="lead reveal">Kumasi is the permanent home of AIPIS. The first two editions are held there, the third in Kenya and the fourth back in Kumasi for the review of progress on the Sustainable Development Goals. From 2031, the summit returns to Kumasi after every two editions held elsewhere.</p>
-        </div>
-        <ol class="timeline">
-          <li class="glass tl-item tl-home reveal"><span class="tl-year">2027</span><strong>Kumasi, Ghana</strong><span>From Financial Close to Prosperity Close</span></li>
-          <li class="glass tl-item tl-home reveal" data-delay="1"><span class="tl-year">2028</span><strong>Kumasi, Ghana</strong><span>Powering Production</span></li>
-          <li class="glass tl-item reveal" data-delay="2"><span class="tl-year">2029</span><strong>Kenya</strong><span>Building with Africa</span></li>
-          <li class="glass tl-item tl-home reveal" data-delay="3"><span class="tl-year">2030</span><strong>Kumasi, Ghana</strong><span>The 2030 Review: SDG impact</span></li>
-          <li class="glass tl-item reveal" data-delay="1"><span class="tl-year">2031</span><strong>Nigeria</strong><span>Shared Prosperity</span></li>
-          <li class="glass tl-item reveal" data-delay="2"><span class="tl-year">2032</span><strong>South Africa</strong><span>Theme to be announced</span></li>
-          <li class="glass tl-item tl-home reveal" data-delay="3"><span class="tl-year">2033</span><strong>Kumasi, Ghana</strong><span>Theme to be announced</span></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Contact</p>
-          <h2 class="reveal">Contact the AIPIS Secretariat</h2>
-        </div>
-        <div class="split split-top">
-          <div class="glass card contact-card reveal">
-            <h3>AIPIS Secretariat</h3>
-            <p>Department of Construction Technology and Management, College of Art and Built Environment, Kwame Nkrumah University of Science and Technology, Kumasi, Ghana</p>
-            <dl class="contact-list">
-              <div><dt>Email</dt><dd><a href="mailto:info@aipis.knust.edu.gh">info@aipis.knust.edu.gh</a></dd></div>
-              <div><dt>Telephone</dt><dd><a href="tel:+233243555882">+233 (0) 243 555 882</a></dd></div>
-              <div><dt>Website</dt><dd><a href="https://www.aipis.knust.edu.gh">www.aipis.knust.edu.gh</a></dd></div>
-            </dl>
+          <div class="btn-row">
+          <a class="btn btn-primary btn-lg" href="register.html">Register to attend</a>
+          <a class="btn btn-glass-light btn-lg" href="partner-with-us.html">Become a partner</a>
           </div>
-          <form class="glass card contact-form reveal" id="contactForm" data-kind="contact" novalidate>
-            <h3>Get in touch</h3>
-            <div class="field"><label for="c-name">Full name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
-            <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
-            <div class="field"><label for="c-org">Organisation (optional)</label><input id="c-org" name="organisation" type="text" autocomplete="organization"></div>
-            <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" rows="5" required></textarea></div>
-            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <p class="form-status" role="status" aria-live="polite"></p>
-            <button class="btn btn-primary btn-lg" type="submit">Send message</button>
-          </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="assets/logo.svg" alt="" width="44" height="44">
-        <p>Africa Infrastructure, Prosperity and Industrialisation Summit. Convened by KNUST (CABE and DCTM), AIPAF and GCI.</p>
-      </div>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="#about">About</a><a href="#programme">Programme</a><a href="#speakers">Call for Speakers</a><a href="#sdgs">SDGs</a><a href="#partner">Partner with us</a><a href="#register">Register</a><a href="#rotation">Future editions</a><a href="#contact">Contact</a>
-      </nav>
-      <p class="footer-tag">Building infrastructure. Powering industry. Delivering prosperity.</p>
-    </div>
-  </footer>
-
-  <button class="to-top" id="toTop" aria-label="Back to top" hidden>
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m0 0l-6 6m6-6l6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-
-  <!-- Shared form modal -->
-  <div class="modal" id="modal" hidden>
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-dialog glass-light" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" data-close aria-label="Close">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-      </button>
-      <h3 id="modalTitle"></h3>
-      <p class="modal-intro" id="modalIntro"></p>
-      <form id="modalForm" novalidate>
-        <div id="modalFields"></div>
-        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <p class="form-status" role="status" aria-live="polite"></p>
-        <div class="btn-row">
-          <button class="btn btn-primary btn-lg" type="submit">Submit</button>
-          <button class="btn btn-outline btn-lg" type="button" data-close>Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <script src="js/components/footer.js"></script>
 
   <script src="js/config.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/lib/form-api.js"></script>
+  <script src="js/components/form-modal.js"></script>
 </body>
 </html>

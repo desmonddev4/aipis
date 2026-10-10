@@ -1,6 +1,6 @@
 # AIPIS 2027 website
 
-- `frontend/` static site (HTML, CSS, vanilla JavaScript), deployed on Vercel
+- `frontend/` multi-page static site (one HTML file per page with its own embedded CSS, shared `js/main.js`), deployed on Vercel
 - `backend/` Django API that stores form submissions and emails the secretariat, deployed on Render
 - `render.yaml` Render blueprint (web service plus Postgres)
 
@@ -39,6 +39,17 @@ On localhost the frontend calls `http://localhost:8000`.
 
 1. Import the repo in Vercel and set Root Directory to `frontend` (framework preset: Other, no build command).
 2. Edit `frontend/js/config.js` and set the production `API_URL` to the Render service URL.
+
+## Frontend file map
+
+- `frontend/*.html` one page each, with its own embedded page-specific CSS
+- `frontend/js/components/navbar.js` navbar (links, styles, menu behaviour)
+- `frontend/js/components/footer.js` footer
+- `frontend/js/components/form-modal.js` pop-up forms (field definitions and styles)
+- `frontend/js/components/contact-form.js` contact page form
+- `frontend/js/components/scroll-effects.js` progress bar, back-to-top, scroll animations
+- `frontend/js/lib/form-api.js` form validation and API call
+- `frontend/js/config.js` API URL
 
 ## Notes
 

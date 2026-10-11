@@ -74,7 +74,7 @@
 }
 .f-panel a:hover { color: var(--ft-o3); transform: translateX(5px); }
 .f-tag { margin: 0; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.12); color: var(--ft-o3); font-family: var(--font-head, "Archivo", system-ui, sans-serif); font-weight: 700; }
-.f-copyright { margin: 0.85rem 0 0; color: rgba(255,255,255,.7); font-size: 0.92rem; }
+.f-copyright { margin: 0.85rem 0 0; color: rgba(255,255,255,.7); font-size: 0.92rem; text-align: center; }
 .footer :focus-visible { outline: 3px solid var(--ft-o5); outline-offset: 3px; border-radius: 8px; }
 
 @media (max-width: 760px) {

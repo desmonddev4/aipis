@@ -28,6 +28,9 @@
       links: [
         ["partners.html", "Partners"],
         ["contact.html", "Contact"],
+        ["privacy-policy.html", "Privacy policy"],
+        ["terms-and-conditions.html", "Terms and conditions"],
+        ["cookie-policy.html", "Cookie policy"],
         ["mailto:info@aipis.knust.edu.gh", "info@aipis.knust.edu.gh"],
         ["tel:+233243555882", "+233 (0) 243 555 882"],
       ],

@@ -144,7 +144,7 @@
 <header class="nav-wrap">
   <nav class="nav" id="nav" aria-label="Main">
     <a class="brand" href="index.html" aria-label="AIPIS home">
-      <img src="assets/logo.svg" alt="" width="40" height="40">
+      <img src="assets/AIPIS-LOGO.png" alt="" width="40" height="40">
       <span class="brand-text">
         <strong>AIPIS</strong>
         <small>Africa Infrastructure, Prosperity and Industrialisation Summit</small>

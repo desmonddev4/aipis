@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0D3D26">
+  <title>Sign in | AIPIS Admin</title>
+  <link rel="icon" href="../assets/AIPIS-LOGO.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../js/config.js"></script>
+  <script src="js/lib/api.js"></script>
+  <script src="js/lib/icons.js"></script>
+  <script src="js/lib/ui.js"></script>
+  <style>
+    :root { --green-950: #082a1a; --green-900: #0d3d26; --green-700: #1a5c2a; --green-600: #237a38; --green-100: #dcebe0; --green-50: #eef6f0; --orange-500: #f4a24c; --orange-400: #f7b36b; --orange-300: #ffc98a; --orange-100: #ffeed9; --orange-50: #fff8ef; --ink: #10261a; --ink-soft: #35493d; --bg: #f2f6f1; --radius: 20px; --shadow: 0 8px 24px rgba(13, 61, 38, 0.08); --shadow-lg: 0 20px 50px rgba(13, 61, 38, 0.2); --font-head: "Archivo", system-ui, sans-serif; --font-body: "Source Sans 3", system-ui, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6; color: var(--ink); background: radial-gradient(700px 420px at 100% 0%, rgba(244, 162, 76, 0.12), transparent 60%), radial-gradient(600px 400px at 0% 100%, rgba(26, 92, 42, 0.08), transparent 60%), var(--bg); background-attachment: fixed; }
+    h1, h2, h3 { font-family: var(--font-head); color: var(--green-900); line-height: 1.2; margin: 0 0 0.5em; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.5rem); font-weight: 800; }
+    h2 { font-size: 1.25rem; font-weight: 700; }
+    p { margin: 0 0 1em; }
+    a { color: var(--green-700); text-underline-offset: 3px; }
+    a:hover { color: var(--green-900); }
+    button { font: inherit; }
+    svg { display: block; flex-shrink: 0; }
+    :focus-visible { outline: 3px solid var(--orange-500); outline-offset: 2px; border-radius: 6px; }
+    .muted { color: var(--ink-soft); }
+    .muted-p { color: var(--ink-soft); font-size: 0.96rem; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.7rem 1.3rem; border-radius: 999px; border: 2px solid transparent; font-family: var(--font-head); font-weight: 700; font-size: 0.98rem; line-height: 1.2; text-decoration: none; cursor: pointer; transition: transform 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s, border-color 0.2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: none; }
+    .btn[disabled] { opacity: 0.6; cursor: wait; transform: none; }
+    .btn-sm { padding: 0.45rem 0.95rem; font-size: 0.9rem; }
+    .btn-primary { background: var(--orange-500); color: var(--green-950); box-shadow: 0 6px 16px rgba(244, 162, 76, 0.38); }
+    .btn-primary:hover { background: var(--orange-400); color: var(--green-950); box-shadow: 0 10px 22px rgba(244, 162, 76, 0.5); }
+    .btn-outline { background: #fff; color: var(--green-900); border-color: var(--green-700); }
+    .btn-outline:hover { background: var(--green-700); color: #fff; }
+    .btn-danger { background: #b3261e; color: #fff; }
+    .btn-danger:hover { background: #8f1d16; color: #fff; }
+
+    .field { display: grid; gap: 0.35rem; margin-bottom: 1rem; }
+    label { font-weight: 700; color: var(--green-900); font-size: 0.96rem; }
+    input, select, textarea { width: 100%; font: inherit; color: var(--ink); background: #fff; border: 2px solid rgba(26, 92, 42, 0.28); border-radius: 14px; padding: 0.7rem 0.95rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--orange-500); box-shadow: 0 0 0 4px rgba(244, 162, 76, 0.3); }
+    input:disabled { background: var(--green-50); color: var(--ink-soft); }
+    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: #b3261e; }
+    .hint { color: var(--ink-soft); font-size: 0.88rem; }
+    .check-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; cursor: pointer; }
+    .check-row input { width: 20px; height: 20px; accent-color: var(--green-700); }
+    .form-status { min-height: 1.4em; margin: 0.4rem 0; font-weight: 600; }
+    .form-status.err { color: #b3261e; }
+    .form-status.ok { color: var(--green-700); }
+
+    .card { background: rgba(255, 255, 255, 0.86); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid rgba(26, 92, 42, 0.14); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(1.1rem, 2vw, 1.6rem); }
+    .card.flush { padding: 0; overflow: hidden; }
+    .card-head { display: flex; justify-content: space-between; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .card-head h2 { margin: 0; }
+    .page-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem; margin-bottom: 1.6rem; }
+    .page-head p { color: var(--ink-soft); margin: 0; max-width: 62ch; }
+    .head-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+
+    body { background: var(--bg); }
+    .login { min-height: 100svh; display: grid; grid-template-columns: 1.05fr 1fr; }
+    .login-art { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; gap: 1.4rem; padding: clamp(2rem, 6vw, 5rem); color: #fff; background: linear-gradient(160deg, var(--green-950), var(--green-900) 60%, #145230); }
+    .login-art::before { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; background: var(--orange-500); opacity: 0.35; filter: blur(80px); top: -140px; right: -100px; }
+    .login-art::after { content: ""; position: absolute; width: 360px; height: 360px; border-radius: 50%; background: var(--green-600); opacity: 0.6; filter: blur(80px); bottom: -140px; left: -100px; }
+    .login-art > * { position: relative; z-index: 1; }
+    .login-brand { display: flex; align-items: center; gap: 0.8rem; }
+    .login-brand img { background: #fff; border-radius: 14px; padding: 6px; }
+    .login-brand strong { font-family: var(--font-head); font-size: 1.6rem; letter-spacing: 0.04em; }
+    .login-art h1 { color: #fff; font-size: clamp(2rem, 1.4rem + 2.4vw, 3.2rem); max-width: 14ch; margin: 0; }
+    .login-art h1 span { color: var(--orange-300); }
+    .login-art p { color: #eaf3ed; max-width: 46ch; margin: 0; font-size: 1.15rem; }
+    .login-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+    .login-points li { display: flex; align-items: center; gap: 0.7rem; font-weight: 600; }
+    .login-points svg { color: var(--orange-300); }
+    .login-panel { display: grid; place-items: center; padding: clamp(1.2rem, 4vw, 3rem); background: radial-gradient(500px 360px at 100% 0%, rgba(244, 162, 76, 0.18), transparent 60%), var(--bg); }
+    .login-card { width: min(440px, 100%); padding: clamp(1.5rem, 4vw, 2.4rem); }
+    .login-card h2 { font-size: 1.7rem; margin-bottom: 0.3rem; }
+    .login-card .sub { color: var(--ink-soft); margin-bottom: 1.4rem; }
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 4.6rem; }
+    .pw-toggle { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); border: 0; background: var(--green-50); color: var(--green-900); font-weight: 700; padding: 0.35rem 0.7rem; border-radius: 10px; cursor: pointer; }
+    .login-card .btn { width: 100%; padding: 0.95rem; font-size: 1.05rem; }
+    .back { display: block; text-align: center; margin-top: 1.2rem; font-weight: 600; }
+    @media (max-width: 900px) { .login { grid-template-columns: 1fr; } .login-art { padding: 2rem 1.4rem; gap: 1rem; } .login-points { display: none; } .login-art p { font-size: 1.02rem; } }
+  </style>
+</head>
+<body>
+    <div class="login">
+      <section class="login-art">
+        <div class="login-brand"><img src="../assets/AIPIS-LOGO.png" alt="" width="52" height="52"><strong>AIPIS</strong></div>
+        <h1>Manage <span>AIPIS 2027</span> in one place</h1>
+        <p>Review registrations, partnership enquiries and speaker submissions, and reply to people without leaving the dashboard.</p>
+        <ul class="login-points">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> See every submission as it arrives</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Track progress with statuses and notes</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Reply by email and export to Excel</li>
+        </ul>
+      </section>
+      <section class="login-panel">
+        <form class="card login-card" id="loginForm" novalidate>
+          <h2>Welcome back</h2>
+          <p class="sub">Sign in to the AIPIS admin dashboard.</p>
+          <div class="field"><label for="username">Username</label><input id="username" autocomplete="username" required autofocus></div>
+          <div class="field"><label for="password">Password</label>
+            <div class="pw-wrap"><input id="password" type="password" autocomplete="current-password" required><button type="button" class="pw-toggle" id="togglePassword" aria-pressed="false">Show</button></div>
+          </div>
+          <label class="check-row"><input type="checkbox" id="remember"> <span>Keep me signed in on this device</span></label>
+          <p class="form-status" id="loginStatus" role="alert"></p>
+          <button class="btn btn-primary" type="submit">Sign in</button>
+          <a class="back" href="../index.html">Back to the website</a>
+        </form>
+      </section>
+    </div>
+  <script src="js/pages/login.js"></script>
+</body>
+</html>

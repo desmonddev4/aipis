@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "submissions",
+    "dashboard",
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,6 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Staff dashboard sign-in lasts this many seconds
+DASHBOARD_TOKEN_MAX_AGE = int(os.environ.get("DASHBOARD_TOKEN_MAX_AGE", str(12 * 3600)))

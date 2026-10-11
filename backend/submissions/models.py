@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -13,6 +14,12 @@ class Submission(models.Model):
         EXHIBITOR = "exhibitor", "Exhibition booking"
         FORENSIC = "forensic", "Forensic Clinic nomination"
 
+    class Status(models.TextChoices):
+        NEW = "new", "New"
+        IN_PROGRESS = "in_progress", "In progress"
+        HANDLED = "handled", "Handled"
+        ARCHIVED = "archived", "Archived"
+
     kind = models.CharField(max_length=20, choices=Kind.choices, db_index=True)
     name = models.CharField(max_length=120)
     email = models.EmailField()
@@ -21,7 +28,7 @@ class Submission(models.Model):
     message = models.TextField(blank=True)
     details = models.JSONField(default=dict, blank=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
-    handled = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -29,3 +36,18 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"{self.get_kind_display()} from {self.name}"
+
+
+class SubmissionNote(models.Model):
+    class Kind(models.TextChoices):
+        NOTE = "note", "Internal note"
+        REPLY = "reply", "Email reply"
+
+    submission = models.ForeignKey(Submission, related_name="notes", on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    kind = models.CharField(max_length=10, choices=Kind.choices, default=Kind.NOTE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at"]

@@ -1,6 +1,6 @@
 # AIPIS 2027 website
 
-- `frontend/` multi-page static site (one HTML file per page with its own embedded CSS, shared `js/main.js`), deployed on Vercel
+- `frontend/` multi-page static site (one HTML file per page with its own embedded CSS and component scripts in `frontend/js/components/`), deployed on Vercel
 - `backend/` Django API that stores form submissions and emails the secretariat, deployed on Render
 - `render.yaml` Render blueprint (web service plus Postgres)
 
@@ -50,6 +50,20 @@ On localhost the frontend calls `http://localhost:8000`.
 - `frontend/js/components/scroll-effects.js` progress bar, back-to-top, scroll animations
 - `frontend/js/lib/form-api.js` form validation and API call
 - `frontend/js/config.js` API URL
+
+## Admin dashboard
+
+A custom multi-page dashboard for the secretariat lives in `frontend/admin/` (open `/admin/login.html` on the Vercel site). It is not linked from the public site and is marked `noindex`.
+
+- Pages: Dashboard, Analytics, All submissions, Registrations, Partnerships, Speakers and presenters, Exhibitors, Forensic Clinic, Messages, Team, My account
+- Features: search, filters, status tracking, internal notes, email replies, bulk actions, CSV export, charts, team management (administrators only)
+- Sign-in uses Django staff accounts (`createsuperuser`, or the `DJANGO_SUPERUSER_*` variables on Render); administrators add other staff from the Team page
+- API: `backend/dashboard/` under `/api/admin/` (token based, tokens last 12 hours, change with `DASHBOARD_TOKEN_MAX_AGE`)
+- Files: `admin/js/components/sidebar.js` (menu), `submissions-list.js` (list and detail drawer), `admin/js/pages/*` (one script per page), `admin/js/lib/*` (API client, UI helpers, charts, icons)
+- Replying by email needs the `EMAIL_HOST*` variables on Render
+- The Django `/admin/` site still exists as a backup
+
+Run backend tests with `python manage.py test`.
 
 ## Notes
 

@@ -112,7 +112,7 @@
     <div class="f-glass">
       <div class="f-top">
         <div class="f-brand">
-          <img src="assets/logo.svg" alt="" width="44" height="44">
+          <img src="assets/AIPIS-LOGO.png" alt="" width="44" height="44">
           <p>Africa Infrastructure, Prosperity and Industrialisation Summit. Convened by KNUST (CABE and DCTM), AIPAF and GCI.</p>
         </div>
         <button class="f-up" type="button" aria-label="Back to top">

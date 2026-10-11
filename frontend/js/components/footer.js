@@ -51,7 +51,7 @@
 }
 .f-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.2rem; padding-bottom: 1.4rem; border-bottom: 1px solid rgba(255,255,255,.12); }
 .f-brand { display: flex; gap: 1rem; align-items: flex-start; max-width: 600px; }
-.f-brand img { background: rgba(255,255,255,.95); border-radius: 14px; padding: 5px; flex-shrink: 0; transition: transform .4s var(--ft-ease); }
+.f-brand img { background: rgba(255,255,255,.98); border-radius: 50%; padding: 6px; flex-shrink: 0; box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18); transition: transform .4s var(--ft-ease); }
 .f-brand:hover img { transform: rotate(-6deg) scale(1.06); }
 .f-brand p { margin: 0; line-height: 1.55; }
 .f-up {

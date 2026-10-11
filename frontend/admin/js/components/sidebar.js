@@ -39,7 +39,7 @@
 :root { --side-w: 272px; }
 .side { position: fixed; inset: 0 auto 0 0; width: var(--side-w); z-index: 600; display: flex; flex-direction: column; padding: 1.2rem 0.9rem; background: radial-gradient(500px 300px at 0% 0%, rgba(244, 162, 76, 0.16), transparent 60%), linear-gradient(180deg, var(--green-950), var(--green-900)); color: #fff; overflow-y: auto; transition: transform 0.3s ease; }
 .side-brand { display: flex; align-items: center; gap: 0.7rem; padding: 0.4rem 0.6rem 1.2rem; color: #fff; text-decoration: none; }
-.side-brand img { background: #fff; border-radius: 12px; padding: 5px; }
+.side-brand img { background: #fff; border-radius: 50%; padding: 6px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18); }
 .side-brand strong { display: block; font-family: var(--font-head); font-size: 1.3rem; letter-spacing: 0.04em; line-height: 1.1; }
 .side-brand span { font-size: 0.8rem; color: var(--orange-300); font-weight: 600; }
 .side-nav { flex: 1; display: grid; align-content: start; gap: 1.1rem; }

@@ -46,7 +46,7 @@
 }
 .nav.scrolled { background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,255,255,.84)); box-shadow: 0 16px 38px rgba(5,32,19,.26), inset 0 1px 0 #fff; }
 .brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--nv-g9); flex-shrink: 0; }
-.brand img { transition: transform .4s var(--nv-ease); }
+.brand img { background: #fff; border-radius: 50%; padding: 5px; box-shadow: 0 6px 18px rgba(6, 31, 18, 0.12); transition: transform .4s var(--nv-ease); }
 .brand:hover img { transform: rotate(-8deg) scale(1.08); }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
 .brand-text strong { font-family: var(--font-head, "Archivo", system-ui, sans-serif); font-size: 1.3rem; letter-spacing: 0.04em; }

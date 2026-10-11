@@ -378,7 +378,10 @@
       if (!("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("in"); }); }
       else {
         var io = new IntersectionObserver(function (es) {
-          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+          es.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add("in"); }
+            else { e.target.classList.remove("in"); }
+          });
         }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
         items.forEach(function (el) { io.observe(el); });
       }

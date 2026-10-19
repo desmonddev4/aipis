@@ -49,6 +49,18 @@ def submission_dict(s, detail=False):
         "created_at": iso(s.created_at),
         "message": s.message if detail else s.message[:160],
     }
+    if s.kind == Submission.Kind.REGISTRATION:
+        payment = getattr(s, "payment", None)
+        data["payment"] = {
+            "status": payment.status,
+            "status_label": payment.get_status_display(),
+            "amount_ghs": str(payment.amount_ghs),
+            "usd_amount": str(payment.usd_amount),
+            "fx_rate": str(payment.fx_rate),
+            "fx_rate_date": payment.fx_rate_date.isoformat(),
+            "reference": payment.reference,
+            "paid_at": iso(payment.paid_at),
+        } if payment else None
     if detail:
         data["ip_address"] = s.ip_address
         data["notes"] = [note_dict(n) for n in s.notes.select_related("author")]

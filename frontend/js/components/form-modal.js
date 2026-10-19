@@ -32,43 +32,43 @@
   const FORMS = {
     keynote: {
       title: "Nominate a Distinguished Keynote Speaker",
-      subject: "AIPIS 2027 Distinguished Keynote Speaker nomination",
+      subject: "AIPIS 2028 Distinguished Keynote Speaker nomination",
       intro: "Distinguished Keynote Speakers are invited by the Summit Steering Committee; nominations are welcome.",
       fields: [...base, text("nominee", "Nominee name and title", { required: true }), area("message", "Why this nominee?", { required: true })],
     },
     guest: {
       title: "Propose a Special Guest Speaker",
-      subject: "AIPIS 2027 Special Guest Speaker proposal",
+      subject: "AIPIS 2028 Special Guest Speaker proposal",
       intro: "Tell us about the speaker and the experience they would share.",
       fields: [...base, text("nominee", "Speaker name and title", { required: true }), area("message", "Proposal", { required: true })],
     },
     technical: {
       title: "Apply as a Technical Keynote Presenter",
-      subject: "AIPIS 2027 Technical Keynote Presenter application",
+      subject: "AIPIS 2028 Technical Keynote Presenter application",
       intro: "Present evidence and lessons in the peer-reviewed research and practice stream.",
       fields: [...base, text("topic", "Proposed topic", { required: true }), area("message", "Summary of your presentation and background", { required: true })],
     },
     poster: {
       title: "Submit a poster abstract",
-      subject: "AIPIS 2027 poster abstract",
+      subject: "AIPIS 2028 poster abstract",
       intro: "Share research, case studies or project results in the poster exhibition.",
       fields: [...base, text("title", "Poster title", { required: true }), area("message", "Abstract", { required: true })],
     },
     exhibitor: {
       title: "Book an exhibition booth",
-      subject: "AIPIS 2027 exhibition booking",
+      subject: "AIPIS 2028 exhibition booking",
       intro: "A 6 sq m booth costs USD 5,000 and includes 2 delegate passes and a listing in the exhibitor directory. Thirty booths are available.",
       fields: [...base, text("booths", "Number of booths", { type: "number", min: 1, max: 30, value: 1 }), area("message", "Anything we should know? (optional)")],
     },
     partnership: {
       title: "Request the partnership prospectus",
-      subject: "AIPIS 2027 partnership enquiry",
+      subject: "AIPIS 2028 partnership enquiry",
       intro: "Tell us which package interests you and we will send the prospectus.",
       fields: [...base, { name: "package", label: "Package of interest", type: "select", options: PACKAGES }, area("message", "Message (optional)")],
     },
     registration: {
       title: "Register to attend",
-      subject: "AIPIS 2027 registration",
+      subject: "AIPIS 2028 registration",
       intro: "Early fees apply if paid by 31 May 2027. Organisations registering five or more delegates receive a 10 percent discount.",
       fields: [
         ...base,
@@ -80,7 +80,7 @@
     },
     forensic: {
       title: "Nominate a project for the Forensic Clinic",
-      subject: "AIPIS 2027 Forensic Clinic nomination",
+      subject: "AIPIS 2028 Forensic Clinic nomination",
       intro: "Nominate a stalled or abandoned project for review by panels of engineers, quantity surveyors, lawyers and auditors.",
       fields: [...base, text("project", "Project name", { required: true }), text("country", "Country"), area("message", "Describe the project and why it stalled", { required: true })],
     },

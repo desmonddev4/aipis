@@ -159,7 +159,7 @@
   function summary(s) {
     const d = s.details || {};
     switch (s.kind) {
-      case "registration": return [d.category, d.delegates ? `${d.delegates} delegate${d.delegates === "1" ? "" : "s"}` : ""].filter(Boolean).join(" Â· ");
+      case "registration": return [d.category, d.delegates ? d.delegates + " delegates" : "", s.payment ? "GHS " + s.payment.amount_ghs + " / " + s.payment.status_label : "Payment not started"].filter(Boolean).join(" · ");
       case "partnership": return d.package || "General enquiry";
       case "technical": return d.topic || "";
       case "poster": return d.title || "";
@@ -406,10 +406,19 @@
   }
 
   function drawerHTML(s) {
-    const details = Object.entries(s.details || {})
-      .filter(([, v]) => v)
+    let details = Object.entries(s.details || {})
+      .filter(([k, v]) => v && k !== "attendees")
       .map(([k, v]) => `<div><dt>${UI.esc(DETAIL_LABELS[k] || k)}</dt><dd>${UI.esc(v)}</dd></div>`)
       .join("");
+    const attendees = Array.isArray(s.details && s.details.attendees) ? s.details.attendees : [];
+    if (attendees.length) {
+      const rows = attendees.map((a, i) => (i + 1) + '. ' + UI.esc(a.name) + ' | ' + UI.esc(a.email) + ' | ' + UI.esc(a.category) + ' | ' + UI.esc(a.country)).join('<br>');
+      details += '<div class="full"><dt>Delegates (' + attendees.length + ')</dt><dd>' + rows + '</dd></div>';
+    }
+    if (s.kind === "registration" && s.payment) {
+      const p = s.payment;
+      details += '<div><dt>Payment status</dt><dd>' + UI.esc(p.status_label) + '</dd></div><div><dt>Amount charged</dt><dd>GHS ' + UI.esc(p.amount_ghs) + '</dd></div><div><dt>USD registration total</dt><dd>USD ' + UI.esc(p.usd_amount) + '</dd></div><div><dt>Bank of Ghana USD/GHS rate</dt><dd>' + UI.esc(p.fx_rate) + ' (' + UI.esc(p.fx_rate_date) + ')</dd></div><div class="full"><dt>Paystack reference</dt><dd>' + UI.esc(p.reference) + '</dd></div>';
+    }
     return `
       <div class="drawer-head">
         <div class="grow"><span class="kind-tag">${UI.esc(UI.KIND_LABELS[s.kind] || s.kind)}</span><h2>${UI.esc(s.name)}</h2></div>
@@ -445,7 +454,7 @@
         <section class="drawer-section">
           <h3>Reply by email</h3>
           <form class="drawer-form" id="dReplyForm">
-            <div class="field"><label for="dSubject">Subject</label><input id="dSubject" value="${UI.esc("Re: AIPIS 2027 " + (UI.KIND_LABELS[s.kind] || "").toLowerCase())}" required></div>
+            <div class="field"><label for="dSubject">Subject</label><input id="dSubject" value="${UI.esc("Re: AIPIS 2028 " + (UI.KIND_LABELS[s.kind] || "").toLowerCase())}" required></div>
             <div class="field"><label for="dBody">Message to ${UI.esc(s.name)}</label><textarea id="dBody" rows="6" required></textarea></div>
             <div><button class="btn btn-primary" type="submit">${Icons.svg("send", 16)} Send email</button></div>
           </form>

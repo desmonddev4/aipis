@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Register | AIPIS 2027</title>
-  <meta name="description" content="Register to attend AIPIS 2027. Fees, early registration by 31 May 2027 and key dates.">
+  <title>Register | AIPIS 2028</title>
+  <meta name="description" content="Register to attend AIPIS 2028. Fees, early registration by 31 May 2027 and key dates.">
   <meta name="theme-color" content="#0D3D26">
-  <meta property="og:title" content="Register | AIPIS 2027">
-  <meta property="og:description" content="Register to attend AIPIS 2027. Fees, early registration by 31 May 2027 and key dates.">
+  <meta property="og:title" content="Register | AIPIS 2028">
+  <meta property="og:description" content="Register to attend AIPIS 2028. Fees, early registration by 31 May 2027 and key dates.">
   <meta property="og:type" content="website">
   <link rel="icon" href="assets/AIPIS-LOGO.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-/* AIPIS 2027 shared theme: deep green, glass cards, glass buttons */
+/* AIPIS 2028 shared theme: deep green, glass cards, glass buttons */
 :root { --green-950: #052013; --green-900: #0a3a22; --green-800: #0f4d2c; --green-700: #16692f; --green-600: #1f8a3e; --green-50: #eaf4ec; --orange-500: #f4a24c; --orange-400: #f7b36b; --orange-300: #ffc98a; --ink: #0f2418; --ink-soft: #3a4f43; --bg: #f6f9f6; --radius: 20px; --shadow-lg: 0 18px 40px rgba(5,32,19,.22); --font-head: "Archivo", system-ui, sans-serif; --font-body: "Source Sans 3", system-ui, sans-serif; --nav-h: 72px; --ease: cubic-bezier(.2,.7,.2,1); }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-text-size-adjust: 100%; }
@@ -182,7 +182,18 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
   .js [data-rv] { opacity: 1; transform: none; }
 }
 @keyframes grow { from { transform: scaleX(0); } }
-  </style>
+  .registration-form { max-width: 860px; display: grid; gap: 1.2rem; margin: 2rem auto; }
+.registration-form fieldset { border: 1px solid rgba(26,92,42,.2); border-radius: 16px; padding: 1.2rem; }
+.registration-form legend { font-weight: 800; color: var(--green-900); padding: 0 .45rem; }
+.registration-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; }
+.registration-form label { display: grid; gap: .35rem; font-weight: 600; }
+.registration-form input, .registration-form select { width: 100%; padding: .7rem .8rem; border: 1px solid rgba(26,92,42,.3); border-radius: 10px; font: inherit; }
+.registration-form .registration-consent { display: flex; align-items: flex-start; gap: .6rem; }
+.registration-consent input { width: auto; margin-top: .4rem; }
+.delegate-card { display: grid; grid-template-columns: 1fr auto; gap: .8rem; padding: 1rem; margin: .8rem 0; background: var(--green-50); border-radius: 12px; }
+.delegate-card .registration-grid { grid-column: 1 / -1; }
+#registration-error { color: #a11; }
+</style>
   <script>document.documentElement.classList.add("js");</script>
   <script src="js/components/scroll-effects.js"></script>
 </head>
@@ -220,7 +231,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
               </div>
               <p class="note" data-rv>Fees cover all conference sessions, lunches and refreshments, summit materials and the field day. Organisations registering five or more delegates receive a 10 percent discount.</p>
               <div class="btn-row" data-rv>
-                <button class="btn btn-primary btn-lg" data-form="registration">Register by email <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></button>
+                <a class="btn btn-primary btn-lg" href="#online-registration">Register online <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></a>
               </div>
             </div>
 
@@ -230,8 +241,8 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
                 <ul class="dates">
                   <li><time>30 April 2027</time><span>Partner bookings close for full recognition</span></li>
                   <li><time>31 May 2027</time><span>Early registration closes</span></li>
-                  <li><time>24 to 26 August 2027</time><span>Conference days, KNUST, Kumasi</span></li>
-                  <li><time>27 August 2027</time><span>Site-to-Summit Field Day</span></li>
+                  <li><time>21 to 23 March 2028</time><span>Conference days, Labadi Beach Hotel, Accra, Ghana</span></li>
+                  <li><time>24 March 2028</time><span>Field Day</span></li>
                 </ul>
               </div>
               <div class="glass card accent-card" data-rv="right" style="--i:2">
@@ -247,13 +258,33 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
         </div>
       </section>
     </div>
-  </main>
+        <section class="section" id="online-registration" aria-labelledby="registration-heading">
+        <div class="container">
+          <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register delegates</h2><p>Complete the booking contact details and add each delegate. You will review the GHS total before continuing to Paystack.</p></div>
+          <form id="registration-form" class="registration-form" novalidate>
+            <fieldset><legend>Booking contact</legend><div class="registration-grid">
+              <label>Name<input name="name" autocomplete="name" required maxlength="120"></label>
+              <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+              <label>Organisation (optional)<input name="organisation" autocomplete="organization" maxlength="200"></label>
+              <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+              <label>Country<input name="country" autocomplete="country-name" required maxlength="100"></label>
+            </div></fieldset>
+            <fieldset><legend>Delegates</legend><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add another delegate</button><p class="note">Organisations registering five or more delegates receive a 10% discount.</p></fieldset>
+            <label class="registration-consent"><input name="consent" type="checkbox" required> I agree to the <a href="terms-and-conditions.html">registration terms</a> and have read the <a href="privacy-policy.html">privacy notice</a>.</label>
+            <p id="registration-error" role="alert" aria-live="polite"></p>
+            <button class="btn btn-primary btn-lg" type="submit" id="registration-submit">Continue to payment</button>
+            <p class="note">Fees are set in USD and converted to GHS using the latest available Bank of Ghana USD/GHS rate on the day you register. Your exact amount and rate date will be shown before checkout.</p>
+          </form>
+        </div>
+      </section>
+    </main>
 
   <script src="js/components/footer.js"></script>
 
   <script src="js/config.js"></script>
   <script src="js/lib/form-api.js"></script>
   <script src="js/components/form-modal.js"></script>
+  <script src="js/components/registration-form.js" defer></script>
   <script>
 /* Shared scroll effects: progress bar, drifting glows, staggered reveal */
 (function () {

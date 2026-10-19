@@ -84,10 +84,19 @@ def analytics(request):
     categories, countries = Counter(), Counter()
     delegates = 0
     for r in regs:
-        categories[r.details.get("category") or "Not specified"] += 1
-        delegates += to_int(r.details.get("delegates"))
-        if r.details.get("country"):
-            countries[r.details["country"].strip().title()] += 1
+        attendees = r.details.get("attendees")
+        if isinstance(attendees, list) and attendees:
+            delegates += len(attendees)
+            for attendee in attendees:
+                categories[attendee.get("category") or "Not specified"] += 1
+                country = attendee.get("country", "").strip().title()
+                if country:
+                    countries[country] += 1
+        else:
+            categories[r.details.get("category") or "Not specified"] += 1
+            delegates += to_int(r.details.get("delegates"))
+            if r.details.get("country"):
+                countries[r.details["country"].strip().title()] += 1
 
     packages = Counter((p.details.get("package") or "General enquiry") for p in qs.filter(kind="partnership"))
     booths = sum(to_int(e.details.get("booths")) for e in qs.filter(kind="exhibitor"))

@@ -1,4 +1,4 @@
-# AIPIS 2027 website
+# AIPIS 2028 website
 
 - `frontend/` multi-page static site (one HTML file per page with its own embedded CSS and component scripts in `frontend/js/components/`), deployed on Vercel
 - `backend/` Django API that stores form submissions and emails the secretariat, deployed on Render
@@ -68,4 +68,4 @@ Run backend tests with `python manage.py test`.
 ## Notes
 
 - The brochure is served from `frontend/assets/AIPIS_2027_Brochure.pdf`.
-- Dates follow the concept note and website content (24 to 27 August 2027). The cover of `AIPIS_Website_Content.docx` says 8 to 11 June 2027, which conflicts with the rest of the documents.
+- The conference is scheduled for 21 to 24 March 2028 at Labadi Beach Hotel, Accra, Ghana. The source DOCX/PDF materials still contain earlier 2027 dates and need refreshed copies.

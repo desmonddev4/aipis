@@ -38,6 +38,35 @@ class Submission(models.Model):
         return f"{self.get_kind_display()} from {self.name}"
 
 
+class RegistrationPayment(models.Model):
+    class Status(models.TextChoices):
+        PENDING = "pending", "Pending"
+        SUCCESS = "success", "Paid"
+        FAILED = "failed", "Failed"
+
+    submission = models.OneToOneField(Submission, related_name="payment", on_delete=models.CASCADE)
+    reference = models.CharField(max_length=100, unique=True)
+    amount_kobo = models.PositiveBigIntegerField()
+    currency = models.CharField(max_length=3, default="GHS")
+    usd_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    fx_rate = models.DecimalField(max_digits=12, decimal_places=6)
+    fx_rate_date = models.DateField()
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.PENDING, db_index=True)
+    authorization_url = models.URLField(blank=True)
+    paystack_transaction_id = models.PositiveBigIntegerField(null=True, blank=True)
+    paid_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    @property
+    def amount_ghs(self):
+        from decimal import Decimal
+        return (Decimal(self.amount_kobo) / Decimal("100")).quantize(Decimal("0.01"))
+
+
 class SubmissionNote(models.Model):
     class Kind(models.TextChoices):
         NOTE = "note", "Internal note"

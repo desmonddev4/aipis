@@ -8,7 +8,7 @@
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    submitForm(form, "contact", "AIPIS 2027 enquiry", () => {
+    submitForm(form, "contact", "AIPIS 2028 enquiry", () => {
       form.reset();
       setStatus(form, "Thank you. Your message has been sent to the AIPIS Secretariat.", "ok");
     });

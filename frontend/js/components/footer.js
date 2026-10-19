@@ -129,7 +129,7 @@
       <nav class="f-cols" aria-label="Footer">${cols}
       </nav>
       <p class="f-tag">Building infrastructure. Powering industry. Delivering prosperity.</p>
-      <p class="f-copyright">© 2027 AIPIS. All rights reserved.</p>
+      <p class="f-copyright">© 2028 AIPIS. All rights reserved.</p>
       <div class="f-legal" aria-label="Legal links">
         <a href="https://aipis-frontend.vercel.app/privacy-policy.html">Privacy policy</a>
         <a href="https://aipis-frontend.vercel.app/terms-and-conditions.html">Terms and conditions</a>

@@ -45,7 +45,7 @@ def filtered(params, ignore_status=False):
 @require_GET
 def submission_list(request):
     params = request.GET
-    qs = filtered(params)
+    qs = filtered(params).select_related("payment")
     try:
         size = min(max(int(params.get("page_size", 20)), 1), 100)
         page_number = max(int(params.get("page", 1)), 1)
@@ -72,7 +72,7 @@ def submission_list(request):
 @staff_required
 @require_http_methods(["GET", "PATCH", "DELETE"])
 def submission_detail(request, pk):
-    sub = Submission.objects.filter(pk=pk).first()
+    sub = Submission.objects.select_related("payment").filter(pk=pk).first()
     if sub is None:
         return error("Submission not found.", 404)
 
@@ -99,7 +99,7 @@ def submission_detail(request, pk):
 @staff_required
 @require_POST
 def add_note(request, pk):
-    sub = Submission.objects.filter(pk=pk).first()
+    sub = Submission.objects.select_related("payment").filter(pk=pk).first()
     if sub is None:
         return error("Submission not found.", 404)
     text = str((json_body(request) or {}).get("text", "")).strip()[:4000]
@@ -113,7 +113,7 @@ def add_note(request, pk):
 @staff_required
 @require_POST
 def reply(request, pk):
-    sub = Submission.objects.filter(pk=pk).first()
+    sub = Submission.objects.select_related("payment").filter(pk=pk).first()
     if sub is None:
         return error("Submission not found.", 404)
     data = json_body(request) or {}

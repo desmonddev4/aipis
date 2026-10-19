@@ -6,7 +6,7 @@
   const root = document.getElementById("dashRoot");
   const user = API.session.user() || {};
   const first = (user.first_name || user.username || "").trim();
-  document.getElementById("welcome").textContent = `Welcome back${first ? ", " + first : ""}. Here is what is happening with AIPIS 2027.`;
+  document.getElementById("welcome").textContent = `Welcome back${first ? ", " + first : ""}. Here is what is happening with AIPIS 2028.`;
 
   const statCard = (icon, label, value, note, tone = "") => `
     <article class="card stat ${tone}">

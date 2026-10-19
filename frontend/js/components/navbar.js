@@ -19,7 +19,7 @@
         { href: "speakers.html#exhibitors", label: "Exhibitors" },
       ],
     },
-    { key: "who-attends", href: "who-attends.html", label: "Who attends" },
+    { key: "who-attends", href: "who-attends.html", label: "Audience" },
     { key: "partners", href: "partners.html", label: "Partners" },
     { key: "partner-with-us", href: "partner-with-us.html", label: "Partner with us" },
     { key: "contact", href: "contact.html", label: "Contact" },

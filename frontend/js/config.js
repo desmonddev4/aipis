@@ -3,5 +3,5 @@ window.AIPIS_CONFIG = {
   API_URL: ["localhost", "127.0.0.1"].includes(window.location.hostname)
     ? "http://localhost:8000"
     : "https://aipis-backend.onrender.com",
-  CONTACT_EMAIL: "info@aipis.knust.edu.gh",
+  CONTACT_EMAIL: "info@aipisgh.org",
 };

@@ -6,5 +6,5 @@ python manage.py collectstatic --no-input
 python manage.py migrate
 
 if [[ -n "${DJANGO_SUPERUSER_USERNAME:-}" && -n "${DJANGO_SUPERUSER_PASSWORD:-}" ]]; then
-  python manage.py createsuperuser --noinput --email "${DJANGO_SUPERUSER_EMAIL:-info@aipis.knust.edu.gh}" || true
+  python manage.py createsuperuser --noinput --email "${DJANGO_SUPERUSER_EMAIL:-info@aipisgh.org}" || true
 fi

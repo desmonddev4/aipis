@@ -31,7 +31,7 @@
         ["privacy-policy.html", "Privacy policy"],
         ["terms-and-conditions.html", "Terms and conditions"],
         ["cookie-policy.html", "Cookie policy"],
-        ["mailto:info@aipis.knust.edu.gh", "info@aipis.knust.edu.gh"],
+        ["mailto:info@aipisgh.org", "info@aipisgh.org"],
         ["tel:+233243555882", "+233 (0) 243 555 882"],
       ],
     },

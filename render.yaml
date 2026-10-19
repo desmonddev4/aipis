@@ -22,7 +22,7 @@ services:
       - key: CORS_ALLOWED_ORIGINS
         sync: false
       - key: NOTIFY_EMAIL
-        value: info@aipis.knust.edu.gh
+        value: info@aipisgh.org
       - key: PAYSTACK_SECRET_KEY
         sync: false
       - key: FRONTEND_URL

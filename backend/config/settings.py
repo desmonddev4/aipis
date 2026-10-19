@@ -102,14 +102,14 @@ CORS_URLS_REGEX = r"^/api/.*$"
 CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS")
 
 # Email notifications to the secretariat
-NOTIFY_EMAIL = os.environ.get("NOTIFY_EMAIL", "info@aipis.knust.edu.gh")
+NOTIFY_EMAIL = os.environ.get("NOTIFY_EMAIL", "info@aipisgh.org")
 PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY", "")
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000").rstrip("/")
 API_PUBLIC_URL = os.environ.get(
     "API_PUBLIC_URL",
     f"https://{RENDER_HOST}" if RENDER_HOST else "http://localhost:8000",
 ).rstrip("/")
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "AIPIS Website <no-reply@aipis.knust.edu.gh>")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "AIPIS Website <no-reply@aipisgh.org>")
 if os.environ.get("EMAIL_HOST"):
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_HOST = os.environ["EMAIL_HOST"]

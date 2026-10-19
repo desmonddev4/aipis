@@ -184,6 +184,9 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
 @keyframes grow { from { transform: scaleX(0); } }
   .registration-form { max-width: 860px; display: grid; gap: 1.2rem; margin: 2rem auto; }
 .registration-form .note { color: var(--green-900); }
+.registration-form .btn { background: var(--green-700); color: #fff; border: 1px solid var(--green-700); box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.registration-form .btn::before { display: none; }
+.registration-form .btn:hover { background: var(--green-900); color: #fff; border-color: var(--green-900); box-shadow: none; }
 .registration-form fieldset { border: 1px solid rgba(26,92,42,.2); border-radius: 16px; padding: 1.2rem; }
 .registration-form legend { font-weight: 800; color: var(--green-900); padding: 0 .45rem; }
 .registration-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; }

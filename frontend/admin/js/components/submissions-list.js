@@ -13,6 +13,7 @@
   const DETAIL_LABELS = {
     category: "Category", delegates: "Delegates", country: "Country", package: "Package",
     topic: "Topic", title: "Poster title", booths: "Booths", project: "Project", nominee: "Nominee",
+    organisation_type: "Organisation type", website: "Website", consent: "Terms and privacy", proposal: "Partnership proposal", product_summary: "Products, services or projects", space_requirements: "Space or setup requirements",
   };
   const STATUSES = [["", "All"], ["new", "New"], ["in_progress", "In progress"], ["handled", "Handled"], ["archived", "Archived"]];
 

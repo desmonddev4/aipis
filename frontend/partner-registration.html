@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partner registration | AIPIS 2028</title>
+  <meta name="description" content="Review AIPIS 2028 partner package details and submit your organisation's application.">
+  <meta name="theme-color" content="#0D3D26">
+  <link rel="icon" href="assets/AIPIS-LOGO.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --g9:#0a3a22; --g8:#0f4d2c; --g7:#16692f; --g50:#eaf4ec; --ink:#0f2418; --soft:#3a4f43; --orange:#f4a24c; --bg:#f6f9f6; --shadow:0 18px 40px rgba(5,32,19,.16); }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--bg); font:1rem/1.65 "Source Sans 3",system-ui,sans-serif; } h1,h2,h3,legend { color:var(--g9); font-family:Archivo,system-ui,sans-serif; line-height:1.2; } h1 { font-size:clamp(2rem,4vw,3rem); } h2 { font-size:1.6rem; } a { color:var(--g7); } button,input,select,textarea { font:inherit; }
+    .container { width:min(1080px, calc(100% - 2rem)); margin:auto; } .hero { padding:8rem 0 3rem; color:#fff; background:linear-gradient(145deg,#052013,#0f4d2c); } .hero h1 { color:#fff; margin:.5rem 0; } .hero p { max-width:70ch; color:#e3efe7; } .crumb { color:#ffc98a; }
+    .content { padding:2rem 0 5rem; } .card { background:#fff; border:1px solid rgba(26,92,42,.14); border-radius:18px; padding:clamp(1.2rem,3vw,2rem); box-shadow:var(--shadow); margin-bottom:1.4rem; }
+    .package-heading { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; align-items:start; } .package-heading h2 { margin:0; } .package-meta { color:var(--g9); font-weight:700; } .package-benefits { margin:.7rem 0 0; padding-left:1.3rem; } .requirements { display:grid; gap:.4rem; padding-left:1.3rem; }
+    .steps { display:flex; gap:.5rem; margin:0 0 1.5rem; padding:0; list-style:none; } .steps li { flex:1; padding:.7rem; border-bottom:3px solid #d4e6d9; color:#304f3d; font-weight:700; } .steps li[aria-current="step"] { border-color:var(--g7); color:var(--g9); }
+    fieldset.panel { min-width:0; border:0; padding:0; margin:0; } fieldset[hidden] { display:none; } legend { font-size:1.25rem; font-weight:800; margin-bottom:1rem; } .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; } .field { display:grid; gap:.3rem; } .field label { color:var(--g9); font-weight:700; } input,select,textarea { width:100%; border:1px solid rgba(26,92,42,.35); border-radius:10px; padding:.75rem .85rem; color:var(--ink); background:#fff; } textarea { min-height:120px; resize:vertical; } input:focus,select:focus,textarea:focus { outline:3px solid rgba(244,162,76,.45); border-color:var(--g7); }
+    .actions { display:flex; flex-wrap:wrap; gap:.7rem; justify-content:space-between; margin-top:1.4rem; } .btn { border:1px solid var(--g7); border-radius:999px; padding:.75rem 1.3rem; color:#fff; background:var(--g7); font-weight:800; text-decoration:none; cursor:pointer; } .btn:hover { background:var(--g9); border-color:var(--g9); } .btn.secondary { color:var(--g9); background:#fff; border-color:var(--g7); } .btn[disabled] { opacity:.6; cursor:wait; }
+    .consent { display:flex; gap:.6rem; align-items:flex-start; } .consent input { width:auto; margin-top:.45rem; } .error { color:#a11; font-weight:700; min-height:1.5em; } .success { border-left:4px solid var(--g7); background:var(--g50); padding:1rem; white-space:pre-line; } .muted { color:var(--soft); }
+    @media(max-width:600px) { .steps li { font-size:.82rem; padding:.45rem .2rem; } .actions .btn { width:100%; } }
+  </style>
+</head>
+<body>
+  <script src="js/components/navbar.js"></script>
+  <header class="hero"><div class="container">
+    <a class="crumb" href="partner-with-us.html">Partner with AIPIS</a>
+    <h1 id="page-title">Partner registration</h1>
+    <p id="page-intro">Review the package details, tell us about your organisation and submit an application to the AIPIS team.</p>
+  </div></header>
+  <main class="content container">
+    <section class="card" aria-labelledby="package-title">
+      <div class="package-heading"><h2 id="package-title">Package details</h2><div class="package-meta" id="package-meta"></div></div>
+      <p id="package-benefits"></p>
+      <h3>Information needed to apply</h3><ul class="requirements"><li>Organisation name, type and country</li><li>Lead contact name, email and phone</li><li>Selected package and the organisation website, if available</li><li id="package-requirement">A short description of your proposed support</li></ul><p class="muted" id="requirements-note">The current package information does not list separate eligibility documents.</p>
+    </section>
+    <section class="card" aria-labelledby="application-title">
+      <h2 id="application-title">Application form</h2>
+      <ol class="steps" aria-label="Application steps">
+        <li aria-current="step">1. Organisation</li><li>2. Application</li><li>3. Review</li>
+      </ol>
+      <div id="application-error" class="error" role="alert" aria-live="polite"></div>
+      <form id="partner-application" novalidate>
+        <fieldset class="panel" data-panel="0">
+          <legend>Organisation and lead contact</legend>
+          <div class="grid">
+            <div class="field"><label for="organisation">Organisation name</label><input id="organisation" name="organisation" required maxlength="200" autocomplete="organization"></div>
+            <div class="field"><label for="organisation-type">Organisation type</label><select id="organisation-type" name="organisation_type" required><option value="">Select type</option><option>Government agency</option><option>Company</option><option>Financial institution</option><option>University or research institution</option><option>Non-profit or civil society</option><option>Professional association</option><option>Other</option></select></div>
+            <div class="field"><label for="country">Country</label><input id="country" name="country" required maxlength="100" autocomplete="country-name"></div>
+            <div class="field"><label for="website">Website (optional)</label><input id="website" name="website" type="url" maxlength="250" placeholder="https://"></div>
+            <div class="field"><label for="name">Lead contact name</label><input id="name" name="name" required maxlength="120" autocomplete="name"></div>
+            <div class="field"><label for="email">Lead contact email</label><input id="email" name="email" type="email" required maxlength="254" autocomplete="email"></div>
+            <div class="field"><label for="phone">Lead contact phone</label><input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel"></div>
+          </div>
+          <div class="actions"><span></span><button class="btn" type="button" data-next>Continue</button></div>
+        </fieldset>
+        <fieldset class="panel" data-panel="1" hidden>
+          <legend>Package and proposed support</legend>
+          <div class="field" id="package-select-wrap"><label for="package">Partnership package</label><select id="package" name="package"></select></div>
+          <input type="hidden" id="fixed-package" name="package">
+          <div class="field" id="partnership-proposal-wrap"><label for="proposal">How would your organisation contribute to or benefit from this package?</label><textarea id="proposal" name="proposal" maxlength="3000" required></textarea></div>
+          <div class="field" id="exhibitor-fields" hidden>
+            <div class="grid">
+              <div class="field"><label for="booths">Number of 6 sq m booths requested (up to 30 available)</label><input id="booths" name="booths" type="number" min="1" max="30" value="1"></div>
+              <div class="field"><label for="product-summary">Products, services or projects to exhibit</label><textarea id="product-summary" name="product_summary" maxlength="2000"></textarea></div>
+              <div class="field"><label for="space-requirements">Space or setup requirements (optional)</label><textarea id="space-requirements" name="space_requirements" maxlength="1000"></textarea></div>
+            </div>
+          </div>
+          <div class="actions"><button class="btn secondary" type="button" data-back>Back</button><button class="btn" type="button" data-next>Continue</button></div>
+        </fieldset>
+        <fieldset class="panel" data-panel="2" hidden>
+          <legend>Review and submit</legend>
+          <div id="review-summary" class="success"></div>
+          <label class="consent"><input id="consent" name="consent" type="checkbox" required><span>I agree to the <a href="terms-and-conditions.html">registration terms</a> and have read the <a href="privacy-policy.html">privacy notice</a>.</span></label>
+          <div class="actions"><button class="btn secondary" type="button" data-back>Back</button><button class="btn" type="submit" id="submit-application">Submit application</button></div>
+        </fieldset>
+      </form>
+      <div id="application-result" hidden></div>
+    </section>
+  </main>
+  <script src="js/components/footer.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/components/partner-registration.js" defer></script>
+</body>
+</html>

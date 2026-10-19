@@ -32,7 +32,13 @@ ALLOWED_DETAILS = {
     "keynote": ["nominee"],
     "guest": ["nominee"],
 }
-MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "technical"}
+MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "technical", "partnership", "exhibitor"}
+PARTNERSHIP_PACKAGES = {
+    "Founding Partner", "Prosperity Index Partner", "Strategic Partner", "Knowledge Partner",
+    "Industry Partner", "Session Partner", "Gala Dinner Partner", "Field Day Partner",
+    "Student and Young Professional Bursary Partner", "Delegate Kit and Digital Partner",
+    "General partnership enquiry",
+}
 REGISTRATION_PRICES_USD = {
     "International delegate": (Decimal("750.00"), Decimal("640.00")),
     "African delegate (outside Ghana)": (Decimal("500.00"), Decimal("425.00")),
@@ -382,10 +388,47 @@ def submit(request):
         errors["email"] = "Please enter a valid email address."
     if kind in MESSAGE_REQUIRED and not message:
         errors["message"] = "Please add a message."
+    if kind in {"partnership", "exhibitor"}:
+        if data.get("consent") is not True:
+            errors["consent"] = "Please agree to the registration terms and privacy notice."
+        if not clean_text(data.get("organisation_type"), 80):
+            errors["organisation_type"] = "Please select an organisation type."
+        if not clean_text(data.get("country"), 100):
+            errors["country"] = "Please enter your organisation's country."
+        if kind == "partnership" and clean_text(data.get("package"), 100) not in PARTNERSHIP_PACKAGES:
+            errors["package"] = "Choose a valid partnership package."
+        if kind == "exhibitor":
+            if clean_text(data.get("package"), 100) != "Exhibitor":
+                errors["package"] = "Choose the exhibitor registration."
+            try:
+                booths = int(data.get("booths"))
+                if not 1 <= booths <= 30:
+                    raise ValueError
+            except (TypeError, ValueError):
+                errors["booths"] = "Request between 1 and 30 booths."
+            if not clean_text(data.get("product_summary"), 2000):
+                errors["product_summary"] = "Describe the products, services or projects you plan to exhibit."
     if errors:
         return JsonResponse({"ok": False, "errors": errors}, status=400)
 
     details = {key: clean_text(data.get(key), 200) for key in ALLOWED_DETAILS.get(kind, [])}
+    if kind in {"partnership", "exhibitor"}:
+        details.update({
+            "organisation_type": clean_text(data.get("organisation_type"), 80),
+            "country": clean_text(data.get("country"), 100),
+            "website": clean_text(data.get("website"), 250),
+            "consent": "Agreed",
+        })
+        if kind == "partnership":
+            details["package"] = clean_text(data.get("package"), 100)
+            details["proposal"] = clean_text(data.get("proposal"), 3000)
+        else:
+            details.update({
+                "package": "Exhibitor",
+                "booths": clean_text(data.get("booths"), 2),
+                "product_summary": clean_text(data.get("product_summary"), 2000),
+                "space_requirements": clean_text(data.get("space_requirements"), 1000),
+            })
     submission = Submission.objects.create(
         kind=kind,
         name=name,

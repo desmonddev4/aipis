@@ -42,6 +42,12 @@
       intro: "Tell us about the speaker and the experience they would share.",
       fields: [...base, text("nominee", "Speaker name and title", { required: true }), area("message", "Proposal", { required: true })],
     },
+    panelist: {
+      title: "Nominate or apply as a Panelist",
+      subject: "AIPIS 2028 panelist nomination",
+      intro: "Panelists contribute practical experience to moderated discussions and take questions from delegates.",
+      fields: [...base, text("topic", "Session topic", { required: true }), area("message", "Your relevant experience", { required: true })],
+    },
     technical: {
       title: "Apply as a Technical Keynote Presenter",
       subject: "AIPIS 2028 Technical Keynote Presenter application",
@@ -57,7 +63,7 @@
     exhibitor: {
       title: "Book an exhibition booth",
       subject: "AIPIS 2028 exhibition booking",
-      intro: "A 6 sq m booth costs USD 5,000 and includes 2 delegate passes and a listing in the exhibitor directory. Thirty booths are available.",
+      intro: "A 6 sq m booth costs USD 3,000 and includes 2 delegate passes and a listing in the exhibitor directory. Thirty booths are available.",
       fields: [...base, text("booths", "Number of booths", { type: "number", min: 1, max: 30, value: 1 }), area("message", "Anything we should know? (optional)")],
     },
     partnership: {
@@ -69,7 +75,7 @@
     registration: {
       title: "Register to attend",
       subject: "AIPIS 2028 registration",
-      intro: "Early fees apply if paid by 31 May 2027. Organisations registering five or more delegates receive a 10 percent discount.",
+      intro: "Early fees apply if paid by 31 December 2027. Organisations registering five or more delegates receive a 10 percent discount.",
       fields: [
         ...base,
         { name: "category", label: "Delegate category", type: "select", options: REG_CATEGORIES },

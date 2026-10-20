@@ -80,6 +80,12 @@
     .card { border-radius: var(--radius); padding: 1.3rem 1.4rem; transition: transform .3s var(--ease), box-shadow .3s, border-color .3s, background .3s; }
     .card h3 { margin-bottom: .35em; }
     .card p:last-child { margin-bottom: 0; }
+    .committee-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:1rem; }
+    .committee-grid article:nth-child(-n+3) { grid-column:span 2; }
+    .committee-grid article:nth-child(n+4) { grid-column:span 3; }
+    .committee-grid h4 { margin:1.2rem 0 .45rem; font-family:var(--font-head); color:var(--green-800); }
+    .committee-grid ul { padding-left:1.2rem; margin:.4rem 0 .8rem; }
+    .committee-grid li { margin:.3rem 0; }
     .def { position: relative; padding-left: 4.6rem; background: #fff; border: 1px solid rgba(15,77,44,.14); box-shadow: var(--shadow); }
     .def:hover { transform: translateY(-5px) rotate(-.4deg); box-shadow: var(--shadow-lg); border-color: var(--green-600); }
     .def-step { position: absolute; left: 1.2rem; top: 1.25rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; background: var(--green-800); color: #fff; transition: transform .4s var(--ease); }
@@ -135,11 +141,13 @@
     .form-status a { color: inherit; }
     button[disabled] { opacity: .65; cursor: wait; transform: none; }
 
-    @media (max-width: 1040px) { .sdg-grid { grid-template-columns: repeat(3, 1fr); } .timeline { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1040px) { .sdg-grid { grid-template-columns: repeat(3, 1fr); } .timeline { grid-template-columns: repeat(2, 1fr); } .committee-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .committee-grid article:nth-child(-n+3) { grid-column:span 1; } .committee-grid article:nth-child(n+4) { grid-column:span 2; } }
     @media (max-width: 860px) { .split { grid-template-columns: 1fr; } .definitions { position: static; } }
     @media (max-width: 600px) {
       :root { --nav-h: 64px; }
       .timeline { grid-template-columns: 1fr; }
+      .committee-grid { grid-template-columns:1fr; }
+      .committee-grid article:nth-child(n) { grid-column:span 1; }
       .sdg-grid { grid-template-columns: repeat(2, 1fr); }
       .sdg-main { grid-column: span 2; }
       .btn-row .btn, .cta-box .btn { width: 100%; }
@@ -176,7 +184,7 @@
           <p class="lead" data-rv>Africa has made strong progress in raising finance for infrastructure. Governments, development finance institutions, pension funds and private investors now plan and fund projects with growing skill.</p>
           <p data-rv style="--i:1">Problems remain after the funding is secured. Many projects stall, run over budget, or are completed without the industrial growth that justified them. AIPIS follows projects through construction and operation and measures what they deliver for industry and citizens.</p>
           <div class="theme-box" data-rv="zoom" style="--i:2">
-            <span class="eyebrow">Strategic theme, 2027 to 2031</span>
+            <span class="eyebrow">Strategic theme, 2028 to 2032</span>
             <p>Infrastructure that Delivers: Turning Africa’s Investment into Industry and Shared Prosperity</p>
           </div>
           <p data-rv style="--i:3">Every edition asks one question: has infrastructure spending in Africa produced working industries and better lives?</p>
@@ -203,7 +211,7 @@
       <div class="container">
         <div class="section-head">
           <h2 data-rv>Linked to the Sustainable Development Goals</h2>
-          <p class="lead" data-rv style="--i:1">AIPIS is built around SDG 9 (Industry, Innovation and Infrastructure) and contributes to SDGs 1, 6, 7, 8, 11, 12, 13, 16 and 17. Every session, output and commitment is linked to SDG targets. The 2030 edition in Kumasi will review progress in the SDG target year.</p>
+          <p class="lead" data-rv style="--i:1">AIPIS is built around SDG 9 (Industry, Innovation and Infrastructure) and contributes to SDGs 1, 6, 7, 8, 11, 12, 13, 16 and 17. Every session, output and commitment is linked to SDG targets. The 2030 edition in Ghana will review progress in the SDG target year.</p>
         </div>
         <ul class="sdg-grid">
           <li class="sdg sdg-main" data-rv="zoom"><span class="sdg-num">9</span><span>Industry, Innovation and Infrastructure</span></li>
@@ -223,18 +231,30 @@
     <section class="section" id="rotation">
       <div class="container">
         <div class="section-head">
-          <h2 data-rv>Future editions</h2>
-          <p class="lead" data-rv style="--i:1">Kumasi is the permanent home of AIPIS. The first two editions are held there, the third in Kenya and the fourth back in Kumasi for the review of progress on the Sustainable Development Goals. From 2031, the summit returns to Kumasi after every two editions held elsewhere.</p>
+          <h2 data-rv>Every edition in Ghana</h2>
+          <p class="lead" data-rv style="--i:1">Ghana is the permanent home of AIPIS, and every edition is held in Ghana in the second half of March. The summit does not rotate between countries. Delegates, speakers and partners from across Africa come to Ghana each year, and the 2030 edition reviews progress on the Sustainable Development Goals.</p>
         </div>
         <ol class="timeline">
-          <li class="tl-item tl-home" data-rv><span class="tl-year">2027</span><strong>Kumasi, Ghana</strong><span>From Financial Close to Prosperity Close</span></li>
-          <li class="tl-item tl-home" data-rv style="--i:1"><span class="tl-year">2028</span><strong>Kumasi, Ghana</strong><span>Powering Production</span></li>
-          <li class="tl-item" data-rv style="--i:2"><span class="tl-year">2029</span><strong>Kenya</strong><span>Building with Africa</span></li>
-          <li class="tl-item tl-home" data-rv style="--i:3"><span class="tl-year">2030</span><strong>Kumasi, Ghana</strong><span>The 2030 Review: SDG impact</span></li>
-          <li class="tl-item" data-rv style="--i:1"><span class="tl-year">2031</span><strong>Nigeria</strong><span>Shared Prosperity</span></li>
-          <li class="tl-item" data-rv style="--i:2"><span class="tl-year">2032</span><strong>South Africa</strong><span>Theme to be announced</span></li>
-          <li class="tl-item tl-home" data-rv style="--i:3"><span class="tl-year">2033</span><strong>Kumasi, Ghana</strong><span>Theme to be announced</span></li>
+          <li class="tl-item tl-home" data-rv><span class="tl-year">2028</span><strong>Accra, Ghana</strong><span>From Financial Close to Prosperity Close</span></li>
+          <li class="tl-item tl-home" data-rv style="--i:1"><span class="tl-year">2029</span><strong>Ghana</strong><span>Building with Africa</span></li>
+          <li class="tl-item tl-home" data-rv style="--i:2"><span class="tl-year">2030</span><strong>Ghana</strong><span>The 2030 Review: SDG impact</span></li>
+          <li class="tl-item tl-home" data-rv style="--i:3"><span class="tl-year">2031</span><strong>Ghana</strong><span>Shared Prosperity</span></li>
+          <li class="tl-item tl-home" data-rv style="--i:1"><span class="tl-year">2032</span><strong>Ghana</strong><span>Powering Production</span></li>
         </ol>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="committees">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">Governance</p><h2>Organising committees</h2><p>AIPIS is governed through five bodies. The Summit Steering Committee, drawn from the three convenors, sets strategy, approves partnerships and appoints the two organising committees. The International Organising Committee leads the programme and the summit's reach across Africa and beyond. The Local Organising Committee delivers each edition in the host city. The International Advisory Board advises on direction, and an independent Scientific Committee oversees the research and practice stream.</p></div>
+        <div class="committee-grid">
+          <article id="ssc" class="glass card"><h3>Summit Steering Committee</h3><p>Drawn from the three convenors: KNUST (CABE and DCTM), AIPAF and GCI.</p><ul><li>Sets strategy and approves the budget</li><li>Approves partnerships and fees</li><li>Appoints the International and Local Organising Committees</li><li>Chooses the venue for each edition in Ghana</li></ul><p><strong>Reports to:</strong> The convenors</p></article>
+          <article id="iab" class="glass card"><h3>International Advisory Board</h3><p>Senior figures from government, finance, industry and research, including the Founding Government Partners and Founding Partners.</p><ul><li>Advises on strategy and the programme</li><li>Opens links to senior networks in finance, government and industry</li><li>Supports the AIPIS Delivery Compact and its follow-up</li></ul><p><strong>Reports to:</strong> Summit Steering Committee</p></article>
+          <article id="scientific" class="glass card"><h3>Scientific Committee</h3><p>An independent panel of academics and practitioners. Its Chair sits on the International Organising Committee.</p><ul><li>Reviews papers, posters and Technical Keynote presentations</li><li>Selects Poster Presenters</li><li>Edits the summit proceedings</li></ul><p><strong>Reports to:</strong> International Organising Committee</p></article>
+          <article id="ioc" class="glass card"><h3>International Organising Committee</h3><p>The committee shapes the summit programme and gives AIPIS its continental reach. It meets monthly, mostly online, in the year before each edition, and in person at the summit.</p><h4>Composition</h4><ul><li>Chair nominated by the Steering Committee from the convenors</li><li>Two Vice-Chairs, one from each convenor not holding the Chair</li><li>Three partner-country members: one senior academic or professional each from Kenya, Nigeria and South Africa, nominated by partner universities</li><li>Up to seven regional members: one each from North, East, Central, West and Southern Africa, and up to two from the African diaspora</li><li>Government liaison nominated jointly by the Founding Government Partners</li><li>Top Business Brokers Consult Limited as Founding Industry Partner</li><li>Chairs of the Scientific and Local Organising Committees, ex officio</li><li>AIPIS Secretariat Secretary</li></ul><h4>Responsibilities</h4><ul><li>Sets the edition theme and session topics under the strategic theme</li><li>Identifies and invites Distinguished Keynote Speakers, Special Guest Speakers and Technical Keynote Presenters</li><li>Promotes the call for papers, posters and Forensic Clinic cases across Africa and internationally</li><li>Secures international partners, development finance institutions and delegates</li><li>Oversees the Prosperity Index, the Unfinished Projects Forensic Report and the Commitments Tracker for each edition</li><li>Builds links with partner universities, governments and financiers across Africa</li></ul></article>
+          <article id="loc" class="glass card"><h3>Local Organising Committee</h3><p>The committee delivers each edition from the AIPIS Secretariat at KNUST, working with partners in the host city.</p><h4>Composition</h4><ul><li>Chair nominated by the Steering Committee from KNUST (CABE and DCTM)</li><li>Vice-Chair nominated from AIPAF or GCI</li><li>AIPIS Secretariat Secretary and Finance Officer</li><li>Chairs of the nine sub-committees</li><li>Accra Metropolitan Assembly and Greater Accra Regional Coordinating Council representatives for 2028</li><li>Liaison for traditional authorities and student volunteer coordinator</li></ul><h4>Sub-committees</h4><ul><li>Programme and Technical: detailed programme, session chairs, speaker briefs and research stream, with the Scientific Committee</li><li>Finance and Sponsorship: budget, sponsorship sales, invoicing, payments and financial reporting</li><li>Registration and Digital: registration, payments, website, summit app and delegate database</li><li>Venue, Logistics and Accommodation: venue set-up, exhibition, transport and hotel room blocks</li><li>Protocol and Hospitality: ministers, VIPs and traditional authorities, ceremonies and Gala Dinner</li><li>Field Day and Site Visits: site selection, permissions, transport and safety for Day 4</li><li>Publicity and Media: media partners, press, social media, photography and video</li><li>Security, Health and Safety: security plan, medical cover and emergency procedures</li><li>Volunteers and Welfare: student volunteers, ushers and delegate support</li></ul></article>
+        </div>
+        <p class="note">The Steering Committee will confirm the Chairs and members of both organising committees during the Foundation phase, October to December 2026, and publish their names on the summit website.</p>
       </div>
     </section>
 
@@ -243,7 +263,7 @@
         <div class="cta-box" data-rv="zoom">
           <div>
             <h2>See the programme</h2>
-            <p>The conference takes place at Labadi Beach Hotel, Accra, from 21 to 24 March 2028.</p>
+            <p>The conference takes place at Kempinski Hotel Gold Coast City, Accra, from 21 to 24 March 2028.</p>
           </div>
           <div class="btn-row">
             <a class="btn btn-primary btn-lg" href="programme.html">View the programme

@@ -5,26 +5,53 @@
   /* ---------- Menu content (edit links here) ---------- */
   const LINKS = [
     { key: "about", href: "about.html", label: "About" },
-    { key: "programme", href: "programme.html", label: "Programme" },
-    { key: "innovations", href: "innovations.html", label: "Innovations" },
+    {
+      key: "programme",
+      label: "Programme",
+      children: [
+        { href: "programme.html", label: "Four days in Accra" },
+        { href: "programme.html#panels", label: "Thematic panels" },
+        { href: "innovations.html", label: "The AIPIS Distinction: Seven Innovations" },
+        { href: "innovations.html#roundtables", label: "The AIPIS Roundtables" },
+        { href: "who-attends.html", label: "Who attends" },
+        { href: "register.html", label: "Register to attend" },
+      ],
+    },
     {
       key: "speakers",
       label: "Call for Speakers",
       children: [
-        { href: "speakers.html", label: "All roles" },
         { href: "speakers.html#keynote", label: "Distinguished Keynote Speakers" },
         { href: "speakers.html#guest", label: "Special Guest Speakers" },
+        { href: "speakers.html#panelists", label: "Panelists" },
         { href: "speakers.html#technical", label: "Technical Keynote Presenters" },
         { href: "speakers.html#posters", label: "Poster Presenters" },
-        { href: "speakers.html#exhibitors", label: "Exhibitors" },
       ],
     },
-    { key: "who-attends", href: "who-attends.html", label: "Audience" },
-    { key: "partners", href: "partners.html", label: "Partners" },
-    { key: "partner-with-us", href: "partner-with-us.html", label: "Partner with us" },
+    {
+      key: "committees",
+      label: "Organising Committee",
+      children: [
+        { href: "about.html#ssc", label: "Summit Steering Committee" },
+        { href: "about.html#ioc", label: "International Organising Committee" },
+        { href: "about.html#loc", label: "Local Organising Committee" },
+        { href: "about.html#iab", label: "International Advisory Board" },
+        { href: "about.html#scientific", label: "Scientific Committee" },
+      ],
+    },
+    {
+      key: "partners",
+      label: "Partners",
+      children: [
+        { href: "partners.html#partners", label: "Convenors and founding partners" },
+        { href: "partner-with-us.html#partner", label: "Call for partners and sponsors" },
+        { href: "partner-with-us.html#packages", label: "Partnership packages" },
+        { href: "partner-with-us.html#exhibitors", label: "Exhibitors" },
+      ],
+    },
     { key: "contact", href: "contact.html", label: "Contact" },
   ];
-  const CTA = { key: "register", href: "register.html", label: "Register" };
+  const CTA = { key: "register", href: "register.html", label: "Register to attend" };
 
   /* ---------- Styles (self-contained: does not depend on page variables) ---------- */
   const CSS = `
@@ -127,7 +154,10 @@
 
   // Works with both /about.html and the extension-less /about used on Vercel
   const current = (location.pathname.split("/").pop() || "index").replace(/\.html$/, "") || "index";
-  const isActive = (key) => key === current;
+  const isActive = (key) => {
+    const item = LINKS.find((link) => link.key === key);
+    return key === current || Boolean(item?.children?.some((child) => child.href.split("#")[0].replace(/\.html$/, "") === current));
+  };
   const cur = (key) => (isActive(key) ? ' class="active" aria-current="page"' : "");
 
   const items = LINKS.map((l) => {

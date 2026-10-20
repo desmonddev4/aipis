@@ -4,7 +4,7 @@
 
   const cfg = window.AIPIS_CONFIG || {};
   const API = (cfg.API_URL || "").replace(/\/$/, "");
-  const EMAIL = cfg.CONTACT_EMAIL || "info@aipisgh.org";
+  const EMAIL = cfg.CONTACT_EMAIL || "info@aipis.knust.edu.gh";
 
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));

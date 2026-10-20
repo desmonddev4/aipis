@@ -161,6 +161,12 @@
     .cta-box h2 { color: #fff; font-size: clamp(1.4rem, 1.1rem + 1.1vw, 1.9rem); margin: 0 0 .3em; }
     .cta-box p { color: #d4e0d7; margin: 0; }
     .cta-box .btn-row { margin: 0; }
+    .cta-box.cta-venue { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 0; padding: 0; align-items: stretch; }
+    .cta-venue-media { min-width: 0; display: flex; flex-direction: column; margin: 0; background: rgba(0,0,0,.22); }
+    .cta-venue-media video { display: block; width: 100%; aspect-ratio: 16 / 9; height: 100%; min-height: 260px; object-fit: cover; background: #09110d; }
+    .cta-venue-media figcaption { padding: .8rem 1.2rem; color: #d4e0d7; font-size: .9rem; letter-spacing: .02em; }
+    .cta-venue-copy { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 1rem; padding: clamp(1.5rem, 3.5vw, 2.8rem); }
+    .cta-venue-copy .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; }
 
     /* forms (modal) */
     .field { display: grid; gap: .35rem; margin-bottom: 1rem; }
@@ -186,6 +192,9 @@
       .hero { min-height: auto; padding-bottom: 48px; }
       .scroll-cue { display: none; }
       .btn-row .btn, .cta-box .btn { width: 100%; }
+      .cta-box.cta-venue { grid-template-columns: 1fr; }
+      .cta-venue-media video { min-height: 0; }
+      .cta-venue-copy { padding: 1.5rem; }
       .def { padding-left: 4rem; }
       .def-step { left: .9rem; }
     }
@@ -348,8 +357,15 @@
 
     <section class="cta">
       <div class="container">
-        <div class="cta-box" data-rv="zoom">
-          <div>
+        <div class="cta-box cta-venue" data-rv="zoom">
+          <figure class="cta-venue-media">
+            <video controls playsinline preload="metadata" aria-label="Aerial view of Kempinski Hotel Gold Coast City, the AIPIS 2028 conference venue">
+              <source src="assets/Drone_filming_modern_luxury_hotel_20261020082959.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+            <figcaption>Kempinski Hotel Gold Coast City · Accra, Ghana</figcaption>
+          </figure>
+          <div class="cta-venue-copy">
             <h2>Join AIPIS in Accra</h2>
             <p>21 to 24 March 2028, Kempinski Hotel Gold Coast City, Accra, Ghana.</p>
           </div>

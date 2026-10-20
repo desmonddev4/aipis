@@ -13,7 +13,7 @@
         { href: "programme.html#panels", label: "Thematic panels" },
         { href: "innovations.html", label: "The AIPIS Distinction: Seven Innovations" },
         { href: "innovations.html#roundtables", label: "The AIPIS Roundtables" },
-        { href: "who-attends.html", label: "Who attends" },
+        { href: "who-attends.html", label: "Audience" },
         { href: "register.html", label: "Register to attend" },
       ],
     },

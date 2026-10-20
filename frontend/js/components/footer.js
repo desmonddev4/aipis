@@ -19,7 +19,7 @@
       links: [
         ["register.html", "Register"],
         ["speakers.html", "Call for Speakers"],
-        ["who-attends.html", "Who attends"],
+        ["who-attends.html", "Audience"],
         ["partner-with-us.html", "Partner with us"],
       ],
     },
@@ -28,10 +28,7 @@
       links: [
         ["partners.html", "Partners"],
         ["contact.html", "Contact"],
-        ["privacy-policy.html", "Privacy policy"],
-        ["terms-and-conditions.html", "Terms and conditions"],
-        ["cookie-policy.html", "Cookie policy"],
-        ["mailto:info@aipis.knust.edu.gh", "info@aipis.knust.edu.gh"],
+        ["mailto:info@aipisgh.org", "info@aipisgh.org"],
         ["tel:+233243555882", "+233 (0) 243 555 882"],
       ],
     },
@@ -77,8 +74,11 @@
 }
 .f-panel a:hover { color: var(--ft-o3); transform: translateX(5px); }
 .f-tag { margin: 0; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.12); color: var(--ft-o3); font-family: var(--font-head, "Archivo", system-ui, sans-serif); font-weight: 700; }
-.f-copyright { margin: 0.85rem 0 0; color: rgba(255,255,255,.7); font-size: 0.92rem; text-align: center; }
-.f-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem 1rem; margin: 0.7rem 0 0; text-align: center; }
+.f-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.12); }
+.f-bottom .f-tag { padding: 0; border: 0; }
+.f-bottom-meta { display: grid; justify-items: end; gap: .55rem; }
+.f-copyright { margin: 0; color: rgba(255,255,255,.7); font-size: 0.92rem; text-align: right; }
+.f-legal { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.5rem 1rem; text-align: right; }
 .f-legal a { color: rgba(255,255,255,.82); text-decoration: none; font-size: 0.9rem; }
 .f-legal a:hover { color: var(--ft-o3); }
 .footer :focus-visible { outline: 3px solid var(--ft-o5); outline-offset: 3px; border-radius: 8px; }
@@ -86,6 +86,9 @@
 @media (max-width: 760px) {
   .footer { padding: 2rem 0 1.5rem; }
   .f-cols { grid-template-columns: 1fr; gap: 0; padding: .6rem 0 1rem; }
+  .f-bottom { flex-direction: column; align-items: center; text-align: center; }
+  .f-bottom-meta { justify-items: center; }
+  .f-copyright, .f-legal { text-align: center; justify-content: center; }
   .f-col { border-bottom: 1px solid rgba(255,255,255,.12); }
   .f-toggle { cursor: pointer; margin: 0; padding: 1rem 0; font-size: 1.05rem; }
   .f-toggle svg { display: block; }
@@ -128,12 +131,16 @@
       </div>
       <nav class="f-cols" aria-label="Footer">${cols}
       </nav>
-      <p class="f-tag">Building infrastructure. Powering industry. Delivering prosperity.</p>
-      <p class="f-copyright">Â© 2028 AIPIS. All rights reserved.</p>
-      <div class="f-legal" aria-label="Legal links">
-        <a href="https://aipis-frontend.vercel.app/privacy-policy.html">Privacy policy</a>
-        <a href="https://aipis-frontend.vercel.app/terms-and-conditions.html">Terms and conditions</a>
-        <a href="https://aipis-frontend.vercel.app/cookie-policy.html">Cookie policy</a>
+      <div class="f-bottom">
+        <p class="f-tag">Building infrastructure. Powering industry. Delivering prosperity.</p>
+        <div class="f-bottom-meta">
+          <p class="f-copyright">© 2028 AIPIS. All rights reserved.</p>
+          <nav class="f-legal" aria-label="Legal links">
+            <a href="https://aipisgh.org/privacy-policy.html">Privacy policy</a>
+            <a href="https://aipisgh.org/terms-and-conditions.html">Terms and conditions</a>
+            <a href="https://aipisgh.org/cookie-policy.html">Cookie policy</a>
+          </nav>
+        </div>
       </div>
     </div>
   </div>

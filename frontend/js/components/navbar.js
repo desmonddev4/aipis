@@ -14,7 +14,7 @@
         { href: "innovations.html", label: "The AIPIS Distinction: Seven Innovations" },
         { href: "innovations.html#roundtables", label: "The AIPIS Roundtables" },
         { href: "who-attends.html", label: "Audience" },
-        { href: "register.html", label: "Register to attend" },
+        { href: "register.html#online-registration", label: "Register to attend" },
       ],
     },
     {
@@ -51,7 +51,7 @@
     },
     { key: "contact", href: "contact.html", label: "Contact" },
   ];
-  const CTA = { key: "register", href: "register.html", label: "Register to attend" };
+  const CTA = { key: "register", href: "register.html#online-registration", label: "Register to attend" };
 
   /* ---------- Styles (self-contained: does not depend on page variables) ---------- */
   const CSS = `

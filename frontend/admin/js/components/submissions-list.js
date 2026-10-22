@@ -160,7 +160,7 @@
   function summary(s) {
     const d = s.details || {};
     switch (s.kind) {
-      case "registration": return [d.category, d.delegates ? d.delegates + " delegates" : "", s.payment ? "GHS " + s.payment.amount_ghs + " / " + s.payment.status_label : "Payment not started"].filter(Boolean).join(" · ");
+      case "registration": return [d.category, d.delegates ? d.delegates + " delegates" : "", s.payment ? "GHS " + s.payment.amount_ghs + " / " + s.payment.status_label : "Payment not started"].filter(Boolean).join(" ï¿½ ");
       case "partnership": return d.package || "General enquiry";
       case "technical": return d.topic || "";
       case "poster": return d.title || "";
@@ -455,7 +455,7 @@
         <section class="drawer-section">
           <h3>Reply by email</h3>
           <form class="drawer-form" id="dReplyForm">
-            <div class="field"><label for="dSubject">Subject</label><input id="dSubject" value="${UI.esc("Re: AIPIS 2028 " + (UI.KIND_LABELS[s.kind] || "").toLowerCase())}" required></div>
+            <div class="field"><label for="dSubject">Subject</label><input id="dSubject" value="${UI.esc("Re: AIPIS 2027 " + (UI.KIND_LABELS[s.kind] || "").toLowerCase())}" required></div>
             <div class="field"><label for="dBody">Message to ${UI.esc(s.name)}</label><textarea id="dBody" rows="6" required></textarea></div>
             <div><button class="btn btn-primary" type="submit">${Icons.svg("send", 16)} Send email</button></div>
           </form>

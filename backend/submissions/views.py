@@ -106,7 +106,7 @@ def notify(submission):
         ]
     lines += ["", submission.message or "(no message)"]
     send_email(
-        subject=f"[AIPIS 2028] {submission.get_kind_display()} from {submission.name}",
+        subject=f"[AIPIS 2027] {submission.get_kind_display()} from {submission.name}",
         body="\n".join(lines),
         to=settings.NOTIFY_EMAIL,
         reply_to=submission.email,
@@ -115,7 +115,7 @@ def notify(submission):
 
 def notify_payment(payment):
     send_email(
-        subject="[AIPIS 2028] Registration payment confirmed",
+        subject="[AIPIS 2027] Registration payment confirmed",
         body=(
             f"Registration #{payment.submission_id} for {payment.submission.name} has been paid.\n"
             f"Amount: GHS {payment.amount_ghs}\nUSD fee: {payment.usd_amount}\n"
@@ -272,7 +272,7 @@ def registration_checkout(request):
         details=details,
         ip_address=ip,
     )
-    reference = f"AIPIS2028-{submission.pk}-{uuid.uuid4().hex[:12]}"
+    reference = f"AIPIS2027-{submission.pk}-{uuid.uuid4().hex[:12]}"
     payment = RegistrationPayment.objects.create(
         submission=submission,
         reference=reference,

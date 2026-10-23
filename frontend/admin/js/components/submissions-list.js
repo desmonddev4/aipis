@@ -413,8 +413,8 @@
       .join("");
     const attendees = Array.isArray(s.details && s.details.attendees) ? s.details.attendees : [];
     if (attendees.length) {
-      const rows = attendees.map((a, i) => (i + 1) + '. ' + UI.esc(a.name) + ' | ' + UI.esc(a.email) + ' | ' + UI.esc(a.category) + ' | ' + UI.esc(a.country)).join('<br>');
-      details += '<div class="full"><dt>Delegates (' + attendees.length + ')</dt><dd>' + rows + '</dd></div>';
+      const rows = attendees.map((a, i) => (i + 1) + '. ' + UI.esc(a.name) + ' | ' + UI.esc(a.email) + ' | ' + UI.esc(a.phone || '') + ' | ' + UI.esc(a.category) + ' | ' + UI.esc(a.country)).join('<br>');
+      details += '<div class="full"><dt>Attendees (' + attendees.length + ')</dt><dd>' + rows + '</dd></div>';
     }
     if (s.kind === "registration" && s.payment) {
       const p = s.payment;

@@ -87,10 +87,10 @@ def notify(submission):
     ]
     for key, value in submission.details.items():
         if key == "attendees" and isinstance(value, list):
-            lines.append("Delegates:")
+            lines.append("Attendees:")
             for index, attendee in enumerate(value, 1):
                 lines.append(
-                    f"  {index}. {attendee.get('name', '')} | {attendee.get('email', '')} | "
+                    f"  {index}. {attendee.get('name', '')} | {attendee.get('email', '')} | {attendee.get('phone', '')} | "
                     f"{attendee.get('category', '')} | {attendee.get('country', '')}"
                 )
         elif value:
@@ -192,7 +192,7 @@ def registration_checkout(request):
     name = clean_text(first_attendee.get("name"), 120)
     email = clean_text(first_attendee.get("email"), 254)
     organisation = clean_text(data.get("organisation"), 200)
-    phone = clean_text(data.get("phone"), 40)
+    phone = clean_text(first_attendee.get("phone"), 40)
     country = clean_text(first_attendee.get("country"), 100)
     errors = {}
     if not name:
@@ -201,6 +201,8 @@ def registration_checkout(request):
         errors["email"] = "Please enter a valid email address for the first attendee."
     if not country:
         errors["country"] = "Please enter the first attendee's country."
+    if not phone:
+        errors["phone"] = "Please enter a phone number for the first attendee."
     if data.get("consent") is not True:
         errors["consent"] = "Please agree to the privacy notice and registration terms."
     if not isinstance(attendees, list) or not 1 <= len(attendees) <= 50:
@@ -213,12 +215,15 @@ def registration_checkout(request):
                 continue
             attendee_name = clean_text(attendee.get("name"), 120)
             attendee_email = clean_text(attendee.get("email"), 254)
+            attendee_phone = clean_text(attendee.get("phone"), 40)
             attendee_country = clean_text(attendee.get("country"), 100)
             category = clean_text(attendee.get("category"), 100)
             if not attendee_name:
                 errors[f"attendee_name_{index}"] = f"Enter a name for attendee {index + 1}."
             if not valid_email(attendee_email):
                 errors[f"attendee_email_{index}"] = f"Enter a valid email for attendee {index + 1}."
+            if not attendee_phone:
+                errors[f"attendee_phone_{index}"] = f"Enter a phone number for attendee {index + 1}."
             if category not in REGISTRATION_PRICES_USD:
                 errors[f"attendee_category_{index}"] = f"Choose a category for attendee {index + 1}."
             if not attendee_country:
@@ -226,6 +231,7 @@ def registration_checkout(request):
             cleaned_attendees.append({
                 "name": attendee_name,
                 "email": attendee_email,
+                "phone": attendee_phone,
                 "country": attendee_country,
                 "category": category,
             })

@@ -26,6 +26,10 @@
   const exhibitor = document.getElementById("exhibitor-fields");
   const proposalWrap = document.getElementById("partnership-proposal-wrap");
   const error = document.getElementById("application-error");
+  const drawer = document.getElementById("partner-application-drawer");
+  const drawerPanel = drawer.querySelector(".partner-drawer-panel");
+  const openButton = document.getElementById("open-application");
+  let closeTimer = null;
   let current = 0;
   let selected = byName.get(requested);
   if (!selected) selected = byName.get("General partnership enquiry");
@@ -62,6 +66,36 @@
   }
   packageSelect.addEventListener("change", updatePackage);
   updatePackage();
+  function openDrawer() {
+    if (closeTimer) { window.clearTimeout(closeTimer); closeTimer = null; }
+    drawer.hidden = false;
+    drawer.setAttribute("aria-hidden", "false");
+    document.body.classList.add("partner-drawer-open");
+    window.requestAnimationFrame(() => {
+      drawer.classList.add("is-open");
+      drawer.querySelector(".partner-drawer-close").focus();
+    });
+  }
+  function closeDrawer() {
+    if (drawer.hidden) return;
+    drawer.classList.remove("is-open");
+    drawer.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("partner-drawer-open");
+    closeTimer = window.setTimeout(() => { drawer.hidden = true; closeTimer = null; }, 420);
+    openButton.focus();
+  }
+  openButton.addEventListener("click", openDrawer);
+  drawer.querySelectorAll(".partner-drawer-close, .partner-drawer-scrim").forEach((button) => button.addEventListener("click", closeDrawer));
+  drawer.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { event.preventDefault(); closeDrawer(); return; }
+    if (event.key !== "Tab") return;
+    const focusable = drawerPanel.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  if (requested && byName.has(requested)) openDrawer();
   function updateReview() {
     const data = new FormData(form);
     const lines = [

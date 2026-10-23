@@ -12,15 +12,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root { --g9:#0a3a22; --g8:#0f4d2c; --g7:#16692f; --g50:#eaf4ec; --ink:#0f2418; --soft:#3a4f43; --orange:#f4a24c; --bg:#f6f9f6; --shadow:0 18px 40px rgba(5,32,19,.16); }
-    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--bg); font:1rem/1.65 "Source Sans 3",system-ui,sans-serif; } h1,h2,h3,legend { color:var(--g9); font-family:Archivo,system-ui,sans-serif; line-height:1.2; } h1 { font-size:clamp(2rem,4vw,3rem); } h2 { font-size:1.6rem; } a { color:var(--g7); } button,input,select,textarea { font:inherit; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--bg); font:1rem/1.65 "Source Sans 3",system-ui,sans-serif; } body.partner-drawer-open { overflow:hidden; }
+    h1,h2,h3,legend { color:var(--g9); font-family:Archivo,system-ui,sans-serif; line-height:1.2; } h1 { font-size:clamp(2rem,4vw,3rem); } h2 { font-size:1.6rem; } a { color:var(--g7); } button,input,select,textarea { font:inherit; }
     .container { width:min(1080px, calc(100% - 2rem)); margin:auto; } .hero { padding:8rem 0 3rem; color:#fff; background:linear-gradient(145deg,#052013,#0f4d2c); } .hero h1 { color:#fff; margin:.5rem 0; } .hero p { max-width:70ch; color:#e3efe7; } .crumb { color:#ffc98a; }
     .content { padding:2rem 0 5rem; } .card { background:#fff; border:1px solid rgba(26,92,42,.14); border-radius:18px; padding:clamp(1.2rem,3vw,2rem); box-shadow:var(--shadow); margin-bottom:1.4rem; }
-    .package-heading { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; align-items:start; } .package-heading h2 { margin:0; } .package-meta { color:var(--g9); font-weight:700; } .package-benefits { margin:.7rem 0 0; padding-left:1.3rem; } .requirements { display:grid; gap:.4rem; padding-left:1.3rem; }
-    .steps { display:flex; gap:.5rem; margin:0 0 1.5rem; padding:0; list-style:none; } .steps li { flex:1; padding:.7rem; border-bottom:3px solid #d4e6d9; color:#304f3d; font-weight:700; } .steps li[aria-current="step"] { border-color:var(--g7); color:var(--g9); }
-    fieldset.panel { min-width:0; border:0; padding:0; margin:0; } fieldset[hidden] { display:none; } legend { font-size:1.25rem; font-weight:800; margin-bottom:1rem; } .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; } .field { display:grid; gap:.3rem; } .field label { color:var(--g9); font-weight:700; } input,select,textarea { width:100%; border:1px solid rgba(26,92,42,.35); border-radius:10px; padding:.75rem .85rem; color:var(--ink); background:#fff; } textarea { min-height:120px; resize:vertical; } input:focus,select:focus,textarea:focus { outline:3px solid rgba(244,162,76,.45); border-color:var(--g7); }
-    .actions { display:flex; flex-wrap:wrap; gap:.7rem; justify-content:space-between; margin-top:1.4rem; } .btn { border:1px solid var(--g7); border-radius:999px; padding:.75rem 1.3rem; color:#fff; background:var(--g7); font-weight:800; text-decoration:none; cursor:pointer; } .btn:hover { background:var(--g9); border-color:var(--g9); } .btn.secondary { color:var(--g9); background:#fff; border-color:var(--g7); } .btn[disabled] { opacity:.6; cursor:wait; }
-    .consent { display:flex; gap:.6rem; align-items:flex-start; } .consent input { width:auto; margin-top:.45rem; } .error { color:#a11; font-weight:700; min-height:1.5em; } .success { border-left:4px solid var(--g7); background:var(--g50); padding:1rem; white-space:pre-line; } .muted { color:var(--soft); }
-    @media(max-width:600px) { .steps li { font-size:.82rem; padding:.45rem .2rem; } .actions .btn { width:100%; } }
+    .package-heading { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; align-items:start; } .package-heading h2 { margin:0; } .package-meta { color:var(--g9); font-weight:700; } .package-benefits { margin:.7rem 0 0; } .requirements { display:grid; gap:.4rem; padding-left:1.3rem; }
+    .steps { display:flex; gap:.5rem; margin:0 0 1.5rem; padding:0; list-style:none; } .steps li { flex:1; padding:.7rem; border-bottom:3px solid #d4e6d9; color:#53665a; font-weight:700; } .steps li[aria-current="step"] { border-color:var(--g7); color:var(--g9); }
+    fieldset.panel { min-width:0; border:1px solid rgba(26,92,42,.16); border-radius:18px; padding:1.2rem; margin:0; background:linear-gradient(180deg,#fbfdfb,#f3f8f3); } fieldset[hidden], [hidden] { display:none !important; } legend { font-size:1rem; font-weight:800; padding:0 .5rem; } .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; } .field { display:grid; gap:.3rem; } .field label { color:var(--g9); font-weight:700; } input,select,textarea { width:100%; border:2px solid rgba(26,92,42,.2); border-radius:12px; padding:.75rem .85rem; color:var(--ink); background:#fff; } textarea { min-height:120px; resize:vertical; } input:focus,select:focus,textarea:focus { outline:3px solid rgba(244,162,76,.4); border-color:var(--g7); }
+    .actions { display:flex; flex-wrap:wrap; gap:.7rem; justify-content:space-between; margin-top:1.4rem; } .btn { border:1px solid var(--g7); border-radius:999px; padding:.8rem 1.4rem; color:#fff; background:var(--g7); font-weight:800; text-decoration:none; cursor:pointer; box-shadow:0 8px 20px rgba(15,77,44,.16); } .btn:hover { background:var(--g9); border-color:var(--g9); } .btn.secondary { color:var(--g9); background:#fff; border-color:rgba(26,92,42,.3); box-shadow:none; } .btn[disabled] { opacity:.6; cursor:wait; }
+    .consent { display:flex; gap:.6rem; align-items:flex-start; } .consent input { width:auto; margin-top:.45rem; } .error { color:#a11; font-weight:700; min-height:1.5em; } .success { border-left:4px solid var(--g7); background:var(--g50); padding:1rem; white-space:pre-line; border-radius:0 12px 12px 0; } .muted { color:var(--soft); }
+    .partner-drawer[hidden] { display:none; } .partner-drawer { position:fixed; inset:0; z-index:1200; display:flex; justify-content:flex-end; } .partner-drawer-scrim { position:absolute; inset:0; width:100%; border:0; border-radius:0; background:rgba(3,19,11,.62); backdrop-filter:blur(6px); opacity:0; transition:opacity .35s ease; cursor:default; }
+    .partner-drawer-panel { position:relative; z-index:1; width:min(100%,640px); height:100%; overflow-y:auto; overscroll-behavior:contain; padding:1.25rem clamp(1rem,3vw,2rem) 2.5rem; background:radial-gradient(420px 320px at 100% 0%,rgba(236,181,68,.14),transparent 70%),#f8faf7; border-left:4px solid #ecb544; box-shadow:-24px 0 64px rgba(3,19,11,.3); transform:translateX(100%); transition:transform .4s cubic-bezier(.2,.8,.2,1); }
+    .partner-drawer-panel::after { content:""; position:absolute; right:-120px; bottom:-120px; width:420px; height:420px; background:url("assets/register%20and%20favicon%20logo.png") center/contain no-repeat; opacity:.045; pointer-events:none; }
+    .partner-drawer.is-open .partner-drawer-scrim { opacity:1; } .partner-drawer.is-open .partner-drawer-panel { transform:translateX(0); }
+    .partner-drawer-header { position:sticky; top:-1.25rem; z-index:3; display:flex; align-items:center; justify-content:space-between; gap:1rem; margin:-1.25rem calc(clamp(1rem,3vw,2rem) * -1) 1.4rem; padding:.8rem clamp(1rem,3vw,2rem); background:linear-gradient(135deg,#0a3a22,#16692f); border-bottom:3px solid #ecb544; box-shadow:0 10px 24px rgba(5,32,19,.25); }
+    .partner-drawer-brand { display:flex; align-items:center; gap:.8rem; color:#fff; min-width:0; } .partner-drawer-brand img { width:3.4rem; height:3.4rem; padding:.2rem; object-fit:contain; border-radius:50%; background:#f4f2ee; box-shadow:0 0 0 2px #ecb544; flex:none; } .partner-drawer-brand span { display:grid; gap:.1rem; } .partner-drawer-brand strong { font-family:Archivo,system-ui,sans-serif; font-size:1.02rem; line-height:1.15; } .partner-drawer-brand small { color:#bcd6c4; font-size:.78rem; line-height:1.3; }
+    .partner-drawer-close { flex:none; width:2.75rem; height:2.75rem; display:grid; place-items:center; border:1px solid rgba(255,255,255,.35); border-radius:50%; background:rgba(255,255,255,.1); color:#fff; font-size:1.6rem; line-height:1; cursor:pointer; } .partner-drawer-close:hover { background:#ecb544; color:#0a3a22; }
+    .drawer-eyebrow { display:inline-flex; margin:0 0 .6rem; padding:.3rem .85rem; border-radius:999px; background:#0f4d2c; color:#f3d078; font-family:Archivo,system-ui,sans-serif; font-size:.8rem; font-weight:700; }
+    .application-form { position:relative; z-index:1; display:grid; gap:1rem; padding:clamp(1rem,3vw,1.5rem); background:#fff; border:1px solid rgba(26,92,42,.12); border-radius:22px; box-shadow:0 18px 48px rgba(5,32,19,.1); }
+    .application-drawer-title { margin:.2rem 0 1.2rem; } .package-cta { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:1.5rem; }
+    @media(max-width:760px) { .partner-drawer-panel { width:100%; border-left:0; padding:calc(.75rem + env(safe-area-inset-top)) 1rem calc(1.25rem + env(safe-area-inset-bottom)); } .partner-drawer-panel::after { display:none; } .partner-drawer-header { top:0; margin:calc(-.75rem - env(safe-area-inset-top)) -1rem 1rem; padding:.7rem 1rem; } .partner-drawer-brand img { width:2.9rem; height:2.9rem; } .partner-drawer-brand small { display:none; } }
+    @media(max-width:600px) { .steps li { font-size:.82rem; padding:.45rem .2rem; } .actions .btn { width:100%; } .partner-drawer-panel { padding-inline:.75rem; } .partner-drawer-header { margin-inline:-.75rem; padding-inline:.75rem; } .application-form { padding:.75rem; } .field-grid { grid-template-columns:minmax(0,1fr); } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; animation:none !important; } }
   </style>
 </head>
 <body>
@@ -35,14 +48,17 @@
       <div class="package-heading"><h2 id="package-title">Package details</h2><div class="package-meta" id="package-meta"></div></div>
       <p id="package-benefits"></p>
       <h3>Information needed to apply</h3><ul class="requirements"><li>Organisation name, type and country</li><li>Lead contact name, email and phone</li><li>Selected package and the organisation website, if available</li><li id="package-requirement">A short description of your proposed support</li></ul><p class="muted" id="requirements-note">The current package information does not list separate eligibility documents.</p>
+      <div class="package-cta"><span class="muted">Your application takes a few steps to complete.</span><button class="btn" id="open-application" type="button">Start application</button></div>
     </section>
-    <section class="card" aria-labelledby="application-title">
-      <h2 id="application-title">Application form</h2>
-      <ol class="steps" aria-label="Application steps">
-        <li aria-current="step">1. Organisation</li><li>2. Application</li><li>3. Review</li>
-      </ol>
-      <div id="application-error" class="error" role="alert" aria-live="polite"></div>
-      <form id="partner-application" novalidate>
+    <section class="partner-drawer" id="partner-application-drawer" aria-hidden="true" hidden>
+      <button class="partner-drawer-scrim" type="button" aria-label="Close application form"></button>
+      <div class="partner-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="application-title" tabindex="-1">
+        <header class="partner-drawer-header"><div class="partner-drawer-brand"><img src="assets/register%20and%20favicon%20logo.png" alt=""><span><strong>AIPIS 2027</strong><small>Africa Infrastructure, Prosperity and Industrialisation Summit</small></span></div><button class="partner-drawer-close" type="button" aria-label="Close application form">&times;</button></header>
+        <p class="drawer-eyebrow">Secure online application</p>
+        <h2 class="application-drawer-title" id="application-title">Partnership application</h2>
+        <ol class="steps" aria-label="Application steps"><li aria-current="step">1. Organisation</li><li>2. Application</li><li>3. Review</li></ol>
+        <div id="application-error" class="error" role="alert" aria-live="polite"></div>
+        <form id="partner-application" class="application-form" novalidate>
         <fieldset class="panel" data-panel="0">
           <legend>Organisation and lead contact</legend>
           <div class="grid">
@@ -76,8 +92,9 @@
           <label class="consent"><input id="consent" name="consent" type="checkbox" required><span>I agree to the <a href="terms-and-conditions.html">registration terms</a> and have read the <a href="privacy-policy.html">privacy notice</a>.</span></label>
           <div class="actions"><button class="btn secondary" type="button" data-back>Back</button><button class="btn" type="submit" id="submit-application">Submit application</button></div>
         </fieldset>
-      </form>
-      <div id="application-result" hidden></div>
+        </form>
+        <div id="application-result" hidden></div>
+      </div>
     </section>
   </main>
   <script src="js/components/footer.js"></script>

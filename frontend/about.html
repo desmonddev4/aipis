@@ -55,6 +55,10 @@ p{margin:0 0 1em}
 .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:2rem;align-items:center}
 .page-hero h1{max-width:12ch;margin-bottom:0}
 .page-hero .lead{color:#c4dccb;max-width:46ch;margin:1.1rem 0 0}
+.hero-kicker{margin:0 0 .65rem;color:var(--gold-300);font-family:var(--font-head);font-size:.84rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.hero-facts{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.3rem}
+.hero-fact{display:inline-flex;align-items:center;gap:.55rem;padding:.5rem .85rem;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(255,255,255,.1);color:#f2f7f3;font-size:.92rem;font-weight:600}
+.hero-fact::before{content:"";width:.55rem;height:.55rem;flex:none;border-radius:50%;background:var(--gold-400);box-shadow:0 0 0 4px rgba(236,181,68,.18)}
 .crumbs{display:flex;gap:.5rem;font-weight:600;font-size:.9rem;color:#bcd6c4;margin-bottom:1rem}
 .crumbs a{color:var(--gold-300)}
 .hero-line{display:block;width:140px;height:5px;margin-top:1.3rem;border-radius:4px;background:repeating-linear-gradient(90deg,var(--gold-400) 0 18px,transparent 18px 28px);transform-origin:left;animation:grow 1s .3s var(--ease) both}
@@ -177,9 +181,11 @@ button[disabled]{opacity:.65;cursor:wait}
           <div class="hero-grid" data-fade>
             <div>
               <p class="crumbs" data-rv><a href="index.html">Home</a><span aria-hidden="true">/</span><span>About</span></p>
+              <p class="hero-kicker" data-rv style="--i:1">Africa Infrastructure, Prosperity and Industrialisation Summit</p>
               <h1 id="page-title" data-rv style="--i:1">Why AIPIS</h1>
               <span class="hero-line" aria-hidden="true"></span>
-              <p class="lead" data-rv style="--i:2">Infrastructure should be measured by the industries and jobs it creates, not by the money raised to build it.</p>
+              <p class="lead" data-rv style="--i:2">An annual African summit measuring whether infrastructure investment creates productive industries, jobs and better living standards.</p>
+              <div class="hero-facts" data-rv style="--i:3"><span class="hero-fact">23–27 March 2027</span><span class="hero-fact">Labadi Beach Hotel, Accra</span></div>
             </div>
             <div class="medallion" aria-hidden="true" data-rv="zoom" style="--i:2">
               <svg viewBox="0 0 200 200"><defs><linearGradient id="gs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6cf76"/><stop offset="1" stop-color="#b9791a"/></linearGradient></defs><circle class="gear-ring" data-spin="-0.12" cx="100" cy="100" r="97"/><circle class="ring-draw" cx="100" cy="100" r="92" transform="rotate(-90 100 100)"/></svg>
@@ -190,7 +196,7 @@ button[disabled]{opacity:.65;cursor:wait}
             <div class="stat glass" data-rv style="--i:1"><b data-count="5">0</b><span>Governing bodies</span></div>
             <div class="stat glass" data-rv style="--i:2"><b data-count="10">0</b><span>SDGs linked to every session</span></div>
             <div class="stat glass" data-rv style="--i:3"><b data-count="9">0</b><span>Local sub-committees</span></div>
-            <div class="stat glass" data-rv style="--i:4"><b data-count="5">0</b><span>Days in Accra, 23 to 27 March 2027</span></div>
+            <div class="stat glass" data-rv style="--i:4"><b data-count="5">0</b><span>Summit days in Accra</span></div>
           </div>
         </div>
       </section>

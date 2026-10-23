@@ -201,6 +201,11 @@ body.registration-drawer-open { overflow:hidden; }
 .registration-form label { display:grid; gap:.35rem; font-weight:600; font-size:.92rem; }
 .registration-form input, .registration-form select { padding:.72rem .85rem; border:2px solid rgba(26,92,42,.2); border-radius:12px; background:#fff; }
 .registration-form input:hover, .registration-form select:hover { border-color:rgba(26,92,42,.45); }
+.registration-form select[data-field="category"] { appearance:none; -webkit-appearance:none; min-height:3.15rem; padding:.78rem 3rem .78rem 1rem; border:1px solid rgba(26,92,42,.22); border-radius:14px; color:var(--green-950); font-weight:650; background-color:#fff; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2316692f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; background-size:1.15rem; box-shadow:0 3px 10px rgba(5,32,19,.04); cursor:pointer; transition:border-color .2s, box-shadow .2s, background-color .2s; }
+.registration-form select[data-field="category"]:invalid { color:#6d7c71; font-weight:500; }
+.registration-form select[data-field="category"]:hover { border-color:rgba(22,105,47,.55); background-color:#fbfdfb; }
+.registration-form select[data-field="category"]:focus { outline:none; border-color:var(--gold-400); box-shadow:0 0 0 4px rgba(236,181,68,.26), 0 5px 16px rgba(5,32,19,.08); }
+.registration-form select[data-field="category"] option { color:var(--green-950); background:#fff; font-weight:500; }
 .registration-form .registration-consent { display:flex; align-items:flex-start; gap:.7rem; padding:.9rem 1rem; border-radius:14px; background:var(--green-50); font-weight:500; }
 .registration-consent input { width:1.15rem; height:1.15rem; margin-top:.25rem; padding:0; accent-color:var(--green-700); flex:none; }
 

@@ -183,11 +183,16 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
 }
 @keyframes grow { from { transform: scaleX(0); } }
   .registration-form { max-width: 1080px; display: grid; gap: 1.25rem; margin: 2rem auto; padding: clamp(1rem, 3vw, 2rem); background: #fff; border: 1px solid rgba(26,92,42,.12); border-radius: 24px; box-shadow: 0 18px 48px rgba(5,32,19,.09); }
-.registration-layout { display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); align-items: start; gap: 1.25rem; }
+.registration-layout { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
 .registration-form .note { color: var(--green-900); }
 .registration-form .btn { background: var(--green-700); color: #fff; border: 1px solid var(--green-700); box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
 .registration-form .btn::before { display: none; }
 .registration-form .btn:hover { background: var(--green-900); color: #fff; border-color: var(--green-900); box-shadow: none; }
+.registration-panel { min-width: 0; }
+.registration-panel + .registration-panel { padding-top: 1.25rem; border-top: 1px solid rgba(26,92,42,.14); }
+.registration-panel h3 { margin: 0 0 .35rem; color: var(--green-900); font-family: var(--font-head); font-size: 1.15rem; }
+.registration-panel > p { margin: 0 0 1rem; color: var(--ink-soft); }
+.registration-panel > .registration-grid { margin-top: 1rem; }
 .registration-form fieldset { min-width: 0; border: 1px solid rgba(26,92,42,.16); background: #f8fbf8; border-radius: 18px; padding: 1.2rem; }
 .registration-form legend { font-weight: 800; color: var(--green-900); padding: 0 .45rem; }
 .registration-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 1rem; }
@@ -202,7 +207,6 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
 .registration-form > #registration-error { color: #a11; margin: 0; padding: .75rem 1rem; border-radius: 12px; background: #fff4f2; }
 .registration-form > #registration-error:empty { display: none; }
 .registration-form > #registration-submit { justify-self: start; min-width: min(100%, 260px); }
-@media (max-width: 760px) { .registration-layout { grid-template-columns: 1fr; } }
 body.registration-drawer-open { overflow: hidden; }
 .registration-drawer[hidden] { display: none; }
 .registration-drawer { position: fixed; inset: 0; z-index: 1200; display: flex; justify-content: flex-end; }
@@ -290,14 +294,14 @@ body.registration-drawer-open { overflow: hidden; }
           <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register delegates</h2><p>Enter your booking contact, add each attendee, then review the total before paying securely with Paystack.</p></div>
           <form id="registration-form" class="registration-form" novalidate>
             <div class="registration-layout">
-            <fieldset class="registration-panel"><legend>Booking contact</legend><div class="registration-grid">
+            <section class="registration-panel" aria-labelledby="booking-contact-heading"><h3 id="booking-contact-heading">Booking contact</h3><p>We’ll use these details for the person managing this booking. If you’re attending, add yourself under delegates too.</p><div class="registration-grid">
               <label>Name<input name="name" autocomplete="name" required maxlength="120"></label>
               <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
               <label>Organisation (optional)<input name="organisation" autocomplete="organization" maxlength="200"></label>
               <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
               <label>Country<input name="country" autocomplete="country-name" required maxlength="100"></label>
-            </div></fieldset>
-            <fieldset class="registration-panel"><legend>Delegates</legend><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add another delegate</button><p class="note">Organisations registering five or more delegates receive a 10% discount.</p></fieldset>
+            </div></section>
+            <section class="registration-panel" aria-labelledby="delegates-heading"><h3 id="delegates-heading">Attending delegates</h3><p>Add the details and registration category for each person attending.</p><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add another delegate</button><p class="note">Organisations registering five or more delegates receive a 10% discount.</p></section>
             </div>
             <label class="registration-consent"><input name="consent" type="checkbox" required> I agree to the <a href="terms-and-conditions.html">registration terms</a> and have read the <a href="privacy-policy.html">privacy notice</a>.</label>
             <p id="registration-error" role="alert" aria-live="polite"></p>

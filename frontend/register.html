@@ -256,7 +256,7 @@ body.registration-drawer-open { overflow:hidden; }
   .table.stack tr:last-child { border-bottom:1px solid rgba(22,105,47,.16); }
   .table.stack td { display:flex; flex-direction:column; align-items:flex-start; min-width:0; gap:.2rem; padding:.15rem 0; border:0; white-space:normal; overflow-wrap:anywhere; }
   .table.stack td:first-child { grid-column:1 / -1; padding-bottom:.45rem; border-bottom:1px solid rgba(22,105,47,.12); font-size:1rem; }
-  .table.stack td[data-label]::before { position:static; display:block; width:auto; height:auto; overflow:visible; clip:auto; color:var(--ink-soft); font-size:.74rem; line-height:1.3; font-weight:600; white-space:normal; }
+  .table.stack td[data-label]::before { position:static; display:block; width:auto; height:auto; margin:0; overflow:visible; clip:auto; border-radius:0; background:none; box-shadow:none; color:var(--ink-soft); font-size:.74rem; line-height:1.3; font-weight:600; white-space:normal; }
   .table.stack td.num-cell { font-size:1.12rem; }
   .registration-drawer-panel { width:100%; height:100vh; height:100dvh; border-left:0; padding:calc(.75rem + env(safe-area-inset-top)) 1rem calc(1.25rem + env(safe-area-inset-bottom)); }
   .registration-drawer-panel::after { display:none; }
@@ -370,8 +370,9 @@ body.registration-drawer-open { overflow:hidden; }
                 <ul class="dates">
                   <li><time>15 February 2027</time><span>Partner bookings close for full recognition</span></li>
                   <li><time>15 February 2027</time><span>Early registration closes</span></li>
-                  <li><time>23 to 27 March 2027</time><span>Summit dates, including conference sessions and the field day</span></li>
-                  <li><time>26 March 2027</time><span>Field Day</span></li>
+                  <li><time>23 March 2027</time><span>Arrival day; no programme is scheduled</span></li>
+                  <li><time>24 to 26 March 2027</time><span>Conference days</span></li>
+                  <li><time>27 March 2027</time><span>Site-to-Summit Field Day</span></li>
                 </ul>
               </div>
               <div class="glass card accent-card" data-rv="right" style="--i:2">

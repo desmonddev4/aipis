@@ -77,7 +77,7 @@ p { margin:0 0 1em; }
 /* logo medallion: the page's one signature moment */
 .medallion { position:relative; width:min(340px,70vw); aspect-ratio:1; justify-self:center; }
 .medallion-disc { position:absolute; inset:9%; border-radius:50%; background:radial-gradient(circle at 35% 30%,#fff,#f1eee6 70%); display:grid; place-items:center; box-shadow:0 30px 60px rgba(0,0,0,.45), inset 0 -10px 24px rgba(15,77,44,.12); animation:float 7s ease-in-out infinite; }
-.medallion-disc img { width:78%; height:78%; object-fit:contain; }
+.medallion-disc img { width:78%; height:78%; padding:5%; border-radius:50%; background:#fff; object-fit:contain; box-shadow:0 8px 22px rgba(5,32,19,.12); }
 .medallion svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
 .ring-draw { fill:none; stroke:url(#goldStroke); stroke-width:5; stroke-linecap:round; stroke-dasharray:640; stroke-dashoffset:640; transform-origin:50% 50%; transform:rotate(-90deg); animation:draw 2.2s .4s var(--ease) forwards, spin 28s 2.6s linear infinite; }
 .ring-dots { fill:none; stroke:rgba(255,255,255,.35); stroke-width:2; stroke-dasharray:2 12; stroke-linecap:round; transform-origin:50% 50%; animation:spin 60s linear infinite reverse; }
@@ -250,7 +250,16 @@ body.registration-drawer-open { overflow:hidden; }
   .grid-3, .grid-4 { grid-template-columns:1fr; }
   .btn-row .btn, .cta-box .btn { width:100%; }
   .table.stack td { grid-template-columns:1fr; gap:.1rem; }
+  .table-card { padding:.6rem; }
+  .table.stack tbody { display:grid; gap:.7rem; }
+  .table.stack tr { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; padding:.8rem; border:1px solid rgba(22,105,47,.16); border-radius:14px; background:#fff; }
+  .table.stack tr:last-child { border-bottom:1px solid rgba(22,105,47,.16); }
+  .table.stack td { display:flex; flex-direction:column; align-items:flex-start; min-width:0; gap:.2rem; padding:.15rem 0; border:0; white-space:normal; overflow-wrap:anywhere; }
+  .table.stack td:first-child { grid-column:1 / -1; padding-bottom:.45rem; border-bottom:1px solid rgba(22,105,47,.12); font-size:1rem; }
+  .table.stack td[data-label]::before { position:static; display:block; width:auto; height:auto; overflow:visible; clip:auto; color:var(--ink-soft); font-size:.74rem; line-height:1.3; font-weight:600; white-space:normal; }
+  .table.stack td.num-cell { font-size:1.12rem; }
   .registration-drawer-panel { width:100%; height:100vh; height:100dvh; border-left:0; padding:calc(.75rem + env(safe-area-inset-top)) 1rem calc(1.25rem + env(safe-area-inset-bottom)); }
+  .registration-drawer-panel::after { display:none; }
   .registration-drawer-header { top:0; margin:calc(-.75rem - env(safe-area-inset-top)) -1rem 1rem; padding:.7rem 1rem; }
   .registration-drawer-brand small { display:none; }
   .registration-drawer-brand img { width:2.9rem; height:2.9rem; }
@@ -266,10 +275,18 @@ body.registration-drawer-open { overflow:hidden; }
   .registration-form select[data-field="category"] { padding-right:2.7rem; background-position:right .8rem center; }
   .delegate-card { grid-template-columns:1fr; }
   .delegate-card .registration-grid { grid-column:1; }
+  .card:hover, .delegate-card:hover, .delegate-card:focus-within { transform:none; }
+  .medallion-disc { animation:none; }
   .registration-consent { font-size:.9rem; }
   #registration-submit { padding:.9rem 1rem; }
+  #toTop.to-top { right:.75rem; bottom:calc(.75rem + env(safe-area-inset-bottom)); width:44px; height:44px; }
 }
 @media (max-width:380px) {
+  .table.stack tr { grid-template-columns:minmax(0,1fr); gap:.45rem; }
+  .table.stack td:first-child { grid-column:1; }
+  .table.stack td:not(:first-child) { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:.5rem; }
+  .table.stack td:not(:first-child)::before { font-size:.78rem; }
+  .table.stack td.num-cell { font-size:1rem; text-align:right; }
   .registration-drawer-panel { padding-inline:.75rem; }
   .registration-drawer-header { margin-inline:-.75rem; padding-inline:.75rem; }
   .registration-form { padding:.75rem; }
@@ -306,7 +323,7 @@ body.registration-drawer-open { overflow:hidden; }
             <span class="hero-line" aria-hidden="true"></span>
             <p class="lead" data-rv style="--i:2">Join the Africa Infrastructure, Prosperity and Industrialisation Summit in Accra.</p>
             <div class="hero-chips" data-rv style="--i:3">
-              <span class="hero-chip"><i></i>23 to 25 March 2027</span>
+              <span class="hero-chip"><i></i>23 to 27 March 2027</span>
               <span class="hero-chip"><i></i>Labadi Beach Hotel, Accra</span>
               <span class="hero-chip"><i></i>Early fees close 15 February</span>
             </div>
@@ -353,7 +370,7 @@ body.registration-drawer-open { overflow:hidden; }
                 <ul class="dates">
                   <li><time>15 February 2027</time><span>Partner bookings close for full recognition</span></li>
                   <li><time>15 February 2027</time><span>Early registration closes</span></li>
-                  <li><time>23 to 25 March 2027</time><span>Conference days, Labadi Beach Hotel, Accra, Ghana</span></li>
+                  <li><time>23 to 27 March 2027</time><span>Summit dates, including conference sessions and the field day</span></li>
                   <li><time>26 March 2027</time><span>Field Day</span></li>
                 </ul>
               </div>

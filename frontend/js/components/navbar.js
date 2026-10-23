@@ -9,7 +9,7 @@
       key: "programme",
       label: "Programme",
       children: [
-        { href: "programme.html", label: "Four days in Accra" },
+        { href: "programme.html", label: "Summit programme in Accra" },
         { href: "programme.html#panels", label: "Thematic panels" },
         { href: "innovations.html", label: "The AIPIS Distinction: Seven Innovations" },
         { href: "innovations.html#roundtables", label: "The AIPIS Roundtables" },

@@ -14,7 +14,7 @@
     count += 1;
     const card = document.createElement("fieldset");
     card.className = "delegate-card";
-    card.innerHTML = '<legend>Delegate ' + count + '</legend><button type="button" class="btn btn-outline remove-delegate" aria-label="Remove delegate ' + count + '">Remove</button><div class="registration-grid"><label>Full name<input data-field="name" autocomplete="name" required maxlength="120"></label><label>Email<input data-field="email" type="email" autocomplete="email" required maxlength="254"></label><label>Country<input data-field="country" autocomplete="country-name" required maxlength="100"></label><label>Registration category<select data-field="category" required><option value="">Choose category</option>' + categories.map((c) => '<option value="' + c + '">' + c + '</option>').join("") + '</select></label></div>';
+    card.innerHTML = '<legend>Attendee ' + count + '</legend><button type="button" class="btn btn-outline remove-delegate" aria-label="Remove attendee ' + count + '">Remove</button><div class="registration-grid"><label>Full name<input data-field="name" autocomplete="name" required maxlength="120"></label><label>Email<input data-field="email" type="email" autocomplete="email" required maxlength="254"></label><label>Country<input data-field="country" autocomplete="country-name" required maxlength="100"></label><label>Registration category<select data-field="category" required><option value="">Choose category</option>' + categories.map((c) => '<option value="' + c + '">' + c + '</option>').join("") + '</select></label></div>';
     card.querySelector(".remove-delegate").addEventListener("click", () => { card.remove(); renumber(); });
     list.appendChild(card);
     renumber();
@@ -22,7 +22,7 @@
   function renumber() {
     const cards = [...list.children];
     count = cards.length;
-    cards.forEach((card, index) => { card.querySelector("legend").textContent = "Delegate " + (index + 1); card.querySelector("button").setAttribute("aria-label", "Remove delegate " + (index + 1)); });
+    cards.forEach((card, index) => { card.querySelector("legend").textContent = "Attendee " + (index + 1); card.querySelector("button").setAttribute("aria-label", "Remove attendee " + (index + 1)); });
     add.disabled = count >= 50;
   }
   add.addEventListener("click", addDelegate);
@@ -33,7 +33,7 @@
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     const attendees = [...list.children].map((card) => Object.fromEntries([...card.querySelectorAll("[data-field]")].map((input) => [input.dataset.field, input.value.trim()])));
-    const payload = { name: data.get("name").trim(), email: data.get("email").trim(), organisation: data.get("organisation").trim(), phone: data.get("phone").trim(), country: data.get("country").trim(), consent: data.get("consent") === "on", attendees };
+    const payload = { consent: data.get("consent") === "on", attendees };
     submit.disabled = true; submit.textContent = "Calculating total...";
     try {
       const api = (window.AIPIS_CONFIG && window.AIPIS_CONFIG.API_URL) || "";

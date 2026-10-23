@@ -257,7 +257,7 @@ body.registration-drawer-open { overflow: hidden; }
                   </table>
                 </div>
               </div>
-              <p class="note" data-rv>Fees cover all conference sessions, lunches and refreshments, summit materials and the field day. Organisations registering five or more delegates receive a 10 percent discount.</p>
+              <p class="note" data-rv>Fees cover all conference sessions, lunches and refreshments, summit materials and the field day. Registrations for five or more attendees receive a 10 percent discount.</p>
               <div class="btn-row" data-rv>
                 <a class="btn btn-primary btn-lg" href="#online-registration">Register online <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></a>
               </div>
@@ -291,17 +291,10 @@ body.registration-drawer-open { overflow: hidden; }
         <div class="registration-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="registration-heading" tabindex="-1">
           <header class="registration-drawer-header"><button class="registration-drawer-close" type="button" aria-label="Close registration form">&times;</button></header>
           <div class="container">
-          <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register delegates</h2><p>Enter your booking contact, add each attendee, then review the total before paying securely with Paystack.</p></div>
+          <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register attendees</h2><p>Enter each attendee’s details and registration category. Updates and payment information will be sent to the first attendee’s email address.</p></div>
           <form id="registration-form" class="registration-form" novalidate>
             <div class="registration-layout">
-            <section class="registration-panel" aria-labelledby="booking-contact-heading"><h3 id="booking-contact-heading">Booking contact</h3><p>We’ll use these details for the person managing this booking. If you’re attending, add yourself under delegates too.</p><div class="registration-grid">
-              <label>Name<input name="name" autocomplete="name" required maxlength="120"></label>
-              <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
-              <label>Organisation (optional)<input name="organisation" autocomplete="organization" maxlength="200"></label>
-              <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
-              <label>Country<input name="country" autocomplete="country-name" required maxlength="100"></label>
-            </div></section>
-            <section class="registration-panel" aria-labelledby="delegates-heading"><h3 id="delegates-heading">Attending delegates</h3><p>Add the details and registration category for each person attending.</p><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add another delegate</button><p class="note">Organisations registering five or more delegates receive a 10% discount.</p></section>
+            <fieldset class="registration-panel"><legend>Attendee details</legend><p>Enter a name, email, country and registration category for each attendee. Updates go to the first attendee listed.</p><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add attendee</button><p class="note">Registrations for five or more attendees receive a 10% discount.</p></fieldset>
             </div>
             <label class="registration-consent"><input name="consent" type="checkbox" required> I agree to the <a href="terms-and-conditions.html">registration terms</a> and have read the <a href="privacy-policy.html">privacy notice</a>.</label>
             <p id="registration-error" role="alert" aria-live="polite"></p>

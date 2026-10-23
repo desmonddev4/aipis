@@ -187,41 +187,42 @@ def registration_checkout(request):
     if not settings.PAYSTACK_SECRET_KEY:
         return JsonResponse({"ok": False, "error": "Online payments are not configured yet. Please contact the secretariat."}, status=503)
 
-    name = clean_text(data.get("name"), 120)
-    email = clean_text(data.get("email"), 254)
+    attendees = data.get("attendees")
+    first_attendee = attendees[0] if isinstance(attendees, list) and attendees and isinstance(attendees[0], dict) else {}
+    name = clean_text(first_attendee.get("name"), 120)
+    email = clean_text(first_attendee.get("email"), 254)
     organisation = clean_text(data.get("organisation"), 200)
     phone = clean_text(data.get("phone"), 40)
-    country = clean_text(data.get("country"), 100)
-    attendees = data.get("attendees")
+    country = clean_text(first_attendee.get("country"), 100)
     errors = {}
     if not name:
-        errors["name"] = "Please enter the booking contact's name."
+        errors["name"] = "Please enter the first attendee's name."
     if not valid_email(email):
-        errors["email"] = "Please enter a valid email address."
+        errors["email"] = "Please enter a valid email address for the first attendee."
     if not country:
-        errors["country"] = "Please select the booking contact's country."
+        errors["country"] = "Please enter the first attendee's country."
     if data.get("consent") is not True:
         errors["consent"] = "Please agree to the privacy notice and registration terms."
     if not isinstance(attendees, list) or not 1 <= len(attendees) <= 50:
-        errors["attendees"] = "Add between 1 and 50 delegates."
+        errors["attendees"] = "Add between 1 and 50 attendees."
     cleaned_attendees = []
     if isinstance(attendees, list):
         for index, attendee in enumerate(attendees[:50]):
             if not isinstance(attendee, dict):
-                errors[f"attendee_{index}"] = "Please check this delegate's details."
+                errors[f"attendee_{index}"] = "Please check this attendee's details."
                 continue
             attendee_name = clean_text(attendee.get("name"), 120)
             attendee_email = clean_text(attendee.get("email"), 254)
             attendee_country = clean_text(attendee.get("country"), 100)
             category = clean_text(attendee.get("category"), 100)
             if not attendee_name:
-                errors[f"attendee_name_{index}"] = f"Enter a name for delegate {index + 1}."
+                errors[f"attendee_name_{index}"] = f"Enter a name for attendee {index + 1}."
             if not valid_email(attendee_email):
-                errors[f"attendee_email_{index}"] = f"Enter a valid email for delegate {index + 1}."
+                errors[f"attendee_email_{index}"] = f"Enter a valid email for attendee {index + 1}."
             if category not in REGISTRATION_PRICES_USD:
-                errors[f"attendee_category_{index}"] = f"Choose a category for delegate {index + 1}."
+                errors[f"attendee_category_{index}"] = f"Choose a category for attendee {index + 1}."
             if not attendee_country:
-                errors[f"attendee_country_{index}"] = f"Enter a country for delegate {index + 1}."
+                errors[f"attendee_country_{index}"] = f"Enter a country for attendee {index + 1}."
             cleaned_attendees.append({
                 "name": attendee_name,
                 "email": attendee_email,
@@ -238,7 +239,7 @@ def registration_checkout(request):
         for attendee in cleaned_attendees
     )
     discount_usd = Decimal("0.00")
-    if organisation and len(cleaned_attendees) >= 5:
+    if len(cleaned_attendees) >= 5:
         discount_usd = (subtotal_usd * Decimal("0.10")).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
     total_usd = subtotal_usd - discount_usd
     try:

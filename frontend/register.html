@@ -368,6 +368,21 @@ body.registration-drawer-open { overflow:hidden; }
   <script src="js/components/registration-form.js" defer></script>
   <script>
 (function () {
+  /* Reveal the registration page sections; the shared scroll script handles .reveal elements only. */
+  var revealItems = document.querySelectorAll("[data-rv]");
+  if (!("IntersectionObserver" in window)) {
+    revealItems.forEach(function (item) { item.classList.add("in"); });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+    revealItems.forEach(function (item) { revealObserver.observe(item); });
+  }
+
   /* cursor spotlight on every button, including ones the form script adds later */
   document.addEventListener("pointermove", function (e) {
     var b = e.target.closest && e.target.closest(".btn");

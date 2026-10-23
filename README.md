@@ -68,4 +68,4 @@ Run backend tests with `python manage.py test`.
 ## Notes
 
 - The brochure is served from `frontend/assets/AIPIS_2027_Brochure.pdf`.
-- The conference is scheduled for 16 to 19 March 2027 at Labadi Beach Hotel, Accra, Ghana. The source DOCX/PDF materials still contain earlier 2027 dates and need refreshed copies.
+- The conference is scheduled for 23 to 26 March 2027 at Labadi Beach Hotel, Accra, Ghana. The source DOCX/PDF materials still contain earlier 2027 dates and need refreshed copies.

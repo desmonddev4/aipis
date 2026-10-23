@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Register | AIPIS 2027</title>
-  <meta name="description" content="Register to attend AIPIS 2027. Fees, early registration by 31 December 2026 and key dates.">
+  <meta name="description" content="Register to attend AIPIS 2027. Fees, early registration by 15 February 2027 and key dates.">
   <meta name="theme-color" content="#0D3D26">
   <meta property="og:title" content="Register | AIPIS 2027">
-  <meta property="og:description" content="Register to attend AIPIS 2027. Fees, early registration by 31 December 2026 and key dates.">
+  <meta property="og:description" content="Register to attend AIPIS 2027. Fees, early registration by 15 February 2027 and key dates.">
   <meta property="og:type" content="website">
   <link rel="icon" href="assets/AIPIS-LOGO.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,21 +182,27 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
   .js [data-rv] { opacity: 1; transform: none; }
 }
 @keyframes grow { from { transform: scaleX(0); } }
-  .registration-form { max-width: 860px; display: grid; gap: 1.2rem; margin: 2rem auto; }
+  .registration-form { max-width: 1080px; display: grid; gap: 1.25rem; margin: 2rem auto; padding: clamp(1rem, 3vw, 2rem); background: #fff; border: 1px solid rgba(26,92,42,.12); border-radius: 24px; box-shadow: 0 18px 48px rgba(5,32,19,.09); }
+.registration-layout { display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); align-items: start; gap: 1.25rem; }
 .registration-form .note { color: var(--green-900); }
 .registration-form .btn { background: var(--green-700); color: #fff; border: 1px solid var(--green-700); box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
 .registration-form .btn::before { display: none; }
 .registration-form .btn:hover { background: var(--green-900); color: #fff; border-color: var(--green-900); box-shadow: none; }
-.registration-form fieldset { border: 1px solid rgba(26,92,42,.2); border-radius: 16px; padding: 1.2rem; }
+.registration-form fieldset { min-width: 0; border: 1px solid rgba(26,92,42,.16); background: #f8fbf8; border-radius: 18px; padding: 1.2rem; }
 .registration-form legend { font-weight: 800; color: var(--green-900); padding: 0 .45rem; }
-.registration-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; }
+.registration-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 1rem; }
 .registration-form label { display: grid; gap: .35rem; font-weight: 600; }
 .registration-form input, .registration-form select { width: 100%; padding: .7rem .8rem; border: 1px solid rgba(26,92,42,.3); border-radius: 10px; font: inherit; }
-.registration-form .registration-consent { display: flex; align-items: flex-start; gap: .6rem; }
+.registration-form .registration-consent { display: flex; align-items: flex-start; gap: .6rem; padding-top: .25rem; }
 .registration-consent input { width: auto; margin-top: .4rem; }
-.delegate-card { display: grid; grid-template-columns: 1fr auto; gap: .8rem; padding: 1rem; margin: .8rem 0; background: var(--green-50); border-radius: 12px; }
+#delegate-list { display: grid; gap: .85rem; margin-bottom: 1rem; }
+.delegate-card { display: grid; grid-template-columns: 1fr auto; gap: .8rem; padding: 1rem; margin: 0; background: #fff; border: 1px solid rgba(26,92,42,.14); border-radius: 14px; }
 .delegate-card .registration-grid { grid-column: 1 / -1; }
-#registration-error { color: #a11; }
+.delegate-card .remove-delegate { background: transparent; color: var(--green-900); }
+.registration-form > #registration-error { color: #a11; margin: 0; padding: .75rem 1rem; border-radius: 12px; background: #fff4f2; }
+.registration-form > #registration-error:empty { display: none; }
+.registration-form > #registration-submit { justify-self: start; min-width: min(100%, 260px); }
+@media (max-width: 760px) { .registration-layout { grid-template-columns: 1fr; } }
 </style>
   <script>document.documentElement.classList.add("js");</script>
   <script src="js/components/scroll-effects.js"></script>
@@ -222,13 +228,13 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
                 <div class="table-scroll">
                   <table class="table stack">
                     <caption class="sr-only">Registration fees</caption>
-                    <thead><tr><th>Category</th><th>Standard fee (USD)</th><th>Early fee (USD), paid by 31 December 2026</th></tr></thead>
+                    <thead><tr><th>Category</th><th>Standard fee (USD)</th><th>Early fee (USD), paid by 15 February 2027</th></tr></thead>
                     <tbody>
-                    <tr><td data-label="Category"><strong>International delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">750</td><td data-label="Early fee (USD), paid by 31 December 2026" class="num-cell early">640</td></tr>
-                    <tr><td data-label="Category"><strong>African delegate (outside Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">500</td><td data-label="Early fee (USD), paid by 31 December 2026" class="num-cell early">425</td></tr>
-                    <tr><td data-label="Category"><strong>Ghanaian delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">350</td><td data-label="Early fee (USD), paid by 31 December 2026" class="num-cell early">300</td></tr>
-                    <tr><td data-label="Category"><strong>Public sector and university staff (Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">200</td><td data-label="Early fee (USD), paid by 31 December 2026" class="num-cell early">170</td></tr>
-                    <tr><td data-label="Category"><strong>Student or young professional (under 35)</strong></td><td data-label="Standard fee (USD)" class="num-cell">75</td><td data-label="Early fee (USD), paid by 31 December 2026" class="num-cell early">60</td></tr>
+                    <tr><td data-label="Category"><strong>International delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">750</td><td data-label="Early fee (USD), paid by 15 February 2027" class="num-cell early">640</td></tr>
+                    <tr><td data-label="Category"><strong>African delegate (outside Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">500</td><td data-label="Early fee (USD), paid by 15 February 2027" class="num-cell early">425</td></tr>
+                    <tr><td data-label="Category"><strong>Ghanaian delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">350</td><td data-label="Early fee (USD), paid by 15 February 2027" class="num-cell early">300</td></tr>
+                    <tr><td data-label="Category"><strong>Public sector and university staff (Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">200</td><td data-label="Early fee (USD), paid by 15 February 2027" class="num-cell early">170</td></tr>
+                    <tr><td data-label="Category"><strong>Student or young professional (under 35)</strong></td><td data-label="Standard fee (USD)" class="num-cell">75</td><td data-label="Early fee (USD), paid by 15 February 2027" class="num-cell early">60</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -243,10 +249,10 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
               <div class="glass card" data-rv="right" style="--i:1">
                 <h3>Key dates</h3>
                 <ul class="dates">
-                  <li><time>30 November 2026</time><span>Partner bookings close for full recognition</span></li>
-                  <li><time>31 December 2026</time><span>Early registration closes</span></li>
-                  <li><time>16 to 18 March 2027</time><span>Conference days, <a href="https://www.guestreservations.com/labadi-beach-hotel/booking" target="_blank" rel="noopener noreferrer">Labadi Beach Hotel, Accra, Ghana</a></span></li>
-                  <li><time>19 March 2027</time><span>Field Day</span></li>
+                  <li><time>15 February 2027</time><span>Partner bookings close for full recognition</span></li>
+                  <li><time>15 February 2027</time><span>Early registration closes</span></li>
+                  <li><time>23 to 25 March 2027</time><span>Conference days, Labadi Beach Hotel, Accra, Ghana</span></li>
+                  <li><time>26 March 2027</time><span>Field Day</span></li>
                 </ul>
               </div>
               <div class="glass card accent-card" data-rv="right" style="--i:2">
@@ -264,16 +270,18 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
     </div>
         <section class="section" id="online-registration" aria-labelledby="registration-heading">
         <div class="container">
-          <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register delegates</h2><p>Complete the booking contact details and add each delegate. You will review the GHS total before continuing to Paystack.</p></div>
+          <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register delegates</h2><p>Enter your booking contact, add each attendee, then review the total before paying securely with Paystack.</p></div>
           <form id="registration-form" class="registration-form" novalidate>
-            <fieldset><legend>Booking contact</legend><div class="registration-grid">
+            <div class="registration-layout">
+            <fieldset class="registration-panel"><legend>Booking contact</legend><div class="registration-grid">
               <label>Name<input name="name" autocomplete="name" required maxlength="120"></label>
               <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
               <label>Organisation (optional)<input name="organisation" autocomplete="organization" maxlength="200"></label>
               <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
               <label>Country<input name="country" autocomplete="country-name" required maxlength="100"></label>
             </div></fieldset>
-            <fieldset><legend>Delegates</legend><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add another delegate</button><p class="note">Organisations registering five or more delegates receive a 10% discount.</p></fieldset>
+            <fieldset class="registration-panel"><legend>Delegates</legend><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add another delegate</button><p class="note">Organisations registering five or more delegates receive a 10% discount.</p></fieldset>
+            </div>
             <label class="registration-consent"><input name="consent" type="checkbox" required> I agree to the <a href="terms-and-conditions.html">registration terms</a> and have read the <a href="privacy-policy.html">privacy notice</a>.</label>
             <p id="registration-error" role="alert" aria-live="polite"></p>
             <button class="btn btn-primary btn-lg" type="submit" id="registration-submit">Continue to payment</button>

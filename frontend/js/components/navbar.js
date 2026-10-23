@@ -60,7 +60,7 @@
   --nv-o5: #f4a24c; --nv-o4: #f7b36b; --nv-o3: #ffc98a; --nv-ease: cubic-bezier(.2,.7,.2,1);
 }
 .skip-link { position: fixed; left: 1rem; top: -4rem; z-index: 200; background: var(--nv-g9); color: #fff; padding: 0.7rem 1rem; border-radius: 10px; }
-.skip-link:focus { top: 1rem; color: #fff; }
+.skip-link:focus-visible { top: 1rem; color: #fff; }
 .nav-wrap { position: fixed; top: 14px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; pointer-events: none; font-family: var(--font-body, "Source Sans 3", system-ui, sans-serif); }
 .nav {
   pointer-events: auto; width: min(1240px, 100% - 1.5rem); min-height: var(--nav-h, 72px);

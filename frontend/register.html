@@ -211,10 +211,15 @@ body.registration-drawer-open { overflow: hidden; }
 .registration-drawer[hidden] { display: none; }
 .registration-drawer { position: fixed; inset: 0; z-index: 1200; display: flex; justify-content: flex-end; }
 .registration-drawer-scrim { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 0; background: rgba(3,19,11,.58); opacity: 0; cursor: default; transition: opacity .28s ease; }
-.registration-drawer-panel { position: relative; z-index: 1; width: min(100%, 760px); height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 1.25rem clamp(1rem, 3vw, 2rem) 2rem; background: var(--bg); box-shadow: -24px 0 64px rgba(3,19,11,.2); transform: translateX(100%); transition: transform .32s cubic-bezier(.2,.7,.2,1); }
+.registration-drawer-panel { position: relative; z-index: 1; width: min(100%, 600px); height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 1.25rem clamp(1rem, 3vw, 2rem) 2rem; background: var(--bg); box-shadow: -24px 0 64px rgba(3,19,11,.2); transform: translateX(100%); transition: transform .32s cubic-bezier(.2,.7,.2,1); }
 .registration-drawer.is-open .registration-drawer-scrim { opacity: 1; }
 .registration-drawer.is-open .registration-drawer-panel { transform: translateX(0); }
-.registration-drawer-header { position: sticky; top: -1.25rem; z-index: 2; display: flex; justify-content: flex-end; margin: -1.25rem calc(clamp(1rem, 3vw, 2rem) * -1) 1rem; padding: .75rem clamp(1rem, 3vw, 2rem); background: rgba(246,249,246,.94); border-bottom: 1px solid rgba(26,92,42,.12); backdrop-filter: blur(12px); }
+.registration-drawer-header { position: sticky; top: -1.25rem; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: -1.25rem calc(clamp(1rem, 3vw, 2rem) * -1) 1rem; padding: .75rem clamp(1rem, 3vw, 2rem); background: rgba(255,255,255,.96); border-bottom: 3px solid var(--orange-500); backdrop-filter: blur(12px); }
+.registration-drawer-brand { display: flex; align-items: center; gap: .75rem; color: var(--green-900); }
+.registration-drawer-brand img { display: block; width: 3.25rem; height: 3.25rem; object-fit: contain; border-radius: 12px; }
+.registration-drawer-brand span { display: grid; gap: .1rem; }
+.registration-drawer-brand strong { font-family: var(--font-head); font-size: 1rem; line-height: 1.15; }
+.registration-drawer-brand small { color: var(--ink-soft); font-size: .8rem; }
 .registration-drawer-close { width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border: 1px solid rgba(26,92,42,.2); border-radius: 50%; background: #fff; color: var(--green-900); font-size: 1.6rem; line-height: 1; cursor: pointer; }
 .registration-drawer-close:hover { background: var(--green-50); }
 .registration-drawer .section-head { text-align: left; margin-bottom: 1.25rem; }
@@ -289,7 +294,7 @@ body.registration-drawer-open { overflow: hidden; }
         <section class="registration-drawer" id="online-registration" aria-hidden="true" hidden>
         <button class="registration-drawer-scrim" type="button" aria-label="Close registration form"></button>
         <div class="registration-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="registration-heading" tabindex="-1">
-          <header class="registration-drawer-header"><button class="registration-drawer-close" type="button" aria-label="Close registration form">&times;</button></header>
+          <header class="registration-drawer-header"><div class="registration-drawer-brand"><img src="assets/AIPIS-LOGO.png" alt=""><span><strong>AIPIS 2027</strong><small>Africa Infrastructure, Prosperity and Industrialisation Summit</small></span></div><button class="registration-drawer-close" type="button" aria-label="Close registration form">&times;</button></header>
           <div class="container">
           <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register attendees</h2><p>Enter each attendee’s details and registration category. Updates and payment information will be sent to the first attendee’s email address.</p></div>
           <form id="registration-form" class="registration-form" novalidate>

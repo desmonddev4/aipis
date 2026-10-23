@@ -12,173 +12,191 @@
   <link rel="icon" href="assets/register%20and%20favicon%20logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add("js");</script>
   <script src="js/components/scroll-effects.js"></script>
   <style>
-    :root { --green-950: #052013; --green-900: #0a3a22; --green-800: #0f4d2c; --green-700: #16692f; --green-600: #1f8a3e; --green-100: #d6ead9; --green-50: #eaf4ec; --orange-500: #f4a24c; --orange-400: #f7b36b; --orange-300: #ffc98a; --orange-100: #ffeed9; --ink: #0f2418; --ink-soft: #3a4f43; --bg: #f6f9f6; --radius: 16px; --shadow: 0 6px 20px rgba(5, 32, 19, 0.1); --shadow-lg: 0 18px 40px rgba(5, 32, 19, 0.22); --font-head: "Archivo", system-ui, sans-serif; --font-body: "Source Sans 3", system-ui, sans-serif; --nav-h: 72px; --ease: cubic-bezier(.2,.7,.2,1); }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-text-size-adjust: 100%; }
-    body { margin: 0; font-family: var(--font-body); font-size: 1rem; line-height: 1.65; color: var(--ink); background: var(--bg); overflow-x: hidden; }
-    img, svg { max-width: 100%; display: block; }
-    a { color: var(--green-700); text-underline-offset: 3px; }
-    h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; margin: 0 0 .55em; color: var(--green-900); letter-spacing: -0.01em; }
-    h1 { font-size: clamp(1.9rem, 1.4rem + 2.2vw, 3rem); font-weight: 800; }
-    h2 { font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2.1rem); font-weight: 800; }
-    h3 { font-size: 1.1rem; font-weight: 700; }
-    p { margin: 0 0 1em; }
-    :focus-visible { outline: 3px solid var(--orange-500); outline-offset: 3px; border-radius: 6px; }
-    .container { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
-    .hp { position: absolute !important; left: -9999px; opacity: 0; height: 0; width: 0; }
-
-    /* scroll progress */
-    .progress { position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 9999; background: transparent; pointer-events: none; }
-    .progress span { display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--orange-500), var(--orange-300)); }
-
-    /* reveal (own classes, no clash with other scripts) */
-    .js [data-rv] { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
-    .js [data-rv="left"] { transform: translateX(-34px); }
-    .js [data-rv="right"] { transform: translateX(34px); }
-    .js [data-rv="zoom"] { transform: scale(.94); }
-    .js [data-rv].in { opacity: 1; transform: none; }
-
-    /* buttons */
-    .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: .75rem 1.5rem; border-radius: 999px; border: 2px solid transparent; font-family: var(--font-head); font-weight: 700; font-size: .95rem; line-height: 1.2; text-decoration: none; transition: transform .25s var(--ease), box-shadow .25s, background .25s, color .25s; }
-    .btn::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%); transform: translateX(-120%); transition: transform .6s var(--ease); }
-    .btn:hover::before { transform: translateX(120%); }
-    .btn svg { width: 18px; height: 18px; transition: transform .25s var(--ease); }
-    .btn:hover svg { transform: translateX(4px); }
-    .btn:hover { transform: translateY(-3px); }
-    .btn:active { transform: translateY(0) scale(.97); }
-    .btn-lg { padding: .9rem 1.8rem; font-size: 1rem; }
-    .btn-primary { background: linear-gradient(135deg, var(--orange-400), var(--orange-500)); color: var(--green-950); box-shadow: 0 8px 20px rgba(244,162,76,.4); }
-    .btn-primary:hover { color: var(--green-950); box-shadow: 0 14px 28px rgba(244,162,76,.55); }
-    .btn-row { display: flex; flex-wrap: wrap; gap: .9rem; }
-
-    .eyebrow { display: inline-block; font-family: var(--font-head); font-weight: 700; font-size: .8rem; letter-spacing: .08em; color: var(--orange-300); margin-bottom: .6rem; }
-    .section { position: relative; padding: clamp(3rem, 2rem + 4vw, 5.5rem) 0; overflow: hidden; }
-    .section-head { max-width: 720px; margin-bottom: clamp(1.6rem, 3vw, 2.6rem); }
-    .lead { font-size: 1.1rem; color: var(--ink-soft); }
-
-    /* hero */
-    .page-hero { position: relative; overflow: hidden; padding: calc(var(--nav-h) + 56px) 0 clamp(2.5rem, 5vw, 4rem); background: linear-gradient(135deg, var(--green-950), var(--green-800)); color: #fff; }
-    .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
-    .blob-a { width: 380px; height: 380px; background: var(--orange-500); opacity: .28; top: -140px; right: -80px; }
-    .blob-b { width: 320px; height: 320px; background: var(--green-600); opacity: .45; bottom: -160px; left: -80px; }
-    .page-hero .container { position: relative; z-index: 1; }
-    .page-hero h1 { color: #fff; max-width: 20ch; margin-bottom: 0; }
-    .crumbs { display: flex; gap: .5rem; align-items: center; font-weight: 600; font-size: .9rem; color: #bcd6c4; margin-bottom: .9rem; }
-    .crumbs a { color: var(--orange-300); }
-    .hero-line { display: block; width: 72px; height: 4px; border-radius: 4px; background: var(--orange-500); margin-top: 1.2rem; transform-origin: left; animation: grow 1s .3s var(--ease) both; }
-
-    /* about section */
-    .split { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(1.8rem, 4vw, 3.5rem); align-items: start; }
-    .theme-box { position: relative; background: linear-gradient(135deg, var(--green-900), var(--green-700)); border-radius: var(--radius); padding: 1.3rem 1.5rem; margin: 1.5rem 0; border-left: 5px solid var(--orange-500); box-shadow: var(--shadow); transition: transform .3s var(--ease), box-shadow .3s; }
-    .theme-box:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .theme-box p { color: #fff; font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; margin: 0; line-height: 1.4; }
-    .definitions { display: flex; flex-direction: column; gap: .5rem; position: sticky; top: 100px; }
-    .card { border-radius: var(--radius); padding: 1.3rem 1.4rem; transition: transform .3s var(--ease), box-shadow .3s, border-color .3s, background .3s; }
-    .card h3 { margin-bottom: .35em; }
-    .card p:last-child { margin-bottom: 0; }
-    .committee-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:1rem; }
-    .committee-grid article:nth-child(-n+3) { grid-column:span 2; }
-    .committee-grid article:nth-child(n+4) { grid-column:span 3; }
-    .committee-grid h4 { margin:1.2rem 0 .45rem; font-family:var(--font-head); color:var(--green-800); }
-    .committee-grid ul { padding-left:1.2rem; margin:.4rem 0 .8rem; }
-    .committee-grid li { margin:.3rem 0; }
-    .def { position: relative; padding-left: 4.6rem; background: #fff; border: 1px solid rgba(15,77,44,.14); box-shadow: var(--shadow); }
-    .def:hover { transform: translateY(-5px) rotate(-.4deg); box-shadow: var(--shadow-lg); border-color: var(--green-600); }
-    .def-step { position: absolute; left: 1.2rem; top: 1.25rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; background: var(--green-800); color: #fff; transition: transform .4s var(--ease); }
-    .def:hover .def-step { transform: rotate(360deg) scale(1.08); }
-    .def-accent { background: linear-gradient(135deg, var(--green-900), var(--green-700)); border-color: var(--green-700); }
-    .def-accent h3, .def-accent p { color: #fff; }
-    .def-accent .def-step { background: var(--orange-500); color: var(--green-950); }
-    .def-arrow { align-self: center; color: var(--green-700); animation: bob 2s ease-in-out infinite; }
-
-    /* SDG section (dark green) */
-    .section-dark { background: linear-gradient(160deg, var(--green-950), var(--green-800)); color: #e3efe7; }
-    .section-dark h2 { color: #fff; }
-    .section-dark .lead { color: #c4dccb; }
-    .sdg-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: .9rem; }
-    .sdg { border-radius: 14px; padding: 1.1rem; display: flex; flex-direction: column; gap: .6rem; font-weight: 600; font-size: .95rem; color: #fff; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: transform .3s var(--ease), background .3s, border-color .3s, box-shadow .3s; }
-    .sdg:hover { transform: translateY(-6px); background: rgba(255,255,255,.15); border-color: var(--orange-500); box-shadow: 0 14px 30px rgba(0,0,0,.35); }
-    .sdg-num { width: 2.6rem; height: 2.6rem; border-radius: 12px; background: var(--green-600); color: #fff; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; transition: transform .3s var(--ease), background .3s; }
-    .sdg:hover .sdg-num { background: var(--orange-500); color: var(--green-950); transform: scale(1.12) rotate(-6deg); }
-    .sdg-main { grid-column: span 2; background: linear-gradient(135deg, var(--orange-500), var(--orange-400)); color: var(--green-950); border-color: transparent; font-size: 1.05rem; }
-    .sdg-main .sdg-num { background: var(--green-900); color: #fff; }
-    .sdg-main:hover { background: linear-gradient(135deg, var(--orange-400), var(--orange-300)); }
-
-    /* timeline */
-    .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
-    .tl-item { position: relative; border-radius: var(--radius); padding: 1.3rem; display: flex; flex-direction: column; gap: .25rem; background: #fff; border: 1px solid rgba(15,77,44,.14); box-shadow: var(--shadow); transition: transform .3s var(--ease), box-shadow .3s, background .3s; }
-    .tl-item::before { content: ""; position: absolute; left: 0; top: 0; height: 5px; width: 100%; border-radius: var(--radius) var(--radius) 0 0; background: var(--orange-500); transition: height .3s var(--ease); }
-    .tl-home::before { background: var(--green-700); }
-    .tl-item:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .tl-item:hover::before { height: 100%; opacity: .08; }
-    .tl-year { font-family: var(--font-head); font-weight: 800; font-size: 1.6rem; color: var(--green-800); line-height: 1; margin-top: .3rem; }
-    .tl-item strong { color: var(--green-900); font-family: var(--font-head); font-size: 1rem; }
-    .tl-item span:last-child { font-size: .95rem; color: var(--ink-soft); }
-    .tl-home { background: var(--green-50); }
-
-    /* CTA */
-    .cta { padding: clamp(2.5rem, 5vw, 4rem) 0; background: var(--bg); }
-    .cta-box { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--green-950), var(--green-700)); border-radius: 24px; padding: clamp(1.6rem, 3.5vw, 2.8rem); display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; justify-content: space-between; box-shadow: var(--shadow-lg); }
-    .cta-box::after { content: ""; position: absolute; width: 280px; height: 280px; border-radius: 50%; background: var(--orange-500); opacity: .25; filter: blur(70px); right: -60px; top: -100px; }
-    .cta-box > * { position: relative; z-index: 1; }
-    .cta-box h2 { color: #fff; font-size: clamp(1.4rem, 1.1rem + 1.1vw, 1.9rem); margin: 0 0 .3em; }
-    .cta-box p { color: #d4e6d9; margin: 0; }
-
-    /* forms (used by modal scripts) */
-    .field { display: grid; gap: .35rem; margin-bottom: 1rem; }
-    label { font-weight: 700; color: var(--green-900); font-size: .95rem; }
-    input, select, textarea { width: 100%; font: inherit; color: var(--ink); background: #fff; border: 2px solid rgba(22,105,47,.3); border-radius: 12px; padding: .75rem 1rem; transition: border-color .2s, box-shadow .2s; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--orange-500); box-shadow: 0 0 0 4px rgba(244,162,76,.3); }
-    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: #b3261e; }
-    .field-error { color: #b3261e; font-weight: 600; font-size: .9rem; }
-    .form-status { min-height: 1.4em; font-weight: 600; margin: .4rem 0 .6rem; }
-    .form-status.ok { color: var(--green-700); }
-    .form-status.err { color: #b3261e; }
-    .form-status a { color: inherit; }
-    button[disabled] { opacity: .65; cursor: wait; transform: none; }
-
-    @media (max-width: 1040px) { .sdg-grid { grid-template-columns: repeat(3, 1fr); } .timeline { grid-template-columns: repeat(2, 1fr); } .committee-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .committee-grid article:nth-child(-n+3) { grid-column:span 1; } .committee-grid article:nth-child(n+4) { grid-column:span 2; } }
-    @media (max-width: 860px) { .split { grid-template-columns: 1fr; } .definitions { position: static; } }
-    @media (max-width: 600px) {
-      :root { --nav-h: 64px; }
-      .timeline { grid-template-columns: 1fr; }
-      .committee-grid { grid-template-columns:1fr; }
-      .committee-grid article:nth-child(n) { grid-column:span 1; }
-      .sdg-grid { grid-template-columns: repeat(2, 1fr); }
-      .sdg-main { grid-column: span 2; }
-      .btn-row .btn, .cta-box .btn { width: 100%; }
-      .def { padding-left: 4.1rem; }
-      .def-step { left: 1rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .js [data-rv] { opacity: 1; transform: none; }
-    }
-    @keyframes bob { 50% { transform: translateY(6px); } }
-    @keyframes grow { from { transform: scaleX(0); } }
+:root{--green-950:#04180e;--green-900:#0a3a22;--green-800:#0f4d2c;--green-700:#16692f;--green-600:#1f8a3e;--green-50:#eaf4ec;--gold-600:#b9791a;--gold-500:#d9992b;--gold-400:#ecb544;--gold-300:#f6cf76;--ink:#0f2418;--ink-soft:#3a4f43;--bg:#f6f9f6;--radius:22px;--shadow-lg:0 18px 40px rgba(5,32,19,.22);--font-head:"Montserrat",system-ui,sans-serif;--font-body:"Source Sans 3",system-ui,sans-serif;--nav-h:72px;--ease:cubic-bezier(.2,.7,.2,1);--gold-grad:linear-gradient(135deg,var(--gold-300),var(--gold-400) 45%,var(--gold-500))}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);line-height:1.65;color:var(--ink);background:var(--bg);overflow-x:hidden}
+img,svg{max-width:100%;display:block}
+a{color:var(--green-700);text-underline-offset:3px}
+button{font:inherit;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.15;margin:0 0 .55em;color:var(--green-900);letter-spacing:-.02em}
+h1{font-size:clamp(2.2rem,1.5rem + 3.2vw,4rem);font-weight:800}
+h2{font-size:clamp(1.5rem,1.2rem + 1.3vw,2.1rem);font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+h4{font-size:.95rem;font-weight:700;color:var(--gold-300);margin:1.1rem 0 .4rem}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--gold-400);outline-offset:3px;border-radius:8px}
+.container{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+.lead{font-size:1.1rem;color:var(--ink-soft)}
+.progress{position:fixed;inset:0 0 auto 0;height:4px;z-index:9999;pointer-events:none}
+.progress span{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold-600),var(--gold-300))}
+.js [data-rv]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * 90ms)}
+.js [data-rv=left]{transform:translateX(-34px)}.js [data-rv=right]{transform:translateX(34px)}.js [data-rv=zoom]{transform:scale(.94)}
+.js [data-rv].in{opacity:1;transform:none}
+.stage{position:relative;overflow:hidden;color:#e3efe7;background:radial-gradient(900px 500px at 85% 0%,rgba(236,181,68,.14),transparent 60%),linear-gradient(160deg,var(--green-950),var(--green-800) 60%,var(--green-900))}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.025) 46px 47px)}
+.stage h1,.stage h2,.stage h3{color:#fff}
+.stage>.container{position:relative;z-index:1}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform;pointer-events:none}
+.blob-a{width:380px;height:380px;background:var(--gold-500);opacity:.28;top:-120px;right:-60px}
+.blob-b{width:340px;height:340px;background:var(--green-600);opacity:.5;top:420px;left:-120px}
+.watermark{position:absolute;width:520px;aspect-ratio:1;background:url("assets/register%20and%20favicon%20logo.png") center/contain no-repeat;opacity:.05;pointer-events:none;right:-140px;bottom:-120px}
+.section{position:relative;z-index:1;padding:clamp(3rem,2rem + 4vw,5.5rem) 0;overflow:hidden}
+.section-head{max-width:720px;margin-bottom:clamp(1.6rem,3vw,2.6rem)}
+.section-head h2::after{content:"";display:block;width:0;height:4px;margin-top:.7rem;border-radius:4px;background:var(--gold-grad);transition:width .9s .25s var(--ease)}
+.section-head.in h2::after{width:84px}
+.stage .section-head p{color:#c4dccb}
+/* hero */
+.page-hero{padding:calc(var(--nav-h) + 56px) 0 2.5rem;position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:2rem;align-items:center}
+.page-hero h1{max-width:12ch;margin-bottom:0}
+.page-hero .lead{color:#c4dccb;max-width:46ch;margin:1.1rem 0 0}
+.crumbs{display:flex;gap:.5rem;font-weight:600;font-size:.9rem;color:#bcd6c4;margin-bottom:1rem}
+.crumbs a{color:var(--gold-300)}
+.hero-line{display:block;width:140px;height:5px;margin-top:1.3rem;border-radius:4px;background:repeating-linear-gradient(90deg,var(--gold-400) 0 18px,transparent 18px 28px);transform-origin:left;animation:grow 1s .3s var(--ease) both}
+.medallion{position:relative;width:min(340px,70vw);aspect-ratio:1;justify-self:center}
+.medallion-disc{position:absolute;inset:9%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#f1eee6 70%);display:grid;place-items:center;box-shadow:0 30px 60px rgba(0,0,0,.45),inset 0 -10px 24px rgba(15,77,44,.12);animation:float 7s ease-in-out infinite}
+.medallion-disc img{width:82%;height:82%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(5,32,19,.18))}
+.medallion svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.gear-ring{fill:none;stroke:rgba(236,181,68,.55);stroke-width:7;stroke-dasharray:9 7;transform-origin:50% 50%}
+.ring-draw{fill:none;stroke:url(#gs);stroke-width:5;stroke-linecap:round;stroke-dasharray:580;stroke-dashoffset:580;animation:draw 2.2s .4s var(--ease) forwards}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.2rem}
+.stat{padding:1.1rem 1.2rem;border-radius:18px;text-align:left}
+.stat b{display:block;font-family:var(--font-head);font-weight:800;font-size:2.3rem;line-height:1;color:var(--gold-300)}
+.stat span{font-weight:600;font-size:.92rem;color:#d4e6d9}
+/* glass cards */
+.glass{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.05));-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.22);box-shadow:0 12px 36px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.3);color:#e3efe7}
+.card{--mx:50%;--my:50%;position:relative;border-radius:var(--radius);padding:clamp(1.3rem,1rem + 1vw,1.8rem);transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(260px circle at var(--mx) var(--my),rgba(246,207,118,.18),transparent 65%);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-5px);border-color:rgba(236,181,68,.75)}
+.card:hover::before{opacity:1}
+.card p{color:#d4e6d9}.card p:last-child{margin-bottom:0}
+/* about */
+.about-bg{background:var(--bg)}
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(1.8rem,4vw,3.5rem);align-items:start}
+.theme-box{background:linear-gradient(135deg,var(--green-900),var(--green-700));border-radius:var(--radius);padding:1.4rem 1.6rem;margin:1.5rem 0;border-left:6px solid var(--gold-400);box-shadow:var(--shadow-lg)}
+.eyebrow{display:inline-block;font-family:var(--font-head);font-weight:700;font-size:.82rem;color:var(--gold-300);margin-bottom:.5rem}
+.theme-box p{color:#fff;font-family:var(--font-head);font-weight:600;font-size:1.12rem;line-height:1.4;margin:0}
+.definitions{position:sticky;top:100px;display:grid;gap:.4rem;--p:0}
+.def{position:relative;background:#fff;border:1px solid rgba(15,77,44,.14);border-radius:var(--radius);padding:1.4rem 1.4rem 1.4rem 5rem;box-shadow:0 6px 20px rgba(5,32,19,.1)}
+.def h3{margin-bottom:.3em}.def p{margin:0;color:var(--ink-soft)}
+.def-step{position:absolute;left:1.2rem;top:1.25rem;width:2.6rem;height:2.6rem;border-radius:50%;display:grid;place-items:center;font-family:var(--font-head);font-weight:800;background:var(--green-800);color:#fff}
+.def-accent{background:linear-gradient(135deg,var(--green-900),var(--green-700));border-color:var(--green-700)}
+.def-accent h3,.def-accent p{color:#fff}
+.def-accent .def-step{background:var(--gold-grad);color:var(--green-950)}
+.def-link{height:56px;width:4px;margin:0 auto;border-radius:4px;background:rgba(22,105,47,.18);position:relative;overflow:hidden}
+.def-link::after{content:"";position:absolute;inset:0;background:var(--gold-grad);transform-origin:top;transform:scaleY(var(--p))}
+/* sdgs */
+.sdg-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:.9rem}
+.sdg{border-radius:18px;padding:1.1rem;display:flex;flex-direction:column;gap:.6rem;font-weight:600;font-size:.95rem;color:#fff}
+.sdg-num{width:2.7rem;height:2.7rem;border-radius:50%;background:var(--green-600);display:grid;place-items:center;font-family:var(--font-head);font-weight:800;transition:transform .3s var(--ease),background .3s}
+.sdg:hover .sdg-num{background:var(--gold-grad);color:var(--green-950);transform:scale(1.12) rotate(-8deg)}
+.sdg-main{grid-column:span 2;background:var(--gold-grad);color:var(--green-950);border-color:rgba(255,255,255,.6)}
+.sdg-main .sdg-num{background:var(--green-900);color:#fff}
+.spin-gear{position:absolute;width:420px;right:-120px;top:-100px;opacity:.5;pointer-events:none}
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:1.1rem;position:relative;--p:0}
+.timeline::before,.timeline::after{content:"";position:absolute;left:0;right:0;top:11px;height:4px;border-radius:4px;background:rgba(22,105,47,.18)}
+.timeline::after{background:var(--gold-grad);transform-origin:left;transform:scaleX(var(--p))}
+.tl-item{position:relative;padding-top:2.2rem;display:flex;flex-direction:column;gap:.2rem}
+.tl-item::before{content:"";position:absolute;top:2px;left:0;width:24px;height:24px;z-index:1;border-radius:50%;background:#fff;border:4px solid rgba(22,105,47,.35);transition:.4s var(--ease)}
+.tl-item.on::before{background:var(--gold-400);border-color:var(--green-800);box-shadow:0 0 0 6px rgba(236,181,68,.3)}
+.tl-year{font-family:var(--font-head);font-weight:800;font-size:1.8rem;color:var(--green-800);line-height:1}
+.tl-item strong{font-family:var(--font-head);color:var(--green-900)}
+.tl-item span:last-child{font-size:.95rem;color:var(--ink-soft)}
+/* governance map */
+.gov-map{display:flex;flex-direction:column;align-items:center;margin:0 auto 2.5rem;max-width:860px;--ln:rgba(236,181,68,.85)}
+.gov-node{display:block;padding:.7rem 1.2rem;border-radius:16px;text-align:center;text-decoration:none;font-family:var(--font-head);font-weight:700;font-size:.9rem;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);transition:.3s var(--ease)}
+.gov-node:hover{background:var(--gold-400);color:var(--green-950);transform:translateY(-3px)}
+.gov-node small{display:block;font-family:var(--font-body);font-weight:500;font-size:.78rem;opacity:.8}
+.gov-main{background:var(--gold-grad);color:var(--green-950);border-color:rgba(255,255,255,.6)}
+.gov-row{display:grid;grid-template-columns:repeat(3,1fr);width:100%;position:relative;margin-top:28px}
+.gov-row::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;height:2px;background:var(--ln);transform:scaleX(0);transition:transform .8s .5s var(--ease)}
+.gov-col{display:flex;flex-direction:column;align-items:center;padding:28px .5rem 0;position:relative}
+.gov-col::before,.gov-main::after,.gov-sub::before{content:"";position:absolute;left:50%;top:0;width:2px;height:28px;background:var(--ln);transform:scaleY(0);transform-origin:top;transition:transform .5s .9s var(--ease)}
+.gov-main{position:relative}.gov-main::after{top:100%}
+.gov-sub{position:relative;margin-top:28px}.gov-sub::before{top:-28px}
+.gov-map.in .gov-row::before{transform:none}.gov-map.in .gov-col::before,.gov-map.in .gov-main::after,.gov-map.in .gov-sub::before{transform:none}
+.gov-col .gov-node{width:100%}
+/* committee cards */
+.gov-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem}
+.gwide{grid-column:1/-1}
+.gcard h3{display:flex;align-items:center;gap:.7rem}
+.gicon{flex:none;width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;background:var(--gold-grad);color:var(--green-950);font-size:.95rem;font-weight:800}
+.gcard ul{margin:.4rem 0 1rem;padding-left:1.2rem}.gcard li{margin:.3rem 0;color:#d4e6d9}
+.gcard li::marker{color:var(--gold-400)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 2rem}
+.cols h4:first-child{margin-top:.2rem}
+.reports{display:inline-flex;margin-top:auto;padding:.3rem .9rem;border-radius:999px;font-size:.88rem;font-weight:600;background:rgba(236,181,68,.18);border:1px solid rgba(236,181,68,.5);color:#fff}
+.reports b{color:var(--gold-300);margin-right:.35rem}
+.gcard{display:flex;flex-direction:column}
+.subs{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:.6rem}
+.sub{padding:.8rem .9rem;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font-size:.9rem;line-height:1.45;transition:.3s var(--ease)}
+.sub:hover{background:rgba(236,181,68,.16);border-color:var(--gold-400);transform:translateY(-3px)}
+.sub strong{display:block;font-family:var(--font-head);font-size:.86rem;color:var(--gold-300)}
+.gnote{margin:1.6rem 0 0;max-width:68ch;color:#d4e6d9}
+/* cta */
+.cta{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg)}
+.cta-box{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--green-950),var(--green-700));border-radius:24px;padding:clamp(1.6rem,3.5vw,2.8rem);display:flex;flex-wrap:wrap;gap:1.4rem;align-items:center;justify-content:space-between;box-shadow:var(--shadow-lg)}
+.cta-box h2{color:#fff;margin:0 0 .3em}.cta-box p{color:#d4e6d9;margin:0}
+.cta-logo{width:84px;height:84px;padding:.5rem;border-radius:50%;background:#f4f2ee;box-shadow:0 0 0 3px var(--gold-400);flex:none}
+.cta-logo img{width:100%;height:100%;object-fit:contain}
+.cta-text{display:flex;gap:1.2rem;align-items:center;flex:1 1 320px}
+.btn{--mx:50%;--my:50%;position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:.65rem;padding:1rem 2rem;border-radius:999px;border:1px solid rgba(255,255,255,.6);font-family:var(--font-head);font-weight:700;font-size:1rem;text-decoration:none;background:var(--gold-grad);color:var(--green-950);box-shadow:0 10px 24px rgba(217,153,43,.38),inset 0 1px 0 rgba(255,255,255,.75),inset 0 -3px 0 rgba(185,121,26,.35);transition:transform .25s var(--ease),box-shadow .3s}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120px circle at var(--mx) var(--my),rgba(255,255,255,.5),transparent 65%);opacity:0;transition:opacity .3s}
+.btn:hover{transform:translateY(-3px);color:var(--green-950);box-shadow:0 16px 34px rgba(217,153,43,.55)}.btn:hover::before{opacity:1}
+.btn svg{width:18px;height:18px;transition:transform .3s var(--ease)}.btn:hover svg{transform:translateX(4px)}
+/* shared form bits */
+.field{display:grid;gap:.35rem;margin-bottom:1rem}
+label{font-weight:700;color:var(--green-900);font-size:.95rem}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:#fff;border:2px solid rgba(22,105,47,.25);border-radius:12px;padding:.75rem 1rem}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold-400);box-shadow:0 0 0 4px rgba(236,181,68,.3)}
+.hp{position:absolute!important;left:-9999px;opacity:0;height:0;width:0}
+.field-error{color:#b3261e;font-weight:600;font-size:.9rem}.form-status{min-height:1.4em;font-weight:600}.form-status.ok{color:var(--green-700)}.form-status.err{color:#b3261e}
+button[disabled]{opacity:.65;cursor:wait}
+@media(max-width:1040px){.sdg-grid{grid-template-columns:repeat(3,1fr)}.timeline{grid-template-columns:repeat(3,1fr);row-gap:1.8rem}.timeline::before,.timeline::after{display:none}}
+@media(max-width:860px){.split,.hero-grid{grid-template-columns:1fr}.definitions{position:static}.page-hero{padding-top:calc(var(--nav-h) + 2rem)}.medallion{width:min(220px,54vw);order:-1;justify-self:start}.stats{grid-template-columns:repeat(2,1fr)}.gov-grid,.cols{grid-template-columns:1fr}.gov-map{display:none}}
+@media(max-width:600px){:root{--nav-h:64px}.container{width:min(1120px,100% - 2rem)}.sdg-grid{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:1fr}.subs{grid-template-columns:1fr}.def{padding-left:4.2rem}.btn{width:100%}.card:hover{transform:none}.medallion-disc{animation:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js [data-rv]{opacity:1;transform:none}.ring-draw{stroke-dashoffset:0}.section-head h2::after{width:84px}.gov-map *::before,.gov-map *::after{transform:none!important}}
+@keyframes grow{from{transform:scaleX(0)}}@keyframes draw{to{stroke-dashoffset:0}}@keyframes float{50%{transform:translateY(-10px)}}
   </style>
 </head>
 <body>
-  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
   <script src="js/components/navbar.js"></script>
-
   <main id="main">
-    <section class="page-hero" aria-labelledby="page-title">
+    <div class="stage">
       <span class="blob blob-a" data-speed="0.15" aria-hidden="true"></span>
       <span class="blob blob-b" data-speed="-0.1" aria-hidden="true"></span>
-      <div class="container">
-        <p class="crumbs" data-rv><a href="index.html">Home</a><span aria-hidden="true">/</span><span>About</span></p>
-        <h1 id="page-title" data-rv style="--i:1">Why AIPIS</h1>
-        <span class="hero-line" aria-hidden="true"></span>
-      </div>
-    </section>
+      <section class="page-hero" aria-labelledby="page-title">
+        <div class="container">
+          <div class="hero-grid" data-fade>
+            <div>
+              <p class="crumbs" data-rv><a href="index.html">Home</a><span aria-hidden="true">/</span><span>About</span></p>
+              <h1 id="page-title" data-rv style="--i:1">Why AIPIS</h1>
+              <span class="hero-line" aria-hidden="true"></span>
+              <p class="lead" data-rv style="--i:2">Infrastructure should be measured by the industries and jobs it creates, not by the money raised to build it.</p>
+            </div>
+            <div class="medallion" aria-hidden="true" data-rv="zoom" style="--i:2">
+              <svg viewBox="0 0 200 200"><defs><linearGradient id="gs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6cf76"/><stop offset="1" stop-color="#b9791a"/></linearGradient></defs><circle class="gear-ring" data-spin="-0.12" cx="100" cy="100" r="97"/><circle class="ring-draw" cx="100" cy="100" r="92" transform="rotate(-90 100 100)"/></svg>
+              <div class="medallion-disc"><img src="assets/register%20and%20favicon%20logo.png" alt=""></div>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="stat glass" data-rv style="--i:1"><b data-count="5">0</b><span>Governing bodies</span></div>
+            <div class="stat glass" data-rv style="--i:2"><b data-count="10">0</b><span>SDGs linked to every session</span></div>
+            <div class="stat glass" data-rv style="--i:3"><b data-count="9">0</b><span>Local sub-committees</span></div>
+            <div class="stat glass" data-rv style="--i:4"><b data-count="5">0</b><span>Days in Accra, 23 to 27 March 2027</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-    <section class="section" id="about">
+    <section class="section about-bg" id="about">
       <div class="container split">
         <div>
           <p class="lead" data-rv>Africa has made strong progress in raising finance for infrastructure. Governments, development finance institutions, pension funds and private investors now plan and fund projects with growing skill.</p>
@@ -189,122 +207,178 @@
           </div>
           <p data-rv style="--i:3">Every edition asks one question: has infrastructure spending in Africa produced working industries and better lives?</p>
         </div>
-        <div class="definitions">
-          <article class="card def" data-rv="right" style="--i:1">
-            <span class="def-step">1</span>
-            <h3>Financial close</h3>
-            <p>The point at which a project’s funding is fully secured.</p>
-          </article>
-          <div class="def-arrow" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 4v16m0 0l-6-6m6 6l6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <article class="card def def-accent" data-rv="right" style="--i:3">
-            <span class="def-step">2</span>
-            <h3>Prosperity close</h3>
-            <p>The point at which a project can show measurable benefits to industry and citizens. AIPIS introduces this standard.</p>
-          </article>
+        <div class="definitions" id="defs">
+          <article class="def" data-rv="right" style="--i:1"><span class="def-step">1</span><h3>Financial close</h3><p>The point at which a project’s funding is fully secured.</p></article>
+          <div class="def-link" aria-hidden="true"></div>
+          <article class="def def-accent" data-rv="right" style="--i:3"><span class="def-step">2</span><h3>Prosperity close</h3><p>The point at which a project can show measurable benefits to industry and citizens. AIPIS introduces this standard.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section section-dark" id="sdgs">
+    <section class="section stage" id="sdgs">
+      <svg class="spin-gear" data-spin="0.1" viewBox="0 0 200 200" aria-hidden="true"><circle class="gear-ring" cx="100" cy="100" r="92"/></svg>
       <div class="container">
-        <div class="section-head">
-          <h2 data-rv>Linked to the Sustainable Development Goals</h2>
-          <p class="lead" data-rv style="--i:1">AIPIS is built around SDG 9 (Industry, Innovation and Infrastructure) and contributes to SDGs 1, 6, 7, 8, 11, 12, 13, 16 and 17. Every session, output and commitment is linked to SDG targets. The 2030 edition in Ghana will review progress in the SDG target year.</p>
-        </div>
+        <div class="section-head" data-rv><h2>Linked to the Sustainable Development Goals</h2><p class="lead">AIPIS is built around SDG 9 (Industry, Innovation and Infrastructure) and contributes to SDGs 1, 6, 7, 8, 11, 12, 13, 16 and 17. Every session, output and commitment is linked to SDG targets. The 2030 edition in Ghana will review progress in the SDG target year.</p></div>
         <ul class="sdg-grid">
-          <li class="sdg sdg-main" data-rv="zoom"><span class="sdg-num">9</span><span>Industry, Innovation and Infrastructure</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:1"><span class="sdg-num">1</span><span>No Poverty</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:2"><span class="sdg-num">6</span><span>Clean Water and Sanitation</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:3"><span class="sdg-num">7</span><span>Affordable and Clean Energy</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:1"><span class="sdg-num">8</span><span>Decent Work and Economic Growth</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:2"><span class="sdg-num">11</span><span>Sustainable Cities and Communities</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:3"><span class="sdg-num">12</span><span>Responsible Consumption and Production</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:1"><span class="sdg-num">13</span><span>Climate Action</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:2"><span class="sdg-num">16</span><span>Peace, Justice and Strong Institutions</span></li>
-          <li class="sdg" data-rv="zoom" style="--i:3"><span class="sdg-num">17</span><span>Partnerships for the Goals</span></li>
+          <li class="sdg sdg-main card glass" data-rv="zoom"><span class="sdg-num">9</span><span>Industry, Innovation and Infrastructure</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:1"><span class="sdg-num">1</span><span>No Poverty</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:2"><span class="sdg-num">6</span><span>Clean Water and Sanitation</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:3"><span class="sdg-num">7</span><span>Affordable and Clean Energy</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:1"><span class="sdg-num">8</span><span>Decent Work and Economic Growth</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:2"><span class="sdg-num">11</span><span>Sustainable Cities and Communities</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:3"><span class="sdg-num">12</span><span>Responsible Consumption and Production</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:1"><span class="sdg-num">13</span><span>Climate Action</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:2"><span class="sdg-num">16</span><span>Peace, Justice and Strong Institutions</span></li>
+          <li class="sdg card glass" data-rv="zoom" style="--i:3"><span class="sdg-num">17</span><span>Partnerships for the Goals</span></li>
         </ul>
       </div>
     </section>
 
-    <section class="section" id="rotation">
+    <section class="section about-bg" id="rotation">
       <div class="container">
-        <div class="section-head">
-          <h2 data-rv>Every edition in Ghana</h2>
-          <p class="lead" data-rv style="--i:1">Ghana is the permanent home of AIPIS, and every edition is held in Ghana in the second half of March. The summit does not rotate between countries. Delegates, speakers and partners from across Africa come to Ghana each year, and the 2030 edition reviews progress on the Sustainable Development Goals.</p>
-        </div>
-        <ol class="timeline">
-          <li class="tl-item tl-home" data-rv><span class="tl-year">2027</span><strong>Accra, Ghana</strong><span>From Financial Close to Prosperity Close</span></li>
-          <li class="tl-item tl-home" data-rv style="--i:1"><span class="tl-year">2029</span><strong>Ghana</strong><span>Building with Africa</span></li>
-          <li class="tl-item tl-home" data-rv style="--i:2"><span class="tl-year">2030</span><strong>Ghana</strong><span>The 2030 Review: SDG impact</span></li>
-          <li class="tl-item tl-home" data-rv style="--i:3"><span class="tl-year">2031</span><strong>Ghana</strong><span>Shared Prosperity</span></li>
-          <li class="tl-item tl-home" data-rv style="--i:1"><span class="tl-year">2032</span><strong>Ghana</strong><span>Powering Production</span></li>
+        <div class="section-head" data-rv><h2>Every edition in Ghana</h2><p class="lead">Ghana is the permanent home of AIPIS, and every edition is held in Ghana in the second half of March. The summit does not rotate between countries. Delegates, speakers and partners from across Africa come to Ghana each year, and the 2030 edition reviews progress on the Sustainable Development Goals.</p></div>
+        <ol class="timeline" id="tl">
+          <li class="tl-item" data-rv><span class="tl-year">2027</span><strong>Accra, Ghana</strong><span>From Financial Close to Prosperity Close</span></li>
+          <li class="tl-item" data-rv style="--i:1"><span class="tl-year">2029</span><strong>Ghana</strong><span>Building with Africa</span></li>
+          <li class="tl-item" data-rv style="--i:2"><span class="tl-year">2030</span><strong>Ghana</strong><span>The 2030 Review: SDG impact</span></li>
+          <li class="tl-item" data-rv style="--i:3"><span class="tl-year">2031</span><strong>Ghana</strong><span>Shared Prosperity</span></li>
+          <li class="tl-item" data-rv style="--i:4"><span class="tl-year">2032</span><strong>Ghana</strong><span>Powering Production</span></li>
         </ol>
       </div>
     </section>
 
-    <section class="section section-alt" id="committees">
+    <section class="section stage" id="committees">
+      <div class="watermark" aria-hidden="true" data-speed="-0.05"></div>
       <div class="container">
-        <div class="section-head"><p class="eyebrow">Governance</p><h2>Organising committees</h2><p>AIPIS is governed through five bodies. The Summit Steering Committee, drawn from the three convenors, sets strategy, approves partnerships and appoints the two organising committees. The International Organising Committee leads the programme and the summit's reach across Africa and beyond. The Local Organising Committee delivers each edition in the host city. The International Advisory Board advises on direction, and an independent Scientific Committee oversees the research and practice stream.</p></div>
-        <div class="committee-grid">
-          <article id="ssc" class="glass card"><h3>Summit Steering Committee</h3><p>Drawn from the three convenors: KNUST (CABE and DCTM), AIPAF and GCI.</p><ul><li>Sets strategy and approves the budget</li><li>Approves partnerships and fees</li><li>Appoints the International and Local Organising Committees</li><li>Chooses the venue for each edition in Ghana</li></ul><p><strong>Reports to:</strong> The convenors</p></article>
-          <article id="iab" class="glass card"><h3>International Advisory Board</h3><p>Senior figures from government, finance, industry and research, including the Founding Government Partners and Founding Partners.</p><ul><li>Advises on strategy and the programme</li><li>Opens links to senior networks in finance, government and industry</li><li>Supports the AIPIS Delivery Compact and its follow-up</li></ul><p><strong>Reports to:</strong> Summit Steering Committee</p></article>
-          <article id="scientific" class="glass card"><h3>Scientific Committee</h3><p>An independent panel of academics and practitioners. Its Chair sits on the International Organising Committee.</p><ul><li>Reviews papers, posters and Technical Keynote presentations</li><li>Selects Poster Presenters</li><li>Edits the summit proceedings</li></ul><p><strong>Reports to:</strong> International Organising Committee</p></article>
-          <article id="ioc" class="glass card"><h3>International Organising Committee</h3><p>The committee shapes the summit programme and gives AIPIS its continental reach. It meets monthly, mostly online, in the year before each edition, and in person at the summit.</p><h4>Composition</h4><ul><li>Chair nominated by the Steering Committee from the convenors</li><li>Two Vice-Chairs, one from each convenor not holding the Chair</li><li>Three partner-country members: one senior academic or professional each from Kenya, Nigeria and South Africa, nominated by partner universities</li><li>Up to seven regional members: one each from North, East, Central, West and Southern Africa, and up to two from the African diaspora</li><li>Government liaison nominated jointly by the Founding Government Partners</li><li>Top Business Brokers Consult Limited as Founding Industry Partner</li><li>Chairs of the Scientific and Local Organising Committees, ex officio</li><li>AIPIS Secretariat Secretary</li></ul><h4>Responsibilities</h4><ul><li>Sets the edition theme and session topics under the strategic theme</li><li>Identifies and invites Distinguished Keynote Speakers, Special Guest Speakers and Technical Keynote Presenters</li><li>Promotes the call for papers, posters and Forensic Clinic cases across Africa and internationally</li><li>Secures international partners, development finance institutions and delegates</li><li>Oversees the Prosperity Index, the Unfinished Projects Forensic Report and the Commitments Tracker for each edition</li><li>Builds links with partner universities, governments and financiers across Africa</li></ul></article>
-          <article id="loc" class="glass card"><h3>Local Organising Committee</h3><p>The committee delivers each edition from the AIPIS Secretariat at KNUST, working with partners in the host city.</p><h4>Composition</h4><ul><li>Chair nominated by the Steering Committee from KNUST (CABE and DCTM)</li><li>Vice-Chair nominated from AIPAF or GCI</li><li>AIPIS Secretariat Secretary and Finance Officer</li><li>Chairs of the nine sub-committees</li><li>Accra Metropolitan Assembly and Greater Accra Regional Coordinating Council representatives for 2027</li><li>Liaison for traditional authorities and student volunteer coordinator</li></ul><h4>Sub-committees</h4><ul><li>Programme and Technical: detailed programme, session chairs, speaker briefs and research stream, with the Scientific Committee</li><li>Finance and Sponsorship: budget, sponsorship sales, invoicing, payments and financial reporting</li><li>Registration and Digital: registration, payments, website, summit app and delegate database</li><li>Venue, Logistics and Accommodation: venue set-up, exhibition, transport and hotel room blocks</li><li>Protocol and Hospitality: ministers, VIPs and traditional authorities, ceremonies and Gala Dinner</li><li>Field Day and Site Visits: site selection, permissions, transport and safety for Day 5</li><li>Publicity and Media: media partners, press, social media, photography and video</li><li>Security, Health and Safety: security plan, medical cover and emergency procedures</li><li>Volunteers and Welfare: student volunteers, ushers and delegate support</li></ul></article>
+        <div class="section-head" data-rv><span class="eyebrow">Governance</span><h2>Organising committees</h2><p>AIPIS is governed through five bodies. The Summit Steering Committee, drawn from the three convenors, sets strategy, approves partnerships and appoints the two organising committees. The International Organising Committee leads the programme and the summit's reach across Africa and beyond. The Local Organising Committee delivers each edition in the host city. The International Advisory Board advises on direction, and an independent Scientific Committee oversees the research and practice stream.</p></div>
+
+        <nav class="gov-map" data-rv aria-label="How the five bodies connect">
+          <a class="gov-node gov-main" href="#ssc">Summit Steering Committee<small>Sets strategy</small></a>
+          <div class="gov-row">
+            <div class="gov-col"><a class="gov-node" href="#iab">International Advisory Board<small>Reports to the Steering Committee</small></a></div>
+            <div class="gov-col"><a class="gov-node" href="#ioc">International Organising Committee<small>Appointed by the Steering Committee</small></a><a class="gov-node gov-sub" href="#scientific">Scientific Committee<small>Reports to the IOC</small></a></div>
+            <div class="gov-col"><a class="gov-node" href="#loc">Local Organising Committee<small>Appointed by the Steering Committee</small></a></div>
+          </div>
+        </nav>
+
+        <div class="gov-grid">
+          <article id="ssc" class="glass card gcard gwide" data-rv>
+            <h3><span class="gicon">1</span>Summit Steering Committee</h3>
+            <p>Drawn from the three convenors: KNUST (CABE and DCTM), AIPAF and GCI.</p>
+            <ul style="columns:2;column-gap:2rem"><li>Sets strategy and approves the budget</li><li>Approves partnerships and fees</li><li>Appoints the International and Local Organising Committees</li><li>Chooses the venue for each edition in Ghana</li></ul>
+            <span class="reports"><b>Reports to</b>The convenors</span>
+          </article>
+          <article id="iab" class="glass card gcard" data-rv style="--i:1">
+            <h3><span class="gicon">2</span>International Advisory Board</h3>
+            <p>Senior figures from government, finance, industry and research, including the Founding Government Partners and Founding Partners.</p>
+            <ul><li>Advises on strategy and the programme</li><li>Opens links to senior networks in finance, government and industry</li><li>Supports the AIPIS Delivery Compact and its follow-up</li></ul>
+            <span class="reports"><b>Reports to</b>Summit Steering Committee</span>
+          </article>
+          <article id="scientific" class="glass card gcard" data-rv style="--i:2">
+            <h3><span class="gicon">3</span>Scientific Committee</h3>
+            <p>An independent panel of academics and practitioners. Its Chair sits on the International Organising Committee.</p>
+            <ul><li>Reviews papers, posters and Technical Keynote presentations</li><li>Selects Poster Presenters</li><li>Edits the summit proceedings</li></ul>
+            <span class="reports"><b>Reports to</b>International Organising Committee</span>
+          </article>
+          <article id="ioc" class="glass card gcard gwide" data-rv>
+            <h3><span class="gicon">4</span>International Organising Committee</h3>
+            <p>The committee shapes the summit programme and gives AIPIS its continental reach. It meets monthly, mostly online, in the year before each edition, and in person at the summit.</p>
+            <div class="cols">
+              <div><h4>Composition</h4><ul><li>Chair nominated by the Steering Committee from the convenors</li><li>Two Vice-Chairs, one from each convenor not holding the Chair</li><li>Three partner-country members: one senior academic or professional each from Kenya, Nigeria and South Africa, nominated by partner universities</li><li>Up to seven regional members: one each from North, East, Central, West and Southern Africa, and up to two from the African diaspora</li><li>Government liaison nominated jointly by the Founding Government Partners</li><li>Top Business Brokers Consult Limited as Founding Industry Partner</li><li>Chairs of the Scientific and Local Organising Committees, ex officio</li><li>AIPIS Secretariat Secretary</li></ul></div>
+              <div><h4>Responsibilities</h4><ul><li>Sets the edition theme and session topics under the strategic theme</li><li>Identifies and invites Distinguished Keynote Speakers, Special Guest Speakers and Technical Keynote Presenters</li><li>Promotes the call for papers, posters and Forensic Clinic cases across Africa and internationally</li><li>Secures international partners, development finance institutions and delegates</li><li>Oversees the Prosperity Index, the Unfinished Projects Forensic Report and the Commitments Tracker for each edition</li><li>Builds links with partner universities, governments and financiers across Africa</li></ul></div>
+            </div>
+          </article>
+          <article id="loc" class="glass card gcard gwide" data-rv>
+            <h3><span class="gicon">5</span>Local Organising Committee</h3>
+            <p>The committee delivers each edition from the AIPIS Secretariat at KNUST, working with partners in the host city.</p>
+            <div class="cols">
+              <div><h4>Composition</h4><ul><li>Chair nominated by the Steering Committee from KNUST (CABE and DCTM)</li><li>Vice-Chair nominated from AIPAF or GCI</li><li>AIPIS Secretariat Secretary and Finance Officer</li><li>Chairs of the nine sub-committees</li><li>Accra Metropolitan Assembly and Greater Accra Regional Coordinating Council representatives for 2027</li><li>Liaison for traditional authorities and student volunteer coordinator</li></ul></div>
+              <div><h4>Sub-committees</h4><div class="subs">
+                <div class="sub"><strong>Programme and Technical</strong>Detailed programme, session chairs, speaker briefs and research stream, with the Scientific Committee</div>
+                <div class="sub"><strong>Finance and Sponsorship</strong>Budget, sponsorship sales, invoicing, payments and financial reporting</div>
+                <div class="sub"><strong>Registration and Digital</strong>Registration, payments, website, summit app and delegate database</div>
+                <div class="sub"><strong>Venue, Logistics and Accommodation</strong>Venue set-up, exhibition, transport and hotel room blocks</div>
+                <div class="sub"><strong>Protocol and Hospitality</strong>Ministers, VIPs and traditional authorities, ceremonies and Gala Dinner</div>
+                <div class="sub"><strong>Field Day and Site Visits</strong>Site selection, permissions, transport and safety for Day 5</div>
+                <div class="sub"><strong>Publicity and Media</strong>Media partners, press, social media, photography and video</div>
+                <div class="sub"><strong>Security, Health and Safety</strong>Security plan, medical cover and emergency procedures</div>
+                <div class="sub"><strong>Volunteers and Welfare</strong>Student volunteers, ushers and delegate support</div>
+              </div></div>
+            </div>
+          </article>
         </div>
-        <p class="note">The Steering Committee will confirm the Chairs and members of both organising committees during the Foundation phase, October to December 2026, and publish their names on the summit website.</p>
+        <p class="gnote" data-rv>The Steering Committee will confirm the Chairs and members of both organising committees during the Foundation phase, October to December 2026, and publish their names on the summit website.</p>
       </div>
     </section>
 
     <section class="cta">
       <div class="container">
         <div class="cta-box" data-rv="zoom">
-          <div>
-            <h2>See the programme</h2>
-            <p>The summit takes place at Labadi Beach Hotel, Accra, from 23 to 27 March 2027.</p>
-          </div>
-          <div class="btn-row">
-            <a class="btn btn-primary btn-lg" href="programme.html">View the programme
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
-            </a>
-          </div>
+          <div class="cta-text"><div class="cta-logo"><img src="assets/register%20and%20favicon%20logo.png" alt=""></div><div><h2>See the programme</h2><p>The summit takes place at Labadi Beach Hotel, Accra, from 23 to 27 March 2027.</p></div></div>
+          <a class="btn" href="programme.html">View the programme <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></a>
         </div>
       </div>
     </section>
   </main>
 
   <script src="js/components/footer.js"></script>
-
   <script src="js/config.js"></script>
   <script src="js/lib/form-api.js"></script>
   <script src="js/components/form-modal.js"></script>
-
   <script>
-    (function () {
-      var items = document.querySelectorAll("[data-rv]");
-      if (!("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("in"); }); }
-      else {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-        }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-        items.forEach(function (el) { io.observe(el); });
-      }
-      var bar = document.getElementById("bar");
-      var blobs = document.querySelectorAll(".blob");
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var ticking = false;
-      function update() {
-        var h = document.documentElement.scrollHeight - window.innerHeight;
-        var y = window.scrollY;
-        bar.style.transform = "scaleX(" + (h > 0 ? Math.min(y / h, 1) : 0) + ")";
-        if (!reduce) blobs.forEach(function (b) { b.style.transform = "translateY(" + (y * parseFloat(b.dataset.speed)) + "px)"; });
-        ticking = false;
-      }
-      window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-      update();
-    })();
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function count(el) {
+    var end = +el.dataset.count, t0 = null;
+    if (reduce) { el.textContent = end; return; }
+    (function step(t) { t0 = t0 || t; var k = Math.min((t - t0) / 1200, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })(performance.now());
+  }
+  var items = document.querySelectorAll("[data-rv], .section-head");
+  function show(el) { el.classList.add("in"); el.querySelectorAll("[data-count]").forEach(count); }
+  if (!("IntersectionObserver" in window)) items.forEach(show);
+  else {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }); }, { threshold: .12, rootMargin: "0px 0px -6% 0px" });
+    items.forEach(function (el) { io.observe(el); });
+  }
+  var blobs = document.querySelectorAll("[data-speed]"), spins = document.querySelectorAll("[data-spin]"),
+      fade = document.querySelector("[data-fade]"), tl = document.getElementById("tl"), defs = document.getElementById("defs"), ticking = false;
+  function clamp(v) { return Math.max(0, Math.min(1, v)); }
+  function update() {
+    var y = window.scrollY, vh = window.innerHeight;
+    if (!reduce) {
+      blobs.forEach(function (b) { b.style.transform = "translateY(" + (y * b.dataset.speed) + "px)"; });
+      spins.forEach(function (s) { s.style.transform = "rotate(" + (y * s.dataset.spin) + "deg)"; });
+      if (fade) { fade.style.transform = "translateY(" + (y * .1) + "px)"; fade.style.opacity = clamp(1 - y / (vh * .9)); }
+    }
+    if (tl) {
+      var r = tl.getBoundingClientRect(), p = clamp((vh * .75 - r.top) / (r.height + vh * .25));
+      tl.style.setProperty("--p", p);
+      tl.querySelectorAll(".tl-item").forEach(function (li) { li.classList.toggle("on", li.getBoundingClientRect().top < vh * .78); });
+    }
+    if (defs) { var d = defs.getBoundingClientRect(); defs.style.setProperty("--p", clamp((vh * .8 - d.top) / (vh * .45))); }
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+  /* cursor spotlight on cards and buttons */
+  document.addEventListener("pointermove", function (e) {
+    var t = e.target.closest && e.target.closest(".card,.btn");
+    if (!t) return;
+    var r = t.getBoundingClientRect();
+    t.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    t.style.setProperty("--my", (e.clientY - r.top) + "px");
+  }, { passive: true });
+  /* progress bar fallback if the shared script did not add one */
+  window.addEventListener("load", function () {
+    if (document.querySelector(".progress")) return;
+    var p = document.createElement("div"); p.className = "progress"; p.setAttribute("aria-hidden", "true");
+    p.innerHTML = "<span></span>"; document.body.appendChild(p);
+    var s = p.firstChild;
+    function bar() { var h = document.documentElement.scrollHeight - innerHeight; s.style.transform = "scaleX(" + (h > 0 ? Math.min(scrollY / h, 1) : 0) + ")"; }
+    addEventListener("scroll", bar, { passive: true }); bar();
+  });
+})();
   </script>
 </body>
 </html>

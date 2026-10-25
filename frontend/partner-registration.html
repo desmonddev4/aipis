@@ -69,7 +69,7 @@
             <div class="field"><div class="profile-link-heading"><label for="website">Website or LinkedIn profile (optional)</label><span class="profile-link-icons" aria-hidden="true"><img src="assets/www.jpg" alt=""><img src="assets/LinkedIn%20Icon.jpg" alt=""></span></div><input id="website" name="website" type="url" maxlength="250" placeholder="https://example.com or https://linkedin.com/company/name"></div>
             <div class="field"><label for="name">Lead contact name</label><input id="name" name="name" required maxlength="120" autocomplete="name"></div>
             <div class="field"><label for="email">Lead contact email</label><input id="email" name="email" type="email" required maxlength="254" autocomplete="email"></div>
-            <div class="field"><label for="phone">Lead contact phone</label><input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel"></div>
+            <div class="field"><label for="phone">Lead contact phone</label><div id="lead-phone-input"></div></div>
           </div>
           <div class="actions"><span></span><button class="btn" type="button" data-next>Continue</button></div>
         </fieldset>
@@ -100,6 +100,7 @@
   </main>
   <script src="js/components/footer.js"></script>
   <script src="js/config.js"></script>
-  <script src="js/components/partner-registration.js?v=20261023-drawer" defer></script>
+  <script src="js/components/phone-input.js?v=20261025" defer></script>
+  <script src="js/components/partner-registration.js?v=20261025-phone" defer></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
     text("name", "Full name", { required: true, autocomplete: "name" }),
     text("email", "Email", { required: true, type: "email", autocomplete: "email" }),
     text("organisation", "Organisation", { autocomplete: "organization" }),
-    text("phone", "Phone (optional)", { type: "tel", autocomplete: "tel" }),
+    { name: "phone", label: "Phone (optional)", type: "phone" },
   ];
 
   const REG_CATEGORIES = [
@@ -195,7 +195,8 @@ body.modal-open { overflow: hidden; }
     const id = `m-${f.name}`;
     const req = f.required ? " required" : "";
     let control;
-    if (f.type === "textarea") control = `<textarea id="${id}" name="${f.name}" rows="4"${req}></textarea>`;
+    if (f.type === "phone") control = window.AIPISPhoneInput.markup({ id, name: f.name });
+    else if (f.type === "textarea") control = `<textarea id="${id}" name="${f.name}" rows="4"${req}></textarea>`;
     else if (f.type === "select")
       control = `<select id="${id}" name="${f.name}">${f.options.map((o) => `<option value="${esc(o)}">${esc(o)}</option>`).join("")}</select>`;
     else {
@@ -215,6 +216,7 @@ body.modal-open { overflow: hidden; }
     $("#modalTitle").textContent = def.title;
     $("#modalIntro").textContent = def.intro;
     fieldsBox.innerHTML = def.fields.map(fieldHTML).join("");
+    window.AIPISPhoneInput.decorate(fieldsBox);
     if (trigger.dataset.package && form.elements.package) form.elements.package.value = trigger.dataset.package;
     setStatus(form, "", "");
     submitBtn.hidden = false;

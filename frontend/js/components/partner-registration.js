@@ -18,6 +18,7 @@
   const params = new URLSearchParams(location.search);
   const requested = params.get("package") || (params.get("role") === "exhibitor" ? "Exhibitor" : "");
   const form = document.getElementById("partner-application");
+  window.AIPISPhoneInput.mount(document.getElementById("lead-phone-input"), { id: "phone", name: "phone" });
   const panels = [...form.querySelectorAll("[data-panel]")];
   const steps = [...document.querySelectorAll(".steps li")];
   const packageSelect = document.getElementById("package");

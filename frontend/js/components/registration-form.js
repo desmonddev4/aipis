@@ -14,7 +14,9 @@
     count += 1;
     const card = document.createElement("fieldset");
     card.className = "delegate-card";
-    card.innerHTML = '<legend>Attendee ' + count + '</legend><button type="button" class="btn btn-outline remove-delegate" aria-label="Remove attendee ' + count + '">Remove</button><div class="registration-grid"><label>Full name<input data-field="name" autocomplete="name" required maxlength="120"></label><label>Email<input data-field="email" type="email" autocomplete="email" required maxlength="254"></label><label>Phone number<input data-field="phone" type="tel" autocomplete="tel" placeholder="Include country code" required maxlength="40"></label><label>Country<input data-field="country" autocomplete="country-name" required maxlength="100"></label><label>Registration category<select data-field="category" required><option value="">Choose category</option>' + categories.map((c) => '<option value="' + c + '">' + c + '</option>').join("") + '</select></label></div>';
+    const phone = window.AIPISPhoneInput.markup({ id: "phone-" + count, name: "", field: "phone", required: true });
+    card.innerHTML = '<legend>Attendee ' + count + '</legend><button type="button" class="btn btn-outline remove-delegate" aria-label="Remove attendee ' + count + '">Remove</button><div class="registration-grid"><label>Full name<input data-field="name" autocomplete="name" required maxlength="120"></label><label>Email<input data-field="email" type="email" autocomplete="email" required maxlength="254"></label><div class="registration-phone-field"><label for="phone-' + count + '">Phone number</label>' + phone + '</div><label>Country<input data-field="country" autocomplete="country-name" required maxlength="100"></label><label>Registration category<select data-field="category" required><option value="">Choose category</option>' + categories.map((c) => '<option value="' + c + '">' + c + '</option>').join("") + '</select></label></div>';
+    window.AIPISPhoneInput.decorate(card);
     card.querySelector(".remove-delegate").addEventListener("click", () => { card.remove(); renumber(); });
     list.appendChild(card);
     renumber();

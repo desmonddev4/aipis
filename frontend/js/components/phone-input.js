@@ -268,12 +268,12 @@ Zimbabwe|263|ZW`.trim().split("\n").map((line) => {
 
   const style = document.createElement("style");
   style.textContent = `
-.aipis-phone-input { display:grid; grid-template-columns:minmax(9rem, .9fr) minmax(0, 1.4fr); gap:.55rem; width:100%; }
+.aipis-phone-input { display:grid; grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); gap:.55rem; width:100%; min-width:0; }
 .registration-phone-field { display:grid; align-content:start; gap:.35rem; min-width:0; }
-.aipis-phone-input select, .aipis-phone-input input { min-width:0; width:100%; }
+.aipis-phone-input select, .aipis-phone-input input { min-width:0; max-width:100%; width:100%; }
 .aipis-phone-code { overflow:hidden; text-overflow:ellipsis; }
 .aipis-phone-hint { display:block; margin-top:.25rem; font-size:.82rem; opacity:.8; }
-@media(max-width:420px){.aipis-phone-input{grid-template-columns:minmax(7.2rem,.8fr) minmax(0,1.2fr);gap:.4rem}}
+@media(max-width:420px){.aipis-phone-input{grid-template-columns:minmax(0,1fr);gap:.45rem}}
 `;
   document.head.appendChild(style);
 

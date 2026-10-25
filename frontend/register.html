@@ -214,7 +214,7 @@ body.registration-drawer-open { overflow:hidden; }
 .delegate-card::before { content:""; position:absolute; left:0; top:14px; bottom:14px; width:5px; border-radius:0 4px 4px 0; background:var(--gold-grad); }
 .delegate-card:hover, .delegate-card:focus-within { box-shadow:0 10px 26px rgba(5,32,19,.12); transform:translateY(-2px); }
 .delegate-card .registration-grid { grid-column:1 / -1; }
-.delegate-card .remove-delegate { align-self:start; padding:.4rem .9rem; font-size:.82rem; background:transparent; color:#a11; border:1px solid rgba(170,17,17,.3); box-shadow:none; }
+.delegate-card .remove-delegate { align-self:start; justify-self:end; width:max-content; max-width:100%; padding:.4rem .9rem; font-size:.82rem; background:transparent; color:#a11; border:1px solid rgba(170,17,17,.3); box-shadow:none; }
 .delegate-card .remove-delegate:hover { background:#a11; color:#fff; border-color:#a11; }
 
 /* drawer buttons: gold for the main action, dashed green for adding attendees */
@@ -413,7 +413,7 @@ body.registration-drawer-open { overflow:hidden; }
 
   <script src="js/config.js"></script>
   <script src="js/lib/form-api.js"></script>
-  <script src="js/components/phone-input.js?v=20261025"></script>
+  <script src="js/components/phone-input.js?v=20261025-layout"></script>
   <script src="js/components/form-modal.js"></script>
   <script src="js/components/registration-form.js" defer></script>
   <script>

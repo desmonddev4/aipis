@@ -15,6 +15,14 @@
     text("organisation", "Organisation", { autocomplete: "organization" }),
     { name: "phone", label: "Phone (optional)", type: "phone" },
   ];
+  const speakerBase = [
+    ...base,
+    text("honorific", "Title (optional)"),
+    text("position", "Position or job title", { required: true }),
+    text("country", "Country", { required: true, autocomplete: "country-name" }),
+    text("whatsapp", "WhatsApp number (optional)", { autocomplete: "tel" }),
+    area("bio", "Short professional biography", { required: true, maxlength: 2500 }),
+  ];
 
   const REG_CATEGORIES = [
     "International delegate",
@@ -34,31 +42,31 @@
       title: "Nominate a Distinguished Keynote Speaker",
       subject: "AIPIS 2027 Distinguished Keynote Speaker nomination",
       intro: "Distinguished Keynote Speakers are invited by the Summit Steering Committee; nominations are welcome.",
-      fields: [...base, text("nominee", "Nominee name and title", { required: true }), area("message", "Why this nominee?", { required: true })],
+      fields: [...speakerBase, text("nominee", "Nominee name and title", { required: true }), area("message", "Why this nominee?", { required: true })],
     },
     guest: {
       title: "Propose a Special Guest Speaker",
       subject: "AIPIS 2027 Special Guest Speaker proposal",
       intro: "Tell us about the speaker and the experience they would share.",
-      fields: [...base, text("nominee", "Speaker name and title", { required: true }), area("message", "Proposal", { required: true })],
+      fields: [...speakerBase, text("nominee", "Speaker name and title", { required: true }), area("message", "Proposal", { required: true })],
     },
     panelist: {
       title: "Nominate or apply as a Panelist",
       subject: "AIPIS 2027 panelist nomination",
       intro: "Panelists contribute practical experience to moderated discussions and take questions from delegates.",
-      fields: [...base, text("topic", "Session topic", { required: true }), area("message", "Your relevant experience", { required: true })],
+      fields: [...speakerBase, text("topic", "Session topic", { required: true }), area("message", "Your relevant experience", { required: true })],
     },
     technical: {
       title: "Apply as a Technical Keynote Presenter",
       subject: "AIPIS 2027 Technical Keynote Presenter application",
       intro: "Present evidence and lessons in the peer-reviewed research and practice stream.",
-      fields: [...base, text("topic", "Proposed topic", { required: true }), area("message", "Summary of your presentation and background", { required: true })],
+      fields: [...speakerBase, text("topic", "Proposed topic", { required: true }), area("message", "Summary of your presentation", { required: true })],
     },
     poster: {
       title: "Submit a poster abstract",
       subject: "AIPIS 2027 poster abstract",
       intro: "Share research, case studies or project results in the poster exhibition.",
-      fields: [...base, text("title", "Poster title", { required: true }), area("message", "Abstract", { required: true })],
+      fields: [...speakerBase, text("title", "Poster title", { required: true }), area("message", "Abstract", { required: true })],
     },
     exhibitor: {
       title: "Book an exhibition booth",

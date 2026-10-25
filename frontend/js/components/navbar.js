@@ -6,14 +6,17 @@
   const LINKS = [
     { key: "about", href: "about.html", label: "About" },
     {
-      key: "programme",
-      label: "Programme",
+      key: "summit",
+      label: "The Summit",
       children: [
-        { href: "programme.html", label: "Summit programme in Accra" },
-        { href: "programme.html#panels", label: "Thematic panels" },
-        { href: "innovations.html", label: "The AIPIS Distinction: Seven Innovations" },
+        { href: "about.html#theme", label: "Theme" },
+        { href: "programme.html#panels", label: "Thematic Panels" },
+        { href: "innovations.html#innovations", label: "AIPIS Distinction" },
         { href: "innovations.html#roundtables", label: "The AIPIS Roundtables" },
-        { href: "who-attends.html", label: "Audience" },
+        { href: "who-attends.html#participants", label: "Target Audience" },
+        { href: "programme.html#programme", label: "Programme" },
+        { href: "register.html#calendar", label: "Calendar" },
+        { href: "register.html#fees", label: "Fees" },
         { href: "register.html#online-registration", label: "Register to attend" },
       ],
     },
@@ -21,17 +24,25 @@
       key: "speakers",
       label: "Call for Speakers",
       children: [
-        { href: "speakers.html#keynote", label: "Distinguished Keynote Speakers" },
-        { href: "speakers.html#guest", label: "Special Guest Speakers" },
-        { href: "speakers.html#panelists", label: "Panelists" },
-        { href: "speakers.html#technical", label: "Technical Keynote Presenters" },
-        { href: "speakers.html#posters", label: "Poster Presenters" },
+        { href: "speakers.html#speaker-register", label: "Register as a Speaker" },
+        {
+          href: "speakers.html#speakers2027",
+          label: "2027 Speakers",
+          children: [
+            { href: "speakers.html#keynote", label: "Distinguished Keynote Speakers" },
+            { href: "speakers.html#guest", label: "Special Guest Speakers" },
+            { href: "speakers.html#technical", label: "Technical Keynote Speakers" },
+            { href: "speakers.html#panelists", label: "Panelists" },
+            { href: "speakers.html#posters", label: "Poster Presenters" },
+          ],
+        },
       ],
     },
     {
-      key: "committees",
-      label: "Organising Committee",
+      key: "governance",
+      label: "Governance",
       children: [
+        { href: "partners.html#partners", label: "Founder and partners" },
         { href: "about.html#ssc", label: "Summit Steering Committee" },
         { href: "about.html#ioc", label: "International Organising Committee" },
         { href: "about.html#loc", label: "Local Organising Committee" },
@@ -43,7 +54,7 @@
       key: "partners",
       label: "Partners",
       children: [
-        { href: "partners.html#partners", label: "Convenors and founding partners" },
+        { href: "partners.html#partners", label: "Founder and founding partners" },
         { href: "partner-with-us.html#partner", label: "Call for partners and sponsors" },
         { href: "partner-with-us.html#packages", label: "Partnership packages" },
         { href: "partner-with-us.html#exhibitors", label: "Exhibitors" },
@@ -113,6 +124,9 @@
 .dropdown a::after { display: none; }
 .dropdown a:hover { background: rgba(22,105,47,.1); padding-left: 1.2rem; }
 .dropdown a { transition: background .2s, padding .25s var(--nv-ease), color .2s; }
+.dropdown-group > a { font-weight: 700; color: var(--nv-g9); }
+.dropdown-sub { list-style: none; margin: 0.1rem 0 0.35rem 0.7rem; padding: 0 0 0 0.45rem; border-left: 2px solid rgba(244,162,76,.55); }
+.dropdown-sub a { padding: 0.45rem 0.7rem; font-size: 0.9rem; }
 .nav-toggle { display: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.8); background: rgba(22,105,47,.12); flex-direction: column; justify-content: center; align-items: center; gap: 5px; cursor: pointer; transition: background .2s; }
 .nav-toggle:hover { background: rgba(22,105,47,.2); }
 .nav-toggle span { width: 22px; height: 2.5px; background: var(--nv-g9); border-radius: 2px; transition: transform .25s, opacity .25s; }
@@ -154,15 +168,20 @@
 
   // Works with both /about.html and the extension-less /about used on Vercel
   const current = (location.pathname.split("/").pop() || "index").replace(/\.html$/, "") || "index";
+  const routeMatches = (href) => href.split("#")[0].replace(/\.html$/, "") === current;
+  const containsCurrentRoute = (item) => routeMatches(item.href) || Boolean(item.children?.some(containsCurrentRoute));
   const isActive = (key) => {
     const item = LINKS.find((link) => link.key === key);
-    return key === current || Boolean(item?.children?.some((child) => child.href.split("#")[0].replace(/\.html$/, "") === current));
+    return key === current || Boolean(item?.children?.some(containsCurrentRoute));
   };
   const cur = (key) => (isActive(key) ? ' class="active" aria-current="page"' : "");
+  const renderChild = (child) => child.children
+    ? `<li class="dropdown-group"><a href="${child.href}">${child.label}</a><ul class="dropdown-sub">${child.children.map(renderChild).join("")}</ul></li>`
+    : `<li><a href="${child.href}">${child.label}</a></li>`;
 
   const items = LINKS.map((l) => {
     if (!l.children) return `<li><a href="${l.href}"${cur(l.key)}>${l.label}</a></li>`;
-    const sub = l.children.map((c) => `<li><a href="${c.href}">${c.label}</a></li>`).join("");
+    const sub = l.children.map(renderChild).join("");
     return `<li class="has-dropdown${isActive(l.key) ? " active" : ""}">
       <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true">${l.label} ${CHEVRON}</button>
       <ul class="dropdown">${sub}</ul>

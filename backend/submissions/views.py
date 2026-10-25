@@ -25,12 +25,13 @@ logger = logging.getLogger(__name__)
 
 ALLOWED_DETAILS = {
     "partnership": ["package"],
-    "technical": ["topic"],
-    "poster": ["title"],
+    "technical": ["topic", "honorific", "title", "position", "country", "whatsapp", "bio"],
+    "poster": ["honorific", "title", "position", "country", "whatsapp", "bio"],
     "exhibitor": ["booths"],
     "forensic": ["project", "country"],
-    "keynote": ["nominee"],
-    "guest": ["nominee"],
+    "keynote": ["nominee", "honorific", "position", "country", "whatsapp", "bio"],
+    "guest": ["nominee", "honorific", "position", "country", "whatsapp", "bio"],
+    "panelist": ["topic", "honorific", "position", "country", "whatsapp", "bio"],
     "roundtable": ["roundtable", "role", "country", "experience"],
 }
 MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "technical", "partnership", "exhibitor", "roundtable"}
@@ -436,7 +437,7 @@ def submit(request):
     if errors:
         return JsonResponse({"ok": False, "errors": errors}, status=400)
 
-    details = {key: clean_text(data.get(key), 2500 if key == "experience" else 200) for key in ALLOWED_DETAILS.get(kind, [])}
+    details = {key: clean_text(data.get(key), 2500 if key in {"experience", "bio"} else 200) for key in ALLOWED_DETAILS.get(kind, [])}
     if kind == Submission.Kind.ROUNDTABLE:
         details.update({"role": clean_text(data.get("role"), 120), "consent": "Agreed"})
     if kind in {"partnership", "exhibitor"}:

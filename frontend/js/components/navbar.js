@@ -74,7 +74,7 @@
 .skip-link:focus-visible { top: 1rem; color: #fff; }
 .nav-wrap { position: fixed; top: 14px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; pointer-events: none; font-family: var(--font-body, "Source Sans 3", system-ui, sans-serif); }
 .nav {
-  pointer-events: auto; width: min(1320px, 100% - 1.5rem); min-height: var(--nav-h, 72px);
+  pointer-events: auto; width: min(1320px, 100% - 1.5rem); height: var(--nav-h, 72px); min-height: 0;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding: 0.5rem 0.8rem 0.5rem 1rem; border-radius: 999px;
   background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,255,255,.62));

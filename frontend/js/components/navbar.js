@@ -88,7 +88,7 @@
 .brand:hover img { transform: rotate(-8deg) scale(1.08); }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
 .brand-text strong { font-family: var(--font-head, "Archivo", system-ui, sans-serif); font-size: 1.3rem; letter-spacing: 0.04em; }
-.brand-text small { font-size: 0.68rem; max-width: 190px; color: var(--nv-soft); font-weight: 600; }
+.brand-text small { display: block; font-size: 0.68rem; line-height: 1.1; max-width: 190px; color: var(--nv-soft); font-weight: 600; }
 .nav-menu { display: flex; align-items: center; gap: 0.1rem; list-style: none; margin: 0; padding: 0; }
 .nav-menu a, .dropdown-toggle {
   position: relative; display: block; padding: 0.5rem 0.75rem; border-radius: 999px; text-decoration: none; font-family: inherit;
@@ -134,7 +134,6 @@
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 @media (max-width: 1180px) {
-  .brand-text small { display: none; }
   .nav-menu a, .dropdown-toggle { padding: 0.5rem 0.5rem; font-size: 0.9rem; }
 }
 @media (max-width: 960px) {

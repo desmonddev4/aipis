@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>International Organising Committee | AIPIS 2027</title>
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="js/components/scroll-effects.js"></script>
+  <style>
+    :root { --green-950: #052013; --green-900: #0a3a22; --green-800: #0f4d2c; --green-700: #16692f; --green-50: #eaf4ec; --orange-500: #f4a24c; --orange-300: #ffc98a; --ink: #0f2418; --ink-soft: #3a4f43; --nav-h: 72px; --shadow-lg: 0 18px 40px rgba(5,32,19,.22); }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; line-height: 1.65; color: #0f2418; background: #f6f9f6; }
+    h1, h2, h3 { font-family: "Archivo", system-ui, sans-serif; line-height: 1.2; color: #0a3a22; }
+    h1 { font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); } h2 { font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2.1rem); }
+    p { margin-top: 0; } a { color: #16692f; } .container { width: min(1320px, 100% - 2.5rem); margin-inline: auto; }
+    .crumbs { display: flex; gap: .5rem; color: #bcd6c4; font-weight: 600; } .crumbs a { color: #ffc98a; }
+    .hero-line { display: block; width: 72px; height: 4px; border-radius: 4px; background: #f4a24c; margin-top: 1.2rem; }
+    .section-head { margin-bottom: 1.4rem; } .section-head h2 { margin-bottom: .45rem; }
+    .eyebrow { display: inline-block; color: #9a5408; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; }
+    .grid { display: grid; gap: 1.2rem; } .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .card { border-radius: 20px; padding: 1.5rem; } .glass { color: #e3efe7; background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.05)); border: 1px solid rgba(255,255,255,.22); box-shadow: 0 12px 36px rgba(0,0,0,.28); }
+    .glass h3 { color: #fff; } .glass p { color: #d4e6d9; } .glass-light { background: #fff; box-shadow: 0 12px 30px rgba(5,32,19,.12); }
+    .ioc-hero { padding: calc(var(--nav-h) + 5rem) 0 3.5rem; background: linear-gradient(145deg, #052013 0%, #0f4d2c 68%, #16692f 100%); color: #e3efe7; }
+    .ioc-hero h1 { color: #fff; max-width: 17ch; }
+    .ioc-hero p { max-width: 760px; color: #c4dccb; font-size: 1.1rem; }
+    .ioc-intro { padding: 4rem 0 2rem; }
+    .ioc-intro .lead { max-width: 820px; }
+    .member-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .member { overflow: hidden; padding: 0; background: #ffffff; color: #0f2418; border: 1px solid rgba(255,255,255,.8); }
+    .member img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: var(--green-50); }
+    .member-body { padding: 1.4rem; background: #ffffff; }
+    .member-body h3 { margin-bottom: .25rem; color: #0a3a22; }
+    .member-body p { color: #263f31; }
+    .member-role { color: #16692f !important; font-weight: 800; margin-bottom: .7rem; }
+    .mock-note { color: var(--ink-soft); font-size: .95rem; margin-top: 1.2rem; }
+    @media (max-width: 900px) { .grid-3, .member-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .member-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <script src="js/components/navbar.js"></script>
+  <main>
+    <section class="ioc-hero"><div class="container"><p class="crumbs"><a href="index.html">Home</a><span>/</span><span>Governance</span></p><h1>International Organising Committee</h1><p>Meet the international team shaping the AIPIS programme, building continental partnerships and connecting the summit to leaders across Africa and the diaspora.</p><span class="hero-line" aria-hidden="true"></span></div></section>
+    <section class="ioc-intro"><div class="container"><div class="section-head reveal"><span class="eyebrow">Governance</span><h2>Continental reach, practical delivery</h2><p class="lead">The International Organising Committee gives AIPIS its continental reach. It shapes the edition theme and programme, identifies speakers and partners, promotes the research and project streams, and works with the Local Organising Committee to deliver the summit.</p></div><div class="grid grid-3" style="margin-top:2rem"><article class="glass-light card reveal"><h3>Programme</h3><p>Sets session topics and connects the programme to the summit’s strategic theme.</p></article><article class="glass-light card reveal"><h3>Partnerships</h3><p>Builds links with universities, governments, financiers and industry across Africa.</p></article><article class="glass-light card reveal"><h3>Delivery</h3><p>Oversees the Prosperity Index, forensic report and commitments tracker for each edition.</p></article></div></div></section>
+    <section class="section stage"><div class="container"><div class="section-head reveal"><span class="eyebrow">Provisional roster</span><h2>Committee members</h2><p>These profiles are mock-up content for layout and review. Official names, biographies and photographs will replace them after confirmation.</p></div><div class="member-grid" style="margin-top:2rem">
+      <article class="glass card member reveal"><img src="assets/www.jpg" alt="Mock profile image for Dr. Amara Mensah"><div class="member-body"><h3>Dr. Amara Mensah</h3><p class="member-role">Chair · Ghana</p><p>Infrastructure policy and project delivery specialist coordinating the committee’s programme and partner engagement.</p></div></article>
+      <article class="glass card member reveal"><img src="assets/built%20env.jpg" alt="Mock profile image for Prof. Daniel Okoro"><div class="member-body"><h3>Prof. Daniel Okoro</h3><p class="member-role">Vice-Chair · Nigeria</p><p>Academic and built-environment leader supporting research partnerships and the evidence base for the summit.</p></div></article>
+      <article class="glass card member reveal"><img src="assets/hero-poster%20(1).jpg" alt="Mock profile image for Dr. Lindiwe Ndlovu"><div class="member-body"><h3>Dr. Lindiwe Ndlovu</h3><p class="member-role">Vice-Chair · South Africa</p><p>Infrastructure finance and sustainability practitioner connecting delivery lessons to investment and prosperity outcomes.</p></div></article>
+      <article class="glass card member reveal"><img src="assets/www.jpg" alt="Mock profile image for Eng. Yusuf Abdullahi"><div class="member-body"><h3>Eng. Yusuf Abdullahi</h3><p class="member-role">Regional Member · East Africa</p><p>Engineer and regional infrastructure advisor contributing practical insight on resilient project delivery.</p></div></article>
+      <article class="glass card member reveal"><img src="assets/built%20env.jpg" alt="Mock profile image for Ms. Naledi Mokoena"><div class="member-body"><h3>Ms. Naledi Mokoena</h3><p class="member-role">Industry Member · Southern Africa</p><p>Industry leader focused on partnerships, innovation and stronger links between projects and local economies.</p></div></article>
+      <article class="glass card member reveal"><img src="assets/hero-poster%20(1).jpg" alt="Mock profile image for Prof. Kwame Boateng"><div class="member-body"><h3>Prof. Kwame Boateng</h3><p class="member-role">Scientific Committee Chair · Ghana</p><p>Research and practice convenor supporting peer review, technical sessions and the summit proceedings.</p></div></article>
+    </div><p class="mock-note">Mock-up notice: all names, roles and images on this page are placeholders and should be replaced with approved committee information before publication.</p></div></section>
+  </main>
+  <script src="js/components/footer.js"></script>
+</body>
+</html>

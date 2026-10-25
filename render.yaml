@@ -7,6 +7,10 @@ services:
     buildCommand: ./build.sh
     startCommand: gunicorn config.wsgi:application
     healthCheckPath: /api/health/
+    disk:
+      name: aipis-media
+      mountPath: /opt/render/project/src/media
+      sizeGB: 1
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.8

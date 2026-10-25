@@ -9,6 +9,7 @@ class Submission(models.Model):
         PARTNERSHIP = "partnership", "Partnership enquiry"
         KEYNOTE = "keynote", "Distinguished Keynote nomination"
         GUEST = "guest", "Special Guest Speaker proposal"
+        PANELIST = "panelist", "Panelist application"
         TECHNICAL = "technical", "Technical Keynote application"
         POSTER = "poster", "Poster abstract"
         EXHIBITOR = "exhibitor", "Exhibition booking"
@@ -27,6 +28,7 @@ class Submission(models.Model):
     organisation = models.CharField(max_length=200, blank=True)
     phone = models.CharField(max_length=40, blank=True)
     message = models.TextField(blank=True)
+    photo = models.FileField(upload_to="speaker-photos/%Y/%m/", blank=True)
     details = models.JSONField(default=dict, blank=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW, db_index=True)

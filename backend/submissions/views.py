@@ -25,16 +25,23 @@ logger = logging.getLogger(__name__)
 
 ALLOWED_DETAILS = {
     "partnership": ["package"],
-    "technical": ["topic", "honorific", "title", "position", "country", "whatsapp", "bio"],
-    "poster": ["honorific", "title", "position", "country", "whatsapp", "bio"],
+    "technical": ["role", "topic", "honorific", "title", "position", "country", "whatsapp", "bio"],
+    "poster": ["role", "honorific", "title", "position", "country", "whatsapp", "bio"],
     "exhibitor": ["booths"],
     "forensic": ["project", "country"],
-    "keynote": ["nominee", "honorific", "position", "country", "whatsapp", "bio"],
-    "guest": ["nominee", "honorific", "position", "country", "whatsapp", "bio"],
-    "panelist": ["topic", "honorific", "position", "country", "whatsapp", "bio"],
+    "keynote": ["role", "honorific", "position", "country", "whatsapp", "bio"],
+    "guest": ["role", "honorific", "position", "country", "whatsapp", "bio"],
+    "panelist": ["role", "honorific", "position", "country", "whatsapp", "bio"],
     "roundtable": ["roundtable", "role", "country", "experience"],
 }
-MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "technical", "partnership", "exhibitor", "roundtable"}
+MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "panelist", "technical", "partnership", "exhibitor", "roundtable"}
+APPLICATION_CAPS = {
+    Submission.Kind.KEYNOTE: 6,
+    Submission.Kind.GUEST: 6,
+    Submission.Kind.TECHNICAL: 12,
+    Submission.Kind.POSTER: 20,
+    Submission.Kind.EXHIBITOR: 30,
+}
 ROUNDTABLES = {
     "Africa Infrastructure Bankability Roundtable",
     "Africa Infrastructure and Resource Diplomacy Roundtable",
@@ -371,12 +378,17 @@ def payment_webhook(request):
 @csrf_exempt
 @require_POST
 def submit(request):
-    try:
-        data = json.loads(request.body or b"{}")
-        if not isinstance(data, dict):
-            raise ValueError
-    except ValueError:
-        return JsonResponse({"ok": False, "errors": {"__all__": "Invalid request."}}, status=400)
+    if request.content_type.startswith("multipart/"):
+        data = request.POST
+        photo = request.FILES.get("photo")
+    else:
+        try:
+            data = json.loads(request.body or b"{}")
+            if not isinstance(data, dict):
+                raise ValueError
+        except ValueError:
+            return JsonResponse({"ok": False, "errors": {"__all__": "Invalid request."}}, status=400)
+        photo = None
 
     if data.get("website"):
         return JsonResponse({"ok": True})
@@ -393,7 +405,29 @@ def submit(request):
     if kind == Submission.Kind.REGISTRATION:
         return JsonResponse({"ok": False, "errors": {"__all__": "Please use the secure online registration form."}}, status=400)
 
-    errors = {}
+    capacity = APPLICATION_CAPS.get(kind)
+    if capacity is not None and Submission.objects.filter(kind=kind).count() >= capacity:
+        return JsonResponse(
+            {"ok": False, "errors": {"__all__": f"Applications for this role are now full. The maximum of {capacity} applications has been reached."}},
+            status=409,
+        )
+
+    speaker_kinds = {Submission.Kind.KEYNOTE, Submission.Kind.GUEST, Submission.Kind.TECHNICAL, Submission.Kind.POSTER, Submission.Kind.PANELIST}
+    if kind in speaker_kinds:
+        role = clean_text(data.get("role"), 100)
+        if not role:
+            errors = {"role": "Please choose an application role."}
+        else:
+            errors = {}
+        if not photo:
+            errors["photo"] = "Please upload a professional photograph."
+        elif photo.size > 5 * 1024 * 1024:
+            errors["photo"] = "Please choose an image smaller than 5 MB."
+        elif photo.content_type not in {"image/jpeg", "image/png", "image/webp"}:
+            errors["photo"] = "Upload a JPG, PNG or WEBP image."
+    else:
+        errors = {}
+
     name = clean_text(data.get("name"), 120)
     email = clean_text(data.get("email"), 254)
     message = clean_text(data.get("message"), 4000)
@@ -465,6 +499,7 @@ def submit(request):
         phone=clean_text(data.get("phone"), 40),
         message=message,
         details=details,
+        photo=photo if kind in speaker_kinds else None,
         ip_address=ip,
     )
     try:

@@ -24,7 +24,7 @@
       key: "speakers",
       label: "Call for Speakers",
       children: [
-        { href: "speakers.html#speaker-register", label: "Register as a Speaker" },
+        { href: "speakers.html#guest", label: "Register as a special guest speaker", rolePicker: true },
         {
           href: "speakers.html#speakers2027",
           label: "2027 Speakers",
@@ -44,7 +44,7 @@
       children: [
         { href: "partners.html#partners", label: "Founder and partners" },
         { href: "about.html#ssc", label: "Summit Steering Committee" },
-        { href: "about.html#ioc", label: "International Organising Committee" },
+        { href: "international-organising-committee.html", label: "International Organising Committee" },
         { href: "about.html#loc", label: "Local Organising Committee" },
         { href: "about.html#iab", label: "International Advisory Board" },
         { href: "about.html#scientific", label: "Scientific Committee" },
@@ -177,7 +177,7 @@
   const cur = (key) => (isActive(key) ? ' class="active" aria-current="page"' : "");
   const renderChild = (child) => child.children
     ? `<li class="dropdown-group"><a href="${child.href}">${child.label}</a><ul class="dropdown-sub">${child.children.map(renderChild).join("")}</ul></li>`
-    : `<li><a href="${child.href}">${child.label}</a></li>`;
+    : `<li><a href="${child.href}"${child.rolePicker ? ' data-role-picker' : ''}>${child.label}</a></li>`;
 
   const items = LINKS.map((l) => {
     if (!l.children) return `<li><a href="${l.href}"${cur(l.key)}>${l.label}</a></li>`;

@@ -53,8 +53,8 @@
       return;
     }
 
-    const payload = { kind };
-    new FormData(form).forEach((v, k) => (payload[k] = v));
+    const payload = new FormData(form);
+    payload.append("kind", kind);
     const btn = form.querySelector('button[type="submit"]');
     const label = btn.textContent;
     btn.disabled = true;
@@ -65,8 +65,7 @@
       const timer = setTimeout(() => ctrl.abort(), 30000); // Render free tier may need to wake up
       const res = await fetch(`${API}/api/submit/`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: payload,
         signal: ctrl.signal,
       });
       clearTimeout(timer);

@@ -22,6 +22,9 @@
     text("country", "Country", { required: true, autocomplete: "country-name" }),
     text("whatsapp", "WhatsApp number (optional)", { autocomplete: "tel" }),
     area("bio", "Short professional biography", { required: true, maxlength: 2500 }),
+    { name: "role", label: "Application role", type: "select", required: true, options: ["Distinguished Keynote Speaker", "Special Guest Speaker", "Panelist", "Technical Keynote Presenter", "Poster Presenter"] },
+    area("message", "Summary of your presentation or contribution", { required: true, maxlength: 4000 }),
+    { name: "photo", label: "Professional photograph (JPG, PNG or WEBP; max 5 MB)", type: "file", required: true, accept: "image/jpeg,image/png,image/webp" },
   ];
 
   const REG_CATEGORIES = [
@@ -39,34 +42,39 @@
 
   const FORMS = {
     keynote: {
-      title: "Nominate a Distinguished Keynote Speaker",
-      subject: "AIPIS 2027 Distinguished Keynote Speaker nomination",
-      intro: "Distinguished Keynote Speakers are invited by the Summit Steering Committee; nominations are welcome.",
-      fields: [...speakerBase, text("nominee", "Nominee name and title", { required: true }), area("message", "Why this nominee?", { required: true })],
+      title: "Register as a Distinguished Keynote Speaker",
+      subject: "AIPIS 2027 Distinguished Keynote Speaker application",
+      intro: "Apply directly to be considered as a Distinguished Keynote Speaker.",
+      drawer: true,
+      fields: speakerBase,
     },
     guest: {
-      title: "Propose a Special Guest Speaker",
-      subject: "AIPIS 2027 Special Guest Speaker proposal",
-      intro: "Tell us about the speaker and the experience they would share.",
-      fields: [...speakerBase, text("nominee", "Speaker name and title", { required: true }), area("message", "Proposal", { required: true })],
+      title: "Register as a Special Guest Speaker",
+      subject: "AIPIS 2027 Special Guest Speaker application",
+      intro: "Apply directly to be considered as a Special Guest Speaker.",
+      drawer: true,
+      fields: speakerBase,
     },
     panelist: {
-      title: "Nominate or apply as a Panelist",
-      subject: "AIPIS 2027 panelist nomination",
+      title: "Register as a Panelist",
+      subject: "AIPIS 2027 panelist application",
       intro: "Panelists contribute practical experience to moderated discussions and take questions from delegates.",
-      fields: [...speakerBase, text("topic", "Session topic", { required: true }), area("message", "Your relevant experience", { required: true })],
+      drawer: true,
+      fields: speakerBase,
     },
     technical: {
       title: "Apply as a Technical Keynote Presenter",
       subject: "AIPIS 2027 Technical Keynote Presenter application",
       intro: "Present evidence and lessons in the peer-reviewed research and practice stream.",
-      fields: [...speakerBase, text("topic", "Proposed topic", { required: true }), area("message", "Summary of your presentation", { required: true })],
+      drawer: true,
+      fields: speakerBase,
     },
     poster: {
-      title: "Submit a poster abstract",
+      title: "Register as a Poster Presenter",
       subject: "AIPIS 2027 poster abstract",
-      intro: "Share research, case studies or project results in the poster exhibition.",
-      fields: [...speakerBase, text("title", "Poster title", { required: true }), area("message", "Abstract", { required: true })],
+      intro: "Apply directly to present research, case studies or project results in the poster exhibition.",
+      drawer: true,
+      fields: speakerBase,
     },
     exhibitor: {
       title: "Book an exhibition booth",
@@ -154,6 +162,14 @@
   width: 100%; font: inherit; color: var(--md-ink); background: rgba(255,255,255,.85); border: 1.5px solid rgba(22,105,47,.28); border-radius: 14px; padding: .75rem 1rem;
   box-shadow: inset 0 1px 2px rgba(5,32,19,.06); transition: border-color .2s, box-shadow .2s, background .2s;
 }
+.modal .file-picker { position: relative; display: grid; gap: .3rem; }
+.modal .file-input { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.modal .file-picker-label { display: flex; align-items: center; gap: .85rem; padding: 1rem; border: 1.5px dashed rgba(22,105,47,.45); border-radius: 16px; background: linear-gradient(135deg, rgba(234,244,236,.8), rgba(255,255,255,.9)); color: var(--md-g9); cursor: pointer; transition: border-color .2s, background .2s, transform .2s; }
+.modal .file-picker-label:hover, .modal .file-input:focus-visible + .file-picker-label { border-color: var(--md-o5); background: rgba(247,179,107,.18); transform: translateY(-2px); }
+.modal .file-picker-icon { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 12px; background: var(--md-g7); color: #fff; }
+.modal .file-picker-copy { display: grid; gap: .1rem; min-width: 0; }
+.modal .file-picker-copy strong { font-family: var(--font-head, "Archivo", system-ui, sans-serif); }
+.modal .file-picker-copy span { color: var(--md-soft); font-size: .9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .modal input:hover, .modal select:hover, .modal textarea:hover { border-color: rgba(22,105,47,.5); }
 .modal input:focus, .modal select:focus, .modal textarea:focus { outline: none; background: #fff; border-color: var(--md-o5); box-shadow: 0 0 0 4px rgba(244,162,76,.3); }
 .modal .field.invalid input, .modal .field.invalid select, .modal .field.invalid textarea { border-color: #b3261e; }
@@ -191,6 +207,17 @@ body.modal-open { overflow: hidden; }
 .modal.is-drawer .modal-dialog { width: min(560px, 100%); height: 100%; max-height: 100svh; border-radius: 24px 0 0 24px; animation: modal-drawer-in .3s var(--md-ease); }
 @keyframes modal-drawer-in { from { opacity: .7; transform: translateX(36px); } }
 @media (max-width: 600px) { .modal.is-drawer .modal-dialog { width: 100%; border-radius: 20px 0 0 20px; } }
+.role-picker { position: fixed; inset: 0; z-index: 410; display: grid; place-items: center; padding: 1rem; }
+.role-picker[hidden] { display: none; }
+.role-picker-backdrop { position: absolute; inset: 0; background: rgba(6,18,12,.66); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.role-picker-dialog { position: relative; width: min(520px, 100%); padding: clamp(1.4rem, 4vw, 2.2rem); border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,255,255,.9)); box-shadow: 0 30px 70px rgba(0,0,0,.45); color: var(--md-ink); animation: modal-pop .35s var(--md-ease); }
+.role-picker-dialog h3 { margin: .2rem 0 .5rem; color: var(--md-g9); }
+.role-picker-dialog p { color: var(--md-soft); }
+.role-picker-options { display: grid; gap: .65rem; margin-top: 1.2rem; }
+.role-picker-options button { width: 100%; padding: .85rem 1rem; border: 1px solid rgba(22,105,47,.25); border-radius: 14px; background: rgba(22,105,47,.08); color: var(--md-g9); font: inherit; font-weight: 700; text-align: left; cursor: pointer; transition: background .2s, transform .2s; }
+.role-picker-options button:hover { background: var(--md-o5); transform: translateY(-2px); }
+.role-picker-options small { display: block; margin-top: .15rem; font-weight: 600; opacity: .72; }
+.role-picker-close { position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; border: 1px solid rgba(22,105,47,.2); border-radius: 50%; background: rgba(22,105,47,.1); color: var(--md-g9); cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .modal-backdrop, .modal-dialog { animation: none; }
   .modal .modal-btn, .modal-close { transition: none; }
@@ -222,6 +249,21 @@ body.modal-open { overflow: hidden; }
   </div>
 </div>`
   );
+  document.body.insertAdjacentHTML("beforeend", `<div class="role-picker" id="rolePicker" hidden>
+    <div class="role-picker-backdrop" data-role-picker-close></div>
+    <div class="role-picker-dialog" role="dialog" aria-modal="true" aria-labelledby="rolePickerTitle">
+      <button class="role-picker-close" type="button" data-role-picker-close aria-label="Close">&times;</button>
+      <h3 id="rolePickerTitle">Choose an application role</h3>
+      <p>Select the role you would like to apply for. Your choice will be carried into the application form.</p>
+      <div class="role-picker-options">
+        <button type="button" data-form="guest" data-role="Special Guest Speaker">Special Guest Speaker <small>· Up to 6 applications</small></button>
+        <button type="button" data-form="keynote" data-role="Distinguished Keynote Speaker">Distinguished Keynote Speaker <small>· Up to 6 applications</small></button>
+        <button type="button" data-form="panelist" data-role="Panelist">Panelist</button>
+        <button type="button" data-form="technical" data-role="Technical Keynote Presenter">Technical Keynote Presenter <small>· Up to 12 applications</small></button>
+        <button type="button" data-form="poster" data-role="Poster Presenter">Poster Presenter <small>· Up to 20 applications</small></button>
+      </div>
+    </div>
+  </div>`);
 
   /* ---------- Behaviour ---------- */
   const modal = $("#modal");
@@ -229,6 +271,7 @@ body.modal-open { overflow: hidden; }
   const fieldsBox = $("#modalFields");
   const submitBtn = $('button[type="submit"]', form);
   const cancelBtn = $("#modalCancel");
+  const rolePicker = $("#rolePicker");
   let lastTrigger = null;
   let currentKind = null;
 
@@ -241,6 +284,7 @@ body.modal-open { overflow: hidden; }
     else if (f.type === "textarea") control = `<textarea id="${id}" name="${f.name}" rows="4"${f.maxlength ? ` maxlength="${esc(f.maxlength)}"` : ""}${req}></textarea>`;
     else if (f.type === "select")
       control = `<select id="${id}" name="${f.name}"${req}>${f.options.map((o, i) => `<option value="${i === 0 && f.required ? "" : esc(o)}">${esc(o)}</option>`).join("")}</select>`;
+    else if (f.type === "file") control = `<div class="file-picker"><input class="file-input" id="${id}" name="${esc(f.name)}" type="file" accept="${esc(f.accept || "image/*")}"${req}><label class="file-picker-label" for="${id}"><span class="file-picker-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7 9m5-5 5 5M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg></span><span class="file-picker-copy"><strong>Choose a professional photo</strong><span data-file-name>No file selected · JPG, PNG or WEBP up to 5 MB</span></span></label></div>`;
     else {
       const extra = ["min", "max", "value", "autocomplete", "maxlength"].filter((k) => f[k] !== undefined).map((k) => ` ${k}="${esc(f[k])}"`).join("");
       control = `<input id="${id}" name="${f.name}" type="${f.type}"${extra}${req}>`;
@@ -261,6 +305,7 @@ body.modal-open { overflow: hidden; }
     fieldsBox.innerHTML = def.fields.map(fieldHTML).join("");
     window.AIPISPhoneInput.decorate(fieldsBox);
     if (trigger.dataset.package && form.elements.package) form.elements.package.value = trigger.dataset.package;
+    if (trigger.dataset.role && form.elements.role) form.elements.role.value = trigger.dataset.role;
     setStatus(form, "", "");
     submitBtn.hidden = false;
     submitBtn.disabled = false;
@@ -278,10 +323,44 @@ body.modal-open { overflow: hidden; }
     if (lastTrigger) lastTrigger.focus();
   }
 
+  function closeRolePicker() {
+    rolePicker.hidden = true;
+  }
+
+  function openRolePicker(trigger) {
+    rolePicker.hidden = false;
+    rolePicker.dataset.trigger = "role-picker";
+    rolePicker._trigger = trigger;
+    $(".role-picker-options button", rolePicker).focus();
+  }
+
   document.addEventListener("click", (e) => {
+    const rolePickerLink = e.target.closest("[data-role-picker]");
+    if (rolePickerLink) {
+      if (location.pathname.endsWith("speakers.html")) e.preventDefault();
+      else return;
+      openRolePicker(rolePickerLink);
+      return;
+    }
+    if (e.target.closest("[data-role-picker-close]")) {
+      closeRolePicker();
+      return;
+    }
+    const roleChoice = e.target.closest(".role-picker-options [data-form]");
+    if (roleChoice) {
+      closeRolePicker();
+      open(roleChoice.dataset.form, roleChoice);
+      return;
+    }
     const trigger = e.target.closest("[data-form]");
     if (trigger) open(trigger.dataset.form, trigger);
     if (e.target.closest("[data-close]")) close();
+  });
+
+  form.addEventListener("change", (e) => {
+    if (e.target.type !== "file") return;
+    const name = e.target.closest(".file-picker")?.querySelector("[data-file-name]");
+    if (name) name.textContent = e.target.files[0]?.name || "No file selected · JPG, PNG or WEBP up to 5 MB";
   });
 
   modal.addEventListener("keydown", (e) => {

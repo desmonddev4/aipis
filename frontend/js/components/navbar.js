@@ -123,7 +123,7 @@
   .brand-text small { display: none; }
   .nav-menu a, .dropdown-toggle { padding: 0.5rem 0.5rem; font-size: 0.9rem; }
 }
-@media (max-width: 1040px) {
+@media (max-width: 960px) {
   .nav { border-radius: 28px; }
   .nav-toggle { display: flex; }
   .nav-menu {

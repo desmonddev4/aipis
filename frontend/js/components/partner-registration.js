@@ -1,16 +1,16 @@
 (() => {
   "use strict";
   const packages = [
-    { name: "Founding Partner", fee: "USD 60,000", slots: "3 slots", benefits: "Recognition on all materials and report covers; opening keynote; International Advisory Board seat; roundtable with the Founding Government Partners; 10 VIP passes; 36 sq m exhibition space." },
-    { name: "Prosperity Index Partner", fee: "USD 30,000", slots: "5 slots", benefits: "Joint sponsor credit on the Prosperity Index (one of five); shared launch speaking role; Index Technical Reference Group seat; 4 VIP passes; 9 sq m exhibition space." },
-    { name: "Strategic Partner", fee: "USD 25,000", slots: "4 slots", benefits: "Naming of one main session or one of the AIPIS Roundtables; panel speaking slot; logo on stage and materials; 6 passes; 18 sq m exhibition space." },
-    { name: "Knowledge Partner", fee: "USD 20,000 or in kind", slots: "4 slots", benefits: "Co-author credit on a summit report; one research session; Scientific Committee seat; 4 passes." },
-    { name: "Industry Partner", fee: "USD 20,000", slots: "8 slots", benefits: "Procurement Exchange priority with up to 15 buyer meetings; field day hosting option; 9 sq m exhibition space; 3 passes." },
-    { name: "Session Partner", fee: "USD 15,000", slots: "10 slots", benefits: "Naming of one thematic panel, session or award; one speaker or moderator role; 2 passes." },
-    { name: "Gala Dinner Partner", fee: "USD 15,000", slots: "1 slot", benefits: "Naming of the Gala Dinner; welcome address; 10 dinner seats; 3 passes." },
-    { name: "Field Day Partner", fee: "USD 12,000", slots: "1 slot", benefits: "Branding on field day transport and materials; remarks at one site; 3 passes." },
-    { name: "Student and Young Professional Bursary Partner", fee: "USD 10,000", slots: "3 slots", benefits: "Funds 40 bursaries; named bursary scheme; 2 passes." },
-    { name: "Delegate Kit and Digital Partner", fee: "USD 8,000", slots: "1 slot", benefits: "Branding on delegate kits, lanyards and the summit app; 2 passes." },
+    { name: "Founding Partner", fee: "USD 30,000", slots: "3 slots", benefits: "Recognition on all materials and report covers; opening keynote; International Advisory Board seat; roundtable with the Founding Government Partners; 10 VIP passes; 36 sq m exhibition space." },
+    { name: "Prosperity Index Partner", fee: "USD 15,000", slots: "5 slots", benefits: "Joint sponsor credit on the Prosperity Index (one of five); shared launch speaking role; Index Technical Reference Group seat; 4 VIP passes; 9 sq m exhibition space." },
+    { name: "Strategic Partner", fee: "USD 12,500", slots: "4 slots", benefits: "Naming of one main session or one of the AIPIS Roundtables; panel speaking slot; logo on stage and materials; 6 passes; 18 sq m exhibition space." },
+    { name: "Knowledge Partner", fee: "USD 10,000 or in kind", slots: "4 slots", benefits: "Co-author credit on a summit report; one research session; Scientific Committee seat; 4 passes." },
+    { name: "Industry Partner", fee: "USD 10,000", slots: "8 slots", benefits: "Procurement Exchange priority with up to 15 buyer meetings; field day hosting option; 9 sq m exhibition space; 3 passes." },
+    { name: "Session Partner", fee: "USD 7,500", slots: "10 slots", benefits: "Naming of one thematic panel, session or award; one speaker or moderator role; 2 passes." },
+    { name: "Gala Dinner Partner", fee: "USD 7,500", slots: "3 slots", benefits: "Joint naming of the Gala Dinner (one of three); remarks at the dinner; 10 seats." },
+    { name: "Field Day Partner", fee: "USD 6,000", slots: "3 slots", benefits: "Joint branding on field day transport; remarks at one site." },
+    { name: "Student and Young Professional Bursary Partner", fee: "USD 5,000", slots: "3 slots", benefits: "Funds 20 bursaries; named scheme; 2 passes." },
+    { name: "Delegate Kit and Digital Partner", fee: "USD 4,000", slots: "3 slots", benefits: "Joint branding on delegate kits, lanyards and the summit app." },
     { name: "Exhibitor", fee: "USD 3,000 per booth", slots: "30 booths", benefits: "One 6 sq m booth includes 2 delegate passes and a listing in the exhibitor directory." },
     { name: "General partnership enquiry", fee: "To be discussed", slots: "Subject to availability", benefits: "Tell us which partnership area interests your organisation and the Summit team will follow up." }
   ];

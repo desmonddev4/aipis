@@ -75,7 +75,7 @@
     registration: {
       title: "Register to attend",
       subject: "AIPIS 2027 registration",
-      intro: "Early fees apply if paid by 15 February 2027. A 10 percent discount applies to registrations of five or more attendees.",
+      intro: "Early fees apply if paid by 28 February 2027. A 10 percent discount applies to registrations of five or more attendees.",
       fields: [
         ...base,
         { name: "category", label: "Delegate category", type: "select", options: REG_CATEGORIES },

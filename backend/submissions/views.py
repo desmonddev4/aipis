@@ -42,11 +42,11 @@ PARTNERSHIP_PACKAGES = {
 REGISTRATION_PRICES_USD = {
     "International delegate": (Decimal("750.00"), Decimal("640.00")),
     "African delegate (outside Ghana)": (Decimal("500.00"), Decimal("425.00")),
-    "Ghanaian delegate": (Decimal("350.00"), Decimal("300.00")),
-    "Public sector and university staff (Ghana)": (Decimal("200.00"), Decimal("170.00")),
-    "Student or young professional (under 35)": (Decimal("75.00"), Decimal("60.00")),
+    "Ghanaian delegate": (Decimal("400.00"), Decimal("340.00")),
+    "Public sector and university staff (Ghana)": (Decimal("350.00"), Decimal("300.00")),
+    "Student or young professional (under 35)": (Decimal("200.00"), Decimal("170.00")),
 }
-EARLY_REGISTRATION_DEADLINE = date(2027, 5, 31)
+EARLY_REGISTRATION_DEADLINE = date(2027, 2, 28)
 
 
 def client_ip(request):

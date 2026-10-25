@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d3d26">
+  <title>Application status | AIPIS 2027</title>
+  <link rel="icon" href="assets/register%20and%20favicon%20logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --green-950:#082a1a; --green-900:#0d3d26; --green-700:#1a5c2a; --green-50:#eef6f0; --orange-500:#f4a24c; --ink:#10261a; --soft:#51645a; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; color: var(--ink); font: 1.05rem/1.6 "Source Sans 3", system-ui, sans-serif; background: radial-gradient(700px 420px at 100% 0%, rgba(244,162,76,.18), transparent 60%), radial-gradient(600px 400px at 0% 100%, rgba(26,92,42,.12), transparent 60%), #f2f6f1; }
+    header { padding: 1rem clamp(1rem, 5vw, 4rem); background: rgba(255,255,255,.78); border-bottom: 1px solid rgba(26,92,42,.12); backdrop-filter: blur(14px); }
+    .nav { width: min(1120px, 100%); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    main { width: min(720px, calc(100% - 2.5rem)); margin: clamp(3rem, 10vh, 7rem) auto; }
+    .brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--green-900); font: 800 1.15rem/1.1 Archivo, sans-serif; text-decoration: none; }
+    .brand img { width: 46px; height: 46px; object-fit: contain; }
+    .nav-link { color: var(--green-900); font-weight: 700; text-decoration: none; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .45rem; margin-bottom: .8rem; color: #8a4a05; font: 800 .8rem/1 Archivo, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 28px; height: 3px; border-radius: 99px; background: var(--orange-500); }
+    .card { padding: clamp(1.5rem, 5vw, 3.5rem); border: 1px solid rgba(26,92,42,.15); border-radius: 30px; background: rgba(255,255,255,.92); box-shadow: 0 24px 70px rgba(13,61,38,.14); }
+    h1 { margin: 0 0 .65rem; color: var(--green-900); font: 800 clamp(2rem, 5vw, 3.3rem)/1.05 Archivo, sans-serif; letter-spacing: -.03em; }
+    h2 { margin: 0; color: var(--green-900); font: 700 1.3rem/1.2 Archivo, sans-serif; }
+    .intro, .muted { color: var(--soft); }
+    .lookup { display: grid; gap: .7rem; margin-top: 1.8rem; padding: 1.1rem; border-radius: 18px; background: var(--green-50); border: 1px solid rgba(26,92,42,.12); }
+    .lookup label { color: var(--green-900); font-weight: 700; }
+    .lookup-row { display: flex; gap: .6rem; }
+    .lookup input { min-width: 0; flex: 1; padding: .8rem 1rem; border: 2px solid rgba(26,92,42,.2); border-radius: 12px; font: inherit; }
+    .lookup input:focus { outline: none; border-color: var(--orange-500); box-shadow: 0 0 0 4px rgba(244,162,76,.22); }
+    .lookup button { border: 0; border-radius: 12px; padding: .8rem 1rem; background: var(--green-900); color: #fff; font: 700 1rem "Source Sans 3", sans-serif; cursor: pointer; }
+    .lookup button:hover { background: var(--green-700); }
+    .status { display: inline-flex; margin: 1.5rem 0; padding: .45rem .9rem; border-radius: 999px; color: var(--green-950); background: var(--orange-500); font-weight: 700; }
+    .status.approved { background: #d6efdc; color: #14562a; }
+    .status.waitlisted { background: #ffeed9; color: #8a4a05; }
+    .status.declined { background: #ffe1df; color: #8f1d16; }
+    dl { display: grid; grid-template-columns: minmax(120px, .5fr) 1fr; gap: .8rem 1rem; margin: 0; padding: 1.2rem; border-radius: 16px; background: var(--green-50); }
+    dt { color: var(--soft); font-weight: 600; } dd { margin: 0; font-weight: 700; }
+    .error { color: #8f1d16; font-weight: 700; }
+    .empty-illustration { width: 72px; height: 72px; display: grid; place-items: center; margin: 1.5rem 0 1rem; border-radius: 22px; background: var(--orange-500); color: var(--green-950); font: 800 2rem Archivo, sans-serif; box-shadow: 8px 8px 0 rgba(13,61,38,.1); }
+    .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.6rem; }
+    .btn { display: inline-flex; padding: .75rem 1.1rem; border-radius: 999px; background: var(--green-900); color: #fff; font-weight: 700; text-decoration: none; }
+    .btn.alt { background: var(--orange-500); color: var(--green-950); }
+    @media (max-width: 520px) { .lookup-row { flex-direction: column; } .lookup button { width: 100%; } }
+    @media (max-width: 480px) { dl { grid-template-columns: 1fr; gap: .2rem; } dd { margin-bottom: .6rem; } .nav-link { font-size: .9rem; } }
+  </style>
+</head>
+<body>
+  <header><nav class="nav"><a class="brand" href="index.html"><img src="assets/register%20and%20favicon%20logo.png" alt="AIPIS">AIPIS 2027</a><a class="nav-link" href="index.html">Back to website</a></nav></header>
+  <main>
+    <section class="card" id="statusCard" aria-live="polite">
+      <div class="eyebrow">Applicant portal</div>
+      <h1>Application status</h1>
+      <p class="intro" id="intro">Checking your secure application link…</p>
+      <div id="result"></div>
+    </section>
+  </main>
+  <script src="js/config.js"></script>
+  <script>
+    (() => {
+      const result = document.getElementById("result");
+      const token = new URLSearchParams(location.search).get("token");
+      const api = ((window.AIPIS_CONFIG && window.AIPIS_CONFIG.API_URL) || "").replace(/\/$/, "");
+      const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+      const lookup = (value) => {
+        try { return new URL(value).searchParams.get("token") || value.trim(); } catch { return value.trim(); }
+      };
+      const renderLookup = (message = "Your secure link is in the confirmation email we sent after you applied.") => {
+        document.getElementById("intro").textContent = message;
+        result.innerHTML = `<div class="empty-illustration">?</div><p class="muted">Paste the full status link or enter the application token from your email.</p><form class="lookup" id="lookupForm"><label for="tokenInput">Status link or token</label><div class="lookup-row"><input id="tokenInput" autocomplete="off" placeholder="Paste your status link or token"><button type="submit">Check status</button></div></form><div class="actions"><a class="btn" href="mailto:info@aipisgh.org">Contact the secretariat</a></div>`;
+        document.getElementById("lookupForm").addEventListener("submit", (event) => { event.preventDefault(); const next = lookup(document.getElementById("tokenInput").value); if (next) history.replaceState({}, "", `?token=${encodeURIComponent(next)}`); load(next); });
+      };
+      const load = (currentToken) => {
+        if (!currentToken) { renderLookup(); return; }
+        document.getElementById("intro").textContent = "Checking your secure application link…";
+        result.innerHTML = "";
+        fetch(`${api}/api/application-status/?token=${encodeURIComponent(currentToken)}`)
+          .then(async (response) => { const data = await response.json().catch(() => ({})); if (!response.ok) throw new Error(data.error || "We could not load this application."); return data.application; })
+          .then((application) => {
+            const date = new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeStyle: "short" }).format(new Date(application.submitted_at));
+            document.getElementById("intro").textContent = `Hello ${application.name}. Here is the latest update for your application.`;
+            const payment = application.payment_status_label ? `<dt>Payment</dt><dd>${esc(application.payment_status_label)}</dd>` : "";
+            result.innerHTML = `<span class="status ${esc(application.status)}">${esc(application.status_label)}</span><dl><dt>Application</dt><dd>${esc(application.kind)}</dd><dt>Submitted</dt><dd>${esc(date)}</dd>${payment}</dl><div class="actions"><a class="btn alt" href="index.html">Return to AIPIS</a><a class="btn" href="mailto:info@aipisgh.org">Contact the secretariat</a></div>`;
+          })
+          .catch((error) => renderLookup(error.message));
+      };
+      load(token);
+    })();
+  </script>
+</body>
+</html>

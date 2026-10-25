@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+import uuid
 
 
 class Submission(models.Model):
@@ -20,6 +21,9 @@ class Submission(models.Model):
         NEW = "new", "New"
         IN_PROGRESS = "in_progress", "In progress"
         HANDLED = "handled", "Handled"
+        APPROVED = "approved", "Approved"
+        WAITLISTED = "waitlisted", "Waitlisted"
+        DECLINED = "declined", "Declined"
         ARCHIVED = "archived", "Archived"
 
     kind = models.CharField(max_length=20, choices=Kind.choices, db_index=True)
@@ -29,6 +33,7 @@ class Submission(models.Model):
     phone = models.CharField(max_length=40, blank=True)
     message = models.TextField(blank=True)
     photo = models.FileField(upload_to="speaker-photos/%Y/%m/", blank=True)
+    tracking_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
     details = models.JSONField(default=dict, blank=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW, db_index=True)

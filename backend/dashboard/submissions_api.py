@@ -1,11 +1,13 @@
 import csv
+import mimetypes
+import os
 from datetime import datetime, time
 
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
-from django.http import HttpResponse, JsonResponse
+from django.http import FileResponse, HttpResponse, JsonResponse
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from django.views.decorators.csrf import csrf_exempt
@@ -29,7 +31,7 @@ def filtered(params, ignore_status=False):
         qs = qs.filter(status=status)
     q = params.get("q", "").strip()
     if q:
-        qs = qs.filter(Q(name__icontains=q) | Q(email__icontains=q) | Q(organisation__icontains=q) | Q(message__icontains=q))
+        qs = qs.filter(Q(name__icontains=q) | Q(email__icontains=q) | Q(organisation__icontains=q) | Q(message__icontains=q) | Q(details__role__icontains=q))
     start, end = parse_date(params.get("date_from", "")), parse_date(params.get("date_to", ""))
     tz = timezone.get_current_timezone()
     if start:
@@ -93,6 +95,66 @@ def submission_detail(request, pk):
                 submission=sub, author=request.staff_user, kind="note", text=f"Status changed from {old} to {STATUS_LABELS[status]}."
             )
     return JsonResponse({"ok": True, "submission": submission_dict(sub, detail=True)})
+
+
+@csrf_exempt
+@staff_required
+@require_GET
+def submission_photo(request, pk):
+    sub = Submission.objects.filter(pk=pk).first()
+    if sub is None or not sub.photo:
+        return error("Photo not found.", 404)
+    try:
+        response = FileResponse(
+            sub.photo.open("rb"),
+            content_type=mimetypes.guess_type(sub.photo.name)[0] or "application/octet-stream",
+        )
+    except (FileNotFoundError, OSError):
+        return error("Photo file is not available.", 404)
+    filename = os.path.basename(sub.photo.name).replace('"', "")
+    response["Content-Disposition"] = f'inline; filename="{filename}"'
+    return response
+
+
+@csrf_exempt
+@staff_required
+@require_POST
+def decision(request, pk):
+    sub = Submission.objects.select_related("payment").filter(pk=pk).first()
+    if sub is None:
+        return error("Submission not found.", 404)
+    data = json_body(request) or {}
+    status = data.get("status")
+    if status not in {Submission.Status.APPROVED, Submission.Status.WAITLISTED, Submission.Status.DECLINED}:
+        return error("Choose an approved, waitlisted or declined decision.", 400)
+    message = str(data.get("message", "")).strip()[:8000]
+    default_messages = {
+        Submission.Status.APPROVED: "We are pleased to confirm that your application has been approved for AIPIS 2027. Our team will share the next steps with you shortly.",
+        Submission.Status.WAITLISTED: "Your application has been placed on the AIPIS 2027 waitlist. We will contact you as soon as a place becomes available.",
+        Submission.Status.DECLINED: "Thank you for your interest in AIPIS 2027. After careful consideration, we are unable to proceed with your application at this time.",
+    }
+    body = message or default_messages[status]
+    sender = request.staff_user.get_full_name() or request.staff_user.username
+    subject = f"AIPIS 2027 application update: {Submission.Status(status).label}"
+    try:
+        EmailMessage(
+            subject=subject,
+            body=f"Dear {sub.name},\n\n{body}\n\n--\n{sender}\nAIPIS Secretariat\n{settings.NOTIFY_EMAIL}",
+            to=[sub.email],
+            reply_to=[settings.NOTIFY_EMAIL],
+        ).send(fail_silently=False)
+    except Exception:
+        return error("The decision email could not be sent. Check the email settings on the server.", 502)
+
+    sub.status = status
+    sub.save(update_fields=["status"])
+    note = SubmissionNote.objects.create(
+        submission=sub,
+        author=request.staff_user,
+        kind="reply",
+        text=f"{subject}\n\n{body}",
+    )
+    return JsonResponse({"ok": True, "submission": submission_dict(sub, detail=True), "note": note_dict(note)})
 
 
 @csrf_exempt

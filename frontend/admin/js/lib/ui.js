@@ -10,13 +10,14 @@
     partnership: "Partnership",
     keynote: "Keynote nomination",
     guest: "Guest speaker",
+    panelist: "Panelist application",
     technical: "Technical presenter",
     poster: "Poster abstract",
     exhibitor: "Exhibitor booking",
     forensic: "Forensic Clinic",
     roundtable: "Roundtable invitation",
   };
-  const STATUS_LABELS = { new: "New", in_progress: "In progress", handled: "Handled", archived: "Archived" };
+  const STATUS_LABELS = { new: "New", in_progress: "In progress", handled: "Handled", approved: "Approved", waitlisted: "Waitlisted", declined: "Declined", archived: "Archived" };
 
   const CSS = `
 .badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.22rem 0.7rem; border-radius: 999px; font-size: 0.82rem; font-weight: 700; line-height: 1.4; white-space: nowrap; }

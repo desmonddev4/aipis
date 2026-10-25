@@ -2,7 +2,8 @@ from django.contrib.auth import get_user_model
 from django.core import mail
 from django.test import TestCase, override_settings
 
-from submissions.models import Submission
+from submissions.models import RegistrationPayment, Submission
+from submissions.views import record_paid
 
 User = get_user_model()
 H = {"HTTP_HOST": "localhost"}
@@ -74,6 +75,44 @@ class DashboardApiTests(TestCase):
         self.assertEqual(analytics["registrations"]["delegates"], 3)
         self.assertEqual(analytics["registrations"]["countries"][0]["label"], "Ghana")
         self.assertEqual(self.client.get("/api/admin/badges/", **h).json()["new_total"], 2)
+
+    def test_public_application_status_and_confirmation(self):
+        status = self.client.get(f"/api/application-status/?token={self.reg.tracking_token}", **H)
+        self.assertEqual(status.status_code, 200)
+        self.assertEqual(status.json()["application"]["name"], "Ama")
+        self.assertEqual(self.client.get("/api/application-status/?token=00000000-0000-0000-0000-000000000000", **H).status_code, 404)
+
+        response = self.client.post(
+            "/api/submit/",
+            {"kind": "contact", "name": "Esi", "email": "esi@example.com", "message": "Hello AIPIS"},
+            content_type="application/json",
+            **H,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("application-status.html?token=", mail.outbox[-1].body)
+        self.assertEqual(mail.outbox[-1].to, ["esi@example.com"])
+
+    def test_payment_confirmation_is_sent_to_applicant(self):
+        payment = RegistrationPayment.objects.create(
+            submission=self.reg,
+            reference="AIPIS2027-1-test",
+            amount_kobo=125000,
+            currency="GHS",
+            usd_amount="75.00",
+            fx_rate="16.666667",
+            fx_rate_date="2026-10-25",
+        )
+        self.assertTrue(record_paid(payment, {
+            "status": "success",
+            "reference": payment.reference,
+            "currency": "GHS",
+            "amount": payment.amount_kobo,
+            "id": 12345,
+        }))
+        self.assertEqual(mail.outbox[-1].to, ["ama@example.com"])
+        self.assertIn("payment confirmation", mail.outbox[-1].subject.lower())
+        self.assertIn(payment.reference, mail.outbox[-1].body)
+        self.assertIn("application-status.html?token=", mail.outbox[-1].body)
 
     def test_team_management_is_superuser_only(self):
         self.assertEqual(self.client.get("/api/admin/users/", **self.auth("staff")).status_code, 403)

@@ -31,8 +31,11 @@
   function render(d) {
     const kindUrls = {
       registration: "registrations.html", partnership: "partnerships.html", exhibitor: "exhibitors.html", forensic: "forensic.html", contact: "messages.html",
-      keynote: "speakers.html", guest: "speakers.html", technical: "speakers.html", poster: "speakers.html",
+      keynote: "speakers.html", guest: "speakers.html", panelist: "speakers.html", technical: "speakers.html", poster: "speakers.html",
     };
+    const capacityItems = Object.values(d.capacity || {});
+    const nearCapacity = capacityItems.filter((c) => c.remaining <= Math.max(1, Math.ceil(c.limit * 0.2)));
+    const capacityNotice = nearCapacity.length ? `<p class="muted-p">${nearCapacity.map((c) => c.remaining === 0 ? `${UI.esc(c.label)} is full` : `${UI.esc(c.label)} has ${c.remaining} place${c.remaining === 1 ? "" : "s"} left`).join(" · ")}</p>` : `<p class="muted-p">All capped roles currently have healthy availability.</p>`;
     root.innerHTML = `
       <section class="stats">
         ${statCard("inbox", "Total submissions", d.total, `${d.last7} in the last 7 days`)}
@@ -56,6 +59,12 @@
           <div class="card-head"><h2>Needs attention</h2><a class="btn btn-outline btn-sm" href="submissions.html?status=new">All new</a></div>
           ${d.stale_items.length ? `<p class="muted-p">New submissions waiting for more than 3 days.</p><ul class="rows">${d.stale_items.map(listItem).join("")}</ul>` : `<div class="chart-empty">${Icons.svg("check", 28)}<span>You are all caught up. Nothing has been waiting more than 3 days.</span></div>`}
         </article>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Application capacity</h2><span class="muted">Live role limits</span></div>
+        ${capacityNotice}
+        <div class="quick">${capacityItems.map((c) => `<div class="quick-link ${c.remaining === 0 ? "capacity-full" : c.remaining <= Math.max(1, Math.ceil(c.limit * 0.2)) ? "capacity-near" : ""}"><strong>${c.used}/${c.limit}</strong><span>${UI.esc(c.label)} · ${c.remaining} remaining</span></div>`).join("")}</div>
       </section>
 
       <section class="card">

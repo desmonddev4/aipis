@@ -16,7 +16,7 @@
     organisation_type: "Organisation type", website: "Website", consent: "Terms and privacy", proposal: "Partnership proposal", product_summary: "Products, services or projects", space_requirements: "Space or setup requirements",
     roundtable: "Roundtable of interest", role: "Role or title", country: "Country", experience: "Relevant experience",
   };
-  const STATUSES = [["", "All"], ["new", "New"], ["in_progress", "In progress"], ["handled", "Handled"], ["archived", "Archived"]];
+  const STATUSES = [["", "All"], ["new", "New"], ["in_progress", "In progress"], ["approved", "Approved"], ["waitlisted", "Waitlisted"], ["declined", "Declined"], ["handled", "Handled"], ["archived", "Archived"]];
 
   const CSS = `
 .toolbar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; margin-bottom: 1rem; }
@@ -168,7 +168,8 @@
       case "exhibitor": return d.booths ? `${d.booths} booth${d.booths === "1" ? "" : "s"}` : "";
       case "forensic": return d.project || "";
       case "keynote":
-      case "guest": return d.nominee || "";
+      case "guest":
+      case "panelist": return d.role || d.nominee || "";
       default: return s.message;
     }
   }
@@ -435,6 +436,15 @@
           </div>
         </section>
         <section class="drawer-section">
+          <h3>Application decision</h3>
+          <p class="muted">Send the applicant an outcome email and update their status together.</p>
+          <form class="drawer-form" id="dDecisionForm">
+            <div class="field"><label for="dDecision">Decision</label><select id="dDecision"><option value="approved">Approve application</option><option value="waitlisted">Waitlist application</option><option value="declined">Decline application</option></select></div>
+            <div class="field"><label for="dDecisionMessage">Message (optional)</label><textarea id="dDecisionMessage" rows="4" placeholder="Leave blank to use the standard message."></textarea></div>
+            <div><button class="btn btn-primary" type="submit">Send decision email</button></div>
+          </form>
+        </section>
+        <section class="drawer-section">
           <h3>Contact</h3>
           <dl class="info">
             <div><dt>Email</dt><dd><a href="mailto:${UI.esc(s.email)}">${UI.esc(s.email)}</a></dd></div>
@@ -443,6 +453,7 @@
             ${details}
           </dl>
         </section>
+        ${s.photo_url ? `<section class="drawer-section"><h3>Professional photo</h3><p class="muted">${UI.esc(s.photo_name || "Uploaded photo")}</p><button class="btn btn-outline" id="dPhoto" type="button">Open photo</button></section>` : ""}
         ${s.message ? `<section class="drawer-section"><h3>Message</h3><div class="message">${UI.esc(s.message)}</div></section>` : ""}
         <section class="drawer-section">
           <h3>Activity</h3>
@@ -491,6 +502,16 @@
     $("dClose").addEventListener("click", close);
     $("dClose2").addEventListener("click", close);
 
+    if (s.photo_url) {
+      $("dPhoto").addEventListener("click", async () => {
+        try {
+          await API.openFile("/submissions/" + s.id + "/photo/");
+        } catch (err) {
+          UI.toast(err.message, "error");
+        }
+      });
+    }
+
     $("dStatus").addEventListener("change", async (e) => {
       try {
         const res = await API.patch("/submissions/" + s.id + "/", { status: e.target.value });
@@ -502,6 +523,25 @@
         e.target.value = s.status;
         UI.toast(err.message, "error");
       }
+    });
+
+    $("dDecisionForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector("button");
+      btn.disabled = true;
+      try {
+        const res = await API.post("/submissions/" + s.id + "/decision/", { status: $("dDecision").value, message: $("dDecisionMessage").value });
+        s.status = res.submission.status;
+        $("dStatus").value = s.status;
+        $("dNotes").innerHTML = res.submission.notes.map(noteHTML).join("");
+        $("dDecisionMessage").value = "";
+        UI.toast("Decision sent to " + s.email + ".");
+        await load({ quiet: true });
+        window.AdminLayout && window.AdminLayout.refreshBadges();
+      } catch (err) {
+        UI.toast(err.message, "error");
+      }
+      btn.disabled = false;
     });
 
     $("dNoteForm").addEventListener("submit", async (e) => {

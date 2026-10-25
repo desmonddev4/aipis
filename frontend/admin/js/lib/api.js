@@ -101,11 +101,25 @@
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
 
+  async function openFile(path) {
+    const res = await fetch(BASE + path, { headers: { Authorization: "Bearer " + session.token() } });
+    if (res.status === 401) {
+      session.clear();
+      toLogin();
+      return;
+    }
+    if (!res.ok) throw new ApiError("The file could not be opened.", res.status);
+    const url = URL.createObjectURL(await res.blob());
+    window.open(url, "_blank", "noopener");
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }
+
   window.AdminAPI = {
     session,
     ApiError,
     qs,
     download,
+    openFile,
     get: (path, params) => request("GET", path + qs(params)),
     post: (path, body, opts) => request("POST", path, body ?? {}, opts),
     patch: (path, body) => request("PATCH", path, body ?? {}),

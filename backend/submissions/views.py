@@ -19,6 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
 from .models import RegistrationPayment, Submission
+from .constants import ACTIVE_APPLICATION_STATUSES, APPLICATION_CAPS
 from .payments import PaymentError, get_bog_usd_ghs_rate, initialize_transaction, verify_transaction
 
 logger = logging.getLogger(__name__)
@@ -35,13 +36,6 @@ ALLOWED_DETAILS = {
     "roundtable": ["roundtable", "role", "country", "experience"],
 }
 MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "panelist", "technical", "partnership", "exhibitor", "roundtable"}
-APPLICATION_CAPS = {
-    Submission.Kind.KEYNOTE: 6,
-    Submission.Kind.GUEST: 6,
-    Submission.Kind.TECHNICAL: 12,
-    Submission.Kind.POSTER: 20,
-    Submission.Kind.EXHIBITOR: 30,
-}
 ROUNDTABLES = {
     "Africa Infrastructure Bankability Roundtable",
     "Africa Infrastructure and Resource Diplomacy Roundtable",
@@ -128,6 +122,25 @@ def notify(submission):
     )
 
 
+def notify_applicant(submission):
+    status_url = settings.FRONTEND_URL.rstrip("/") + "/application-status.html?token=" + str(submission.tracking_token)
+    send_email(
+        subject=f"AIPIS 2027 application received — {submission.get_kind_display()}",
+        body=(
+            f"Dear {submission.name},\n\n"
+            f"Thank you for your {submission.get_kind_display().lower()} application to AIPIS 2027. "
+            "We have received your details successfully and the secretariat will review your application. "
+            "We will contact you with the outcome and any next steps.\n\n"
+            f"You can check your application status at any time here:\n{status_url}\n\n"
+            "Please keep this email for your records.\n\n"
+            "AIPIS Secretariat\n"
+            f"{settings.NOTIFY_EMAIL}"
+        ),
+        to=submission.email,
+        reply_to=settings.NOTIFY_EMAIL,
+    )
+
+
 def notify_payment(payment):
     send_email(
         subject="[AIPIS 2027] Registration payment confirmed",
@@ -140,6 +153,52 @@ def notify_payment(payment):
         to=settings.NOTIFY_EMAIL,
         reply_to=payment.submission.email,
     )
+
+
+def notify_payment_applicant(payment):
+    submission = payment.submission
+    status_url = settings.FRONTEND_URL.rstrip("/") + "/application-status.html?token=" + str(submission.tracking_token)
+    send_email(
+        subject="AIPIS 2027 payment confirmation",
+        body=(
+            f"Dear {submission.name},\n\n"
+            f"Your payment for {submission.get_kind_display()} has been confirmed successfully.\n\n"
+            f"Payment details:\n"
+            f"Payment type: {submission.get_kind_display()}\n"
+            f"Registration reference: {payment.reference}\n"
+            f"Amount paid: {payment.amount_ghs} {payment.currency}\n"
+            f"USD value: {payment.usd_amount}\n"
+            f"Bank of Ghana USD/GHS rate: {payment.fx_rate} ({payment.fx_rate_date})\n"
+            f"Payment date: {payment.paid_at.strftime('%d %B %Y, %H:%M UTC') if payment.paid_at else '-'}\n"
+            f"Paystack transaction ID: {payment.paystack_transaction_id or '-'}\n\n"
+            f"You can review your application status here:\n{status_url}\n\n"
+            "Please keep this email as your payment receipt.\n\n"
+            "AIPIS Secretariat\n"
+            f"{settings.NOTIFY_EMAIL}"
+        ),
+        to=submission.email,
+        reply_to=settings.NOTIFY_EMAIL,
+    )
+
+
+@require_GET
+def application_status(request):
+    token = clean_text(request.GET.get("token"), 36)
+    submission = Submission.objects.filter(tracking_token=token).first()
+    if submission is None:
+        return JsonResponse({"ok": False, "error": "We could not find an application for that status link."}, status=404)
+    return JsonResponse({
+        "ok": True,
+        "application": {
+            "name": submission.name,
+            "kind": submission.get_kind_display(),
+            "status": submission.status,
+            "status_label": submission.get_status_display(),
+            "submitted_at": submission.created_at.isoformat(),
+            "payment_status": getattr(getattr(submission, "payment", None), "status", ""),
+            "payment_status_label": getattr(getattr(submission, "payment", None), "get_status_display", lambda: "")(),
+        },
+    })
 
 def valid_email(value):
     try:
@@ -176,6 +235,10 @@ def record_paid(payment, data):
             notify_payment(payment)
         except Exception:
             logger.exception("Could not send payment notification for registration %s", payment.submission_id)
+        try:
+            notify_payment_applicant(payment)
+        except Exception:
+            logger.exception("Could not send payment confirmation to applicant for registration %s", payment.submission_id)
     return True
 
 
@@ -320,6 +383,10 @@ def registration_checkout(request):
         notify(submission)
     except Exception:
         logger.exception("Could not send registration notification for %s", submission.pk)
+    try:
+        notify_applicant(submission)
+    except Exception:
+        logger.exception("Could not send registration confirmation for %s", submission.pk)
     return JsonResponse({
         "ok": True,
         "registration_id": submission.pk,
@@ -331,6 +398,7 @@ def registration_checkout(request):
         "fx_rate_date": fx_date.isoformat(),
         "discount_usd": str(discount_usd),
         "early_rate": early,
+        "status_url": settings.FRONTEND_URL.rstrip("/") + "/application-status.html?token=" + str(submission.tracking_token),
     })
 
 
@@ -406,7 +474,7 @@ def submit(request):
         return JsonResponse({"ok": False, "errors": {"__all__": "Please use the secure online registration form."}}, status=400)
 
     capacity = APPLICATION_CAPS.get(kind)
-    if capacity is not None and Submission.objects.filter(kind=kind).count() >= capacity:
+    if capacity is not None and Submission.objects.filter(kind=kind, status__in=ACTIVE_APPLICATION_STATUSES).count() >= capacity:
         return JsonResponse(
             {"ok": False, "errors": {"__all__": f"Applications for this role are now full. The maximum of {capacity} applications has been reached."}},
             status=409,
@@ -506,4 +574,11 @@ def submit(request):
         notify(submission)
     except Exception:
         logger.exception("Could not send notification for submission %s", submission.pk)
-    return JsonResponse({"ok": True})
+    try:
+        notify_applicant(submission)
+    except Exception:
+        logger.exception("Could not send applicant confirmation for submission %s", submission.pk)
+    return JsonResponse({
+        "ok": True,
+        "status_url": settings.FRONTEND_URL.rstrip("/") + "/application-status.html?token=" + str(submission.tracking_token),
+    })

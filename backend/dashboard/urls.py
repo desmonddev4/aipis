@@ -14,6 +14,8 @@ urlpatterns = [
     path("submissions/", submissions_api.submission_list),
     path("submissions/export/", submissions_api.export_csv),
     path("submissions/bulk/", submissions_api.bulk),
+    path("submissions/<int:pk>/photo/", submissions_api.submission_photo),
+    path("submissions/<int:pk>/decision/", submissions_api.decision),
     path("submissions/<int:pk>/", submissions_api.submission_detail),
     path("submissions/<int:pk>/notes/", submissions_api.add_note),
     path("submissions/<int:pk>/reply/", submissions_api.reply),

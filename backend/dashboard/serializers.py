@@ -48,6 +48,8 @@ def submission_dict(s, detail=False):
         "status_label": s.get_status_display(),
         "created_at": iso(s.created_at),
         "message": s.message if detail else s.message[:160],
+        "has_photo": bool(s.photo),
+        "photo_name": s.photo.name.split("/")[-1] if s.photo else "",
     }
     if s.kind == Submission.Kind.REGISTRATION:
         payment = getattr(s, "payment", None)
@@ -64,6 +66,7 @@ def submission_dict(s, detail=False):
     if detail:
         data["ip_address"] = s.ip_address
         data["notes"] = [note_dict(n) for n in s.notes.select_related("author")]
+        data["photo_url"] = f"/submissions/{s.pk}/photo/" if s.photo else ""
     return data
 
 

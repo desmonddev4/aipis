@@ -189,6 +189,11 @@ body.registration-drawer-open { overflow:hidden; }
 .registration-drawer .section-head p:last-child { color:var(--ink-soft); }
 .registration-drawer.is-open .section-head, .registration-drawer.is-open .registration-form { animation:rise .6s .15s var(--ease) both; }
 .registration-drawer.is-open .registration-form { animation-delay:.28s; }
+.exhibitor-drawer-callout { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin:0 0 1.25rem; padding:1rem 1.1rem; border:1px solid rgba(26,92,42,.16); border-left:4px solid var(--gold-400); border-radius:16px; background:linear-gradient(135deg,#fffdf5,#f3f8f3); box-shadow:0 8px 22px rgba(5,32,19,.07); }
+.exhibitor-drawer-callout h3 { margin:.1rem 0 .3rem; color:var(--green-900); font-size:1.05rem; }
+.exhibitor-drawer-callout p { margin:0; color:var(--ink-soft); font-size:.92rem; }
+.exhibitor-drawer-callout .eyebrow { margin:0 0 .35rem; }
+.exhibitor-drawer-callout .btn { flex:none; white-space:nowrap; }
 
 .registration-form { display:grid; gap:1.25rem; margin:0 auto; padding:clamp(1rem,3vw,1.6rem); background:#fff; border:1px solid rgba(26,92,42,.12); border-radius:24px; box-shadow:0 18px 48px rgba(5,32,19,.1); }
 .registration-form .note { color:var(--ink-soft); margin:.9rem 0 0; font-size:.92rem; }
@@ -267,6 +272,8 @@ body.registration-drawer-open { overflow:hidden; }
   .registration-drawer .section-head { margin-bottom:1rem; }
   .registration-drawer .section-head h2 { font-size:1.55rem; }
   .registration-drawer .section-head p:last-child { font-size:.95rem; }
+  .exhibitor-drawer-callout { align-items:flex-start; flex-direction:column; margin-bottom:1rem; }
+  .exhibitor-drawer-callout .btn { width:100%; }
   .registration-form { gap:1rem; padding:1rem; border-radius:20px; }
   .registration-form fieldset { padding:1rem; }
   .registration-grid { grid-template-columns:minmax(0,1fr); gap:.8rem; }
@@ -354,11 +361,13 @@ body.registration-drawer-open { overflow:hidden; }
                     <tr><td data-label="Category"><strong>Ghanaian delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">400</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell early">340</td></tr>
                     <tr><td data-label="Category"><strong>Public sector and university staff (Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">350</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell early">300</td></tr>
                     <tr><td data-label="Category"><strong>Student or young professional (under 35)</strong></td><td data-label="Standard fee (USD)" class="num-cell">200</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell early">170</td></tr>
+                    <tr><td data-label="Category"><strong>Exhibitor</strong></td><td data-label="Standard fee (USD)" class="num-cell">3,000 / m²</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell">No early rate</td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
               <p class="note" data-rv>Fees cover all conference sessions, lunches and refreshments, summit materials and the field day. Registrations for five or more attendees receive a 10 percent discount.</p>
+              <p class="note" data-rv>Exhibition space is priced separately at USD 3,000 per square metre. <a href="partner-registration.html?package=Exhibitor">Apply to exhibit</a>.</p>
               <div class="btn-row" data-rv>
                 <a class="btn btn-primary btn-lg" href="#online-registration">Register online <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></a>
               </div>
@@ -395,6 +404,7 @@ body.registration-drawer-open { overflow:hidden; }
         <header class="registration-drawer-header"><div class="registration-drawer-brand"><img src="assets/register%20and%20favicon%20logo.png" alt=""><span><strong>AIPIS 2027</strong><small>Africa Infrastructure, Prosperity and Industrialisation Summit</small></span></div><button class="registration-drawer-close" type="button" aria-label="Close registration form">&times;</button></header>
         <div class="container">
           <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register attendees</h2><p>Enter each attendee’s details and registration category. Updates and payment information will be sent to the first attendee’s email address.</p></div>
+          <aside class="exhibitor-drawer-callout" aria-label="Exhibitor registration"><div><p class="eyebrow">Exhibition space</p><h3>Exhibit at AIPIS 2027</h3><p>Exhibition space is priced at <strong>USD 3,000 per square metre</strong>. Exhibitor applications are handled separately from delegate registration.</p></div><a class="btn btn-outline" href="partner-registration.html?package=Exhibitor">Apply as an exhibitor</a></aside>
           <form id="registration-form" class="registration-form" novalidate>
             <div class="registration-layout">
             <fieldset class="registration-panel"><legend>Attendee details</legend><p>Enter a name, email, phone number, country and registration category for each attendee. Choose a phone country calling code and enter the number. Updates go to the first attendee listed.</p><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add attendee</button><p class="note">Registrations for five or more attendees receive a 10% discount.</p></fieldset>

@@ -114,8 +114,8 @@
 
     /* solid brand card in the logo's colours */
     .hero-side .brand {
-      display: flex; flex-direction: column; align-items: center;
-      border-radius: 22px; padding: 1.1rem 1rem .9rem; text-align: center; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 20px; padding: .8rem 1rem; text-align: left; overflow: hidden;
       background: linear-gradient(160deg, #0f5230 0%, #0a3a22 55%, #072b19 100%);
       border: 1px solid rgba(244,162,76,.6);
       -webkit-backdrop-filter: none; backdrop-filter: none;
@@ -127,9 +127,10 @@
     .hero-side .brand > * { position: relative; }
 
     /* perfect circle: fixed size, cannot shrink or stretch */
+    .hero-side .brand-content { display: flex; align-items: center; gap: .75rem; }
     .hero-side .brand-logo {
-      flex: none; width: 76px; height: 76px; aspect-ratio: 1 / 1;
-      margin: 0 auto .65rem; padding: 10px; border-radius: 50%; overflow: hidden;
+      flex: none; width: 64px; height: 64px; aspect-ratio: 1 / 1;
+      margin: 0; padding: 8px; border-radius: 50%; overflow: hidden;
       display: grid; place-items: center;
       background: #fff;
       box-shadow: 0 0 0 3px var(--orange-500), 0 0 0 9px rgba(244,162,76,.2), 0 8px 26px rgba(0,0,0,.35);
@@ -137,12 +138,12 @@
     }
     .hero-side .brand-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 0; }
 
-    .hero-side .brand-name { font-family: var(--font-head); font-weight: 800; font-size: clamp(2.2rem, 1.8rem + 2vw, 3.2rem); letter-spacing: .06em; line-height: 1; padding-left: .06em; color: #fff; text-shadow: 0 3px 14px rgba(0,0,0,.35); }
-    .hero-side .brand-year { display: flex; align-items: center; justify-content: center; gap: .55rem; margin-top: .25rem; width: 100%; }
-    .hero-side .brand-year span { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.35rem, 1.1rem + 1vw, 1.8rem); letter-spacing: .2em; padding-left: .2em; color: var(--orange-400); }
-    .hero-side .brand-year i { flex: 1; max-width: 56px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--orange-500)); }
+    .hero-side .brand-copy { display: grid; justify-items: start; }
+    .hero-side .brand-name { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.6rem); letter-spacing: .06em; line-height: 1; padding-left: .06em; color: #fff; text-shadow: 0 3px 14px rgba(0,0,0,.35); }
+    .hero-side .brand-year { display: flex; align-items: center; justify-content: flex-start; gap: .35rem; margin-top: .15rem; width: auto; }
+    .hero-side .brand-year span { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.15rem, 1rem + .7vw, 1.55rem); letter-spacing: .16em; padding-left: .16em; color: var(--orange-400); }
+    .hero-side .brand-year i { flex: none; width: 24px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--orange-500)); }
     .hero-side .brand-year i:last-child { transform: scaleX(-1); }
-    .hero-side .brand-sub { margin: .55rem 0 0; font-size: .8rem; font-weight: 600; color: #e6efe8; letter-spacing: .02em; }
 
     /* sections */
     .section { position: relative; overflow: hidden; padding: clamp(3rem, 2rem + 4vw, 5.5rem) 0; }
@@ -320,12 +321,15 @@
           <div class="hero-side">
 
             <div class="brand" aria-label="AIPIS 2027">
-              <div class="brand-logo">
-                <img src="assets/register%20and%20favicon%20logo.png" alt="AIPIS logo" width="96" height="96">
+              <div class="brand-content">
+                <div class="brand-logo">
+                  <img src="assets/register%20and%20favicon%20logo.png" alt="AIPIS logo" width="96" height="96">
+                </div>
+                <div class="brand-copy">
+                  <div class="brand-name">AIPIS</div>
+                  <div class="brand-year"><i></i><span>2027</span><i></i></div>
+                </div>
               </div>
-              <div class="brand-name">AIPIS</div>
-              <div class="brand-year"><i></i><span>2027</span><i></i></div>
-              <p class="brand-sub">Accra, Ghana &middot; 22 to 27 March</p>
             </div>
 
             <aside class="count glass-dark" aria-label="Countdown to AIPIS 2027">

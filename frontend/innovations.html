@@ -73,7 +73,15 @@ p { margin: 0 0 1em; }
 .roundtable-card dt { color:var(--orange-300); font-weight:800; }
 .roundtable-card dd { margin:0 0 .65rem; }
 .roundtable-flow { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 1.5rem; }
-.roundtable-flow span { border:1px solid rgba(247,179,107,.65); border-radius:999px; padding:.3rem .8rem; color:#fff; }
+.roundtable-flow span { border:1px solid var(--orange-400); border-radius:999px; padding:.3rem .8rem; color:var(--green-950); background:var(--orange-400); font-weight:700; }
+.section-dark .roundtable-card { background:#fff; -webkit-backdrop-filter:none; backdrop-filter:none; border:1px solid #d7e5da; border-top:5px solid var(--orange-500); box-shadow:0 12px 30px rgba(0,0,0,.24); color:var(--ink); }
+.section-dark .roundtable-card h3 { color:var(--green-900); }
+.section-dark .roundtable-card p { color:var(--ink-soft); }
+.section-dark .roundtable-card .day-date { color:var(--green-700)!important; }
+.section-dark .roundtable-card dt { color:var(--green-800); }
+.section-dark .roundtable-card dd { color:var(--ink-soft); }
+.section-dark .btn-outline { background:#fff; color:var(--green-900); border-color:#fff; -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none; }
+.section-dark .btn-outline:hover { background:var(--orange-400); color:var(--green-950); border-color:var(--orange-400); }
 
 /* glass */
 .glass { background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.05)); -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%); border: 1px solid rgba(255,255,255,.22); box-shadow: 0 12px 36px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.3); color: #e3efe7; }
@@ -219,7 +227,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
           <article class="glass card inno" data-rv="zoom" style="--i:2"><span class="num">03</span><h3>Unfinished Projects Forensic Clinic</h3><p>Led by AIPAF. Panels of engineers, quantity surveyors, lawyers and auditors examine stalled projects and set out the causes and a recovery plan.</p></article>
           <article class="glass card inno" data-rv="zoom" style="--i:0"><span class="num">04</span><h3>Build-with-Africa Procurement Exchange</h3><p>Pre-arranged meetings between project owners, contractors and African manufacturers of steel, cement, cables and building materials.</p></article>
           <article class="glass card inno" data-rv="zoom" style="--i:1"><span class="num">05</span><h3>Site-to-Summit Field Day</h3><p>A full day at live projects, industrial sites and local suppliers around Accra and Tema, with maintainability ratings for selected assets.</p></article>
-          <article class="glass card inno" data-rv="zoom" style="--i:2"><span class="num">06</span><h3>The AIPIS Roundtables</h3><p>Four focused dialogues connect infrastructure with finance, diplomacy, maintainability, land and traditional authority: the Africa Infrastructure Bankability Roundtable; the Africa Infrastructure and Resource Diplomacy Roundtable; the Africa Infrastructure Maintainability Roundtable; and the Land, Traditional Authority and Infrastructure Roundtable.</p></article>
+          <article class="glass card inno" data-rv="zoom" style="--i:2"><span class="num">06</span><h3>The AIPIS Roundtables</h3><p>Four closed roundtables on bankability, resource diplomacy, maintainability and land follow each project from the deal to the asset in use. <a href="#roundtables">See the four roundtables</a></p></article>
           <article class="glass card inno inno-wide" data-rv="zoom" style="--i:0"><span class="num">07</span><h3>Commitments Tracker and AIPIS Delivery Compact</h3><p>Every pledge is recorded publicly and reported at the next edition. The summit closes with the signing of the AIPIS Delivery Compact.</p></article>
           </div>
         </div>
@@ -245,7 +253,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
         <div class="cta-box" data-rv="zoom">
           <div>
             <h2>Join us in Accra</h2>
-            <p>16 to 20 March 2027, Labadi Beach Hotel, Accra, Ghana.</p>
+            <p>22 to 27 March 2027, Labadi Beach Hotel, Accra, Ghana.</p>
           </div>
           <div class="btn-row">
             <a class="btn btn-primary btn-lg" href="register.html#online-registration">Register to attend <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></a>

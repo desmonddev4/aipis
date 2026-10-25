@@ -126,8 +126,16 @@ p { margin: 0 0 1em; }
 .partner-card .partner-links { margin-top: 1rem; padding-top: .85rem; border-top: 1px solid rgba(255,255,255,.2); font-size: .92rem; line-height: 1.8; }
 .partner-card .partner-links a { display: inline-block; margin-right: .55rem; font-weight: 700; }
 .partner-card .plain-list a { font-weight: 700; }
+.partner-grid { align-items: stretch; }
+.partner-card { display: flex; flex-direction: column; height: 100%; }
+.partner-card > h3 { min-height: 2.5em; }
+.partner-card > .partner-links { margin-top: auto; }
 .partner-logo-frame { min-height: 116px; margin: 0 0 1rem; padding: .65rem 1rem; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.75); border-radius: 14px; background: #fff; }
 .partner-logo { width: 100%; height: 96px; object-fit: contain; }
+.partner-logo-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .7rem; margin: 0 0 1rem; }
+.partner-logo-pair .partner-logo-frame { min-width: 0; margin: 0; padding: .55rem; }
+.partner-org { display: flex; align-items: center; gap: .75rem; }
+.partner-org-logo { width: 52px; height: 52px; flex: none; padding: 3px; border: 1px solid rgba(255,255,255,.8); border-radius: 9px; background: #fff; object-fit: contain; }
 .who h3 { position: relative; padding-top: 1rem; }
 .who h3::before { content: ""; position: absolute; top: 0; left: 0; width: 38px; height: 4px; border-radius: 2px; background: var(--orange-500); transition: width .4s var(--ease); }
 .who:hover h3::before { width: 72px; }
@@ -206,16 +214,22 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
 
       <section class="section" id="partners">
         <div class="container">
-          <div class="grid grid-3">
+          <div class="grid grid-3 partner-grid">
             <article class="glass card partner-card" data-rv="zoom" style="--i:0">
               <p class="eyebrow">Founder and Convenor</p><h3>Green Communities International (GCI)</h3>
-              <div class="partner-logo-frame"><img class="partner-logo" src="assets/GCI%20Green%20Growth%20Logo.png" alt="Green Communities International logo" loading="lazy"></div>
+              <div class="partner-logo-pair">
+                <div class="partner-logo-frame"><img class="partner-logo" src="assets/GCI%20Green%20Growth%20Logo.png" alt="Green Communities International logo" loading="lazy"></div>
+                <div class="partner-logo-frame"><img class="partner-logo" src="assets/AIPIS-LOGO.png" alt="AIPIS logo" loading="lazy"></div>
+              </div>
               <p>GCI founded AIPIS and convenes it. It owns the AIPIS name, brand, website and outputs, runs the AIPIS Secretariat, holds the summit finances, signs partner and sponsor agreements, and chairs the Summit Steering Committee.</p>
               <p class="partner-links"><a href="https://www.gcigh.org" target="_blank" rel="noopener noreferrer">Visit GCI website</a></p>
             </article>
             <article class="glass card partner-card" data-rv="zoom" style="--i:1">
               <p class="eyebrow">Academic Partner</p><h3>Kwame Nkrumah University of Science and Technology (KNUST)</h3>
-              <div class="partner-logo-frame"><img class="partner-logo" src="assets/KNUST%20Logo.jpg" alt="Kwame Nkrumah University of Science and Technology logo" loading="lazy"></div>
+              <div class="partner-logo-pair">
+                <div class="partner-logo-frame"><img class="partner-logo" src="assets/KNUST%20Logo.jpg" alt="Kwame Nkrumah University of Science and Technology logo" loading="lazy"></div>
+                <div class="partner-logo-frame"><img class="partner-logo" src="assets/built%20env.jpg" alt="KNUST College of Art and Built Environment Students Association logo" loading="lazy"></div>
+              </div>
               <p>The College of Art and Built Environment, the Faculty of Built Environment and the Department of Construction Technology and Management lead the research and practice stream, Prosperity Index research and peer-reviewed proceedings, and nominate the chair of the Scientific Committee.</p>
               <p class="partner-links"><a href="https://www.knust.edu.gh" target="_blank" rel="noopener noreferrer">KNUST website</a><a href="https://cabe.knust.edu.gh" target="_blank" rel="noopener noreferrer">CABE website</a><a href="https://ctm.knust.edu.gh" target="_blank" rel="noopener noreferrer">DCTM website</a></p>
             </article>
@@ -234,10 +248,10 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
             <article class="glass card partner-card" data-rv="zoom" style="--i:0">
               <p class="eyebrow">Founding Government Partners</p><h3>Government of Ghana</h3>
               <ul class="plain-list">
-                <li>Ministry of Finance<br><a href="https://www.mofep.gov.gh" target="_blank" rel="noopener noreferrer">mofep.gov.gh</a></li>
-                <li>Ministry of Works, Housing and Water Resources<br><a href="https://mwhwr.gov.gh" target="_blank" rel="noopener noreferrer">mwhwr.gov.gh</a></li>
-                <li>Ministry of Trade, Agribusiness and Industry<br><a href="https://moti.gov.gh" target="_blank" rel="noopener noreferrer">moti.gov.gh</a></li>
-                <li>Ministry of Energy and Green Transition<br><a href="https://energymin.gov.gh" target="_blank" rel="noopener noreferrer">energymin.gov.gh</a></li>
+                <li><span class="partner-org"><img class="partner-org-logo" src="assets/Ministry%20of%20finance.jpg" alt="" loading="lazy"><span>Ministry of Finance<br><a href="https://www.mofep.gov.gh" target="_blank" rel="noopener noreferrer">mofep.gov.gh</a></span></span></li>
+                <li><span class="partner-org"><img class="partner-org-logo" src="assets/Ministry%20of%20works%20and%20housing.jpg" alt="" loading="lazy"><span>Ministry of Works, Housing and Water Resources<br><a href="https://mwhwr.gov.gh" target="_blank" rel="noopener noreferrer">mwhwr.gov.gh</a></span></span></li>
+                <li><span class="partner-org"><img class="partner-org-logo" src="assets/Ministry%20of%20trade%2C%20agribusiness%20and%20industry.jpg" alt="" loading="lazy"><span>Ministry of Trade, Agribusiness and Industry<br><a href="https://moti.gov.gh" target="_blank" rel="noopener noreferrer">moti.gov.gh</a></span></span></li>
+                <li><span class="partner-org"><img class="partner-org-logo" src="assets/Ministry%20of%20energy%20and%20green%20transition.jpg" alt="" loading="lazy"><span>Ministry of Energy and Green Transition<br><a href="https://energymin.gov.gh" target="_blank" rel="noopener noreferrer">energymin.gov.gh</a></span></span></li>
                 <li>24-Hour Economy and Accelerated Export Development Secretariat<br><a href="https://24hplus.gov.gh" target="_blank" rel="noopener noreferrer">24hplus.gov.gh</a></li>
               </ul>
             </article>

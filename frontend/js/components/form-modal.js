@@ -259,6 +259,7 @@ body.modal-open { overflow: hidden; }
         <button type="button" data-form="guest" data-role="Special Guest Speaker">Special Guest Speaker <small>· Up to 6 applications</small></button>
         <button type="button" data-form="keynote" data-role="Distinguished Keynote Speaker">Distinguished Keynote Speaker <small>· Up to 6 applications</small></button>
         <button type="button" data-form="panelist" data-role="Panelist">Panelist</button>
+        <button type="button" data-redirect="partner-registration.html?package=Exhibitor">Exhibitor</button>
         <button type="button" data-form="technical" data-role="Technical Keynote Presenter">Technical Keynote Presenter <small>· Up to 12 applications</small></button>
         <button type="button" data-form="poster" data-role="Poster Presenter">Poster Presenter <small>· Up to 20 applications</small></button>
       </div>
@@ -349,6 +350,12 @@ body.modal-open { overflow: hidden; }
     if (roleChoice) {
       closeRolePicker();
       open(roleChoice.dataset.form, roleChoice);
+      return;
+    }
+    const redirectedRole = e.target.closest(".role-picker-options [data-redirect]");
+    if (redirectedRole) {
+      closeRolePicker();
+      window.location.href = redirectedRole.dataset.redirect;
       return;
     }
     const trigger = e.target.closest("[data-form]");

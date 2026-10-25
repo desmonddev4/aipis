@@ -279,7 +279,6 @@ body.modal-open { overflow: hidden; }
         <button type="button" data-form="guest" data-role="Special Guest Speaker">Special Guest Speaker <small>· Up to 6 applications</small></button>
         <button type="button" data-form="keynote" data-role="Distinguished Keynote Speaker">Distinguished Keynote Speaker <small>· Up to 6 applications</small></button>
         <button type="button" data-form="panelist" data-role="Panelist">Panelist</button>
-        <button type="button" data-form="exhibitor">Exhibitor</button>
         <button type="button" data-form="technical" data-role="Technical Keynote Presenter">Technical Keynote Presenter <small>· Up to 12 applications</small></button>
         <button type="button" data-form="poster" data-role="Poster Presenter">Poster Presenter <small>· Up to 20 applications</small></button>
       </div>

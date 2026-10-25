@@ -6,7 +6,7 @@
   const add = document.getElementById("add-delegate");
   const error = document.getElementById("registration-error");
   const submit = document.getElementById("registration-submit");
-  const categories = ["International delegate", "African delegate (outside Ghana)", "Ghanaian delegate", "Public sector and university staff (Ghana)", "Student or young professional (under 35)"];
+  const categories = ["International delegate", "African delegate (outside Ghana)", "Ghanaian delegate", "Public sector and university staff (Ghana)", "Student or young professional (under 35)", "Exhibitor"];
   let count = 0;
   let checkoutUrl = "";
   function addDelegate() {

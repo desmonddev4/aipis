@@ -14,6 +14,7 @@
     poster: "Poster abstract",
     exhibitor: "Exhibitor booking",
     forensic: "Forensic Clinic",
+    roundtable: "Roundtable invitation",
   };
   const STATUS_LABELS = { new: "New", in_progress: "In progress", handled: "Handled", archived: "Archived" };
 

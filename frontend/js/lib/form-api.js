@@ -36,7 +36,7 @@
   const clientValidate = (form) => {
     const errors = {};
     form.querySelectorAll("[required]").forEach((el) => {
-      if (!el.value.trim()) errors[el.name] = "This field is required.";
+      if (el.type === "checkbox" ? !el.checked : !el.value.trim()) errors[el.name] = "This field is required.";
     });
     const email = form.elements.email;
     if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) errors.email = "Please enter a valid email address.";

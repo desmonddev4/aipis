@@ -23,6 +23,7 @@
         { href: "speakers.html", label: "Speakers and presenters", icon: "mic", kinds: ["keynote", "guest", "technical", "poster"] },
         { href: "exhibitors.html", label: "Exhibitors", icon: "bag", kinds: ["exhibitor"] },
         { href: "forensic.html", label: "Forensic Clinic", icon: "search", kinds: ["forensic"] },
+        { href: "roundtables.html", label: "Roundtable invitations", icon: "users", kinds: ["roundtable"] },
         { href: "messages.html", label: "Messages", icon: "mail", kinds: ["contact"] },
       ],
     },

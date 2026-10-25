@@ -31,8 +31,15 @@ ALLOWED_DETAILS = {
     "forensic": ["project", "country"],
     "keynote": ["nominee"],
     "guest": ["nominee"],
+    "roundtable": ["roundtable", "role", "country", "experience"],
 }
-MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "technical", "partnership", "exhibitor"}
+MESSAGE_REQUIRED = {"contact", "forensic", "poster", "keynote", "guest", "technical", "partnership", "exhibitor", "roundtable"}
+ROUNDTABLES = {
+    "Africa Infrastructure Bankability Roundtable",
+    "Africa Infrastructure and Resource Diplomacy Roundtable",
+    "Africa Infrastructure Maintainability Roundtable",
+    "Africa Land, Traditional Authority and Infrastructure Roundtable (Africa Land TRAIR)",
+}
 PARTNERSHIP_PACKAGES = {
     "Founding Partner", "Prosperity Index Partner", "Strategic Partner", "Knowledge Partner",
     "Industry Partner", "Session Partner", "Gala Dinner Partner", "Field Day Partner",
@@ -415,10 +422,23 @@ def submit(request):
                 errors["booths"] = "Request between 1 and 30 booths."
             if not clean_text(data.get("product_summary"), 2000):
                 errors["product_summary"] = "Describe the products, services or projects you plan to exhibit."
+    if kind == Submission.Kind.ROUNDTABLE:
+        if data.get("consent") not in (True, "on"):
+            errors["consent"] = "Please agree to the privacy notice before submitting."
+        if not clean_text(data.get("role"), 120):
+            errors["role"] = "Please enter your role or title."
+        if not clean_text(data.get("country"), 100):
+            errors["country"] = "Please enter your country."
+        if clean_text(data.get("roundtable"), 120) not in ROUNDTABLES:
+            errors["roundtable"] = "Choose a roundtable of interest."
+        if not clean_text(data.get("experience"), 2500):
+            errors["experience"] = "Tell us about your relevant experience."
     if errors:
         return JsonResponse({"ok": False, "errors": errors}, status=400)
 
-    details = {key: clean_text(data.get(key), 200) for key in ALLOWED_DETAILS.get(kind, [])}
+    details = {key: clean_text(data.get(key), 2500 if key == "experience" else 200) for key in ALLOWED_DETAILS.get(kind, [])}
+    if kind == Submission.Kind.ROUNDTABLE:
+        details.update({"role": clean_text(data.get("role"), 120), "consent": "Agreed"})
     if kind in {"partnership", "exhibitor"}:
         details.update({
             "organisation_type": clean_text(data.get("organisation_type"), 80),

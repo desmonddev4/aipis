@@ -13,6 +13,7 @@ class Submission(models.Model):
         POSTER = "poster", "Poster abstract"
         EXHIBITOR = "exhibitor", "Exhibition booking"
         FORENSIC = "forensic", "Forensic Clinic nomination"
+        ROUNDTABLE = "roundtable", "Roundtable invitation request"
 
     class Status(models.TextChoices):
         NEW = "new", "New"

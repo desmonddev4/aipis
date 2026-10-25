@@ -90,6 +90,31 @@
       intro: "Nominate a stalled or abandoned project for review by panels of engineers, quantity surveyors, lawyers and auditors.",
       fields: [...base, text("project", "Project name", { required: true }), text("country", "Country"), area("message", "Describe the project and why it stalled", { required: true })],
     },
+    roundtable: {
+      title: "Request a Roundtable invitation",
+      subject: "AIPIS 2027 Roundtable invitation request",
+      intro: "Roundtables are closed sessions with limited invited participation. Share your details for the Secretariat to consider; submitting this request does not confirm an invitation.",
+      success: "Your request has been received for consideration. This is not confirmation of an invitation; the AIPIS Secretariat will contact you.",
+      drawer: true,
+      fields: [
+        text("name", "Full name", { required: true, autocomplete: "name" }),
+        text("email", "Email", { required: true, type: "email", autocomplete: "email" }),
+        text("organisation", "Organisation (optional)", { autocomplete: "organization" }),
+        text("role", "Role or title", { required: true }),
+        { name: "phone", label: "Phone (optional)", type: "phone" },
+        text("country", "Country", { required: true, autocomplete: "country-name" }),
+        { name: "roundtable", label: "Roundtable of interest", type: "select", required: true, options: [
+          "Choose a roundtable",
+          "Africa Infrastructure Bankability Roundtable",
+          "Africa Infrastructure and Resource Diplomacy Roundtable",
+          "Africa Infrastructure Maintainability Roundtable",
+          "Africa Land, Traditional Authority and Infrastructure Roundtable (Africa Land TRAIR)",
+        ] },
+        area("experience", "Relevant experience", { required: true, maxlength: 2500 }),
+        area("message", "Why would you like to attend, and what perspective would you bring?", { required: true }),
+        { name: "consent", label: "I agree that AIPIS may use these details to review my request and contact me about it.", type: "checkbox", required: true, link: { href: "privacy-policy.html", label: "Read the privacy notice" } },
+      ],
+    },
   };
 
   /* ---------- Styles (scoped to .modal, self-contained) ---------- */
@@ -112,6 +137,10 @@
 .modal-close { position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(22,105,47,.2); background: rgba(22,105,47,.1); color: var(--md-g9); display: grid; place-items: center; cursor: pointer; transition: background .2s, transform .35s var(--md-ease); }
 .modal-close:hover { background: var(--md-o5); transform: rotate(90deg); }
 .modal .field { display: grid; gap: .35rem; margin-bottom: 1rem; }
+.modal .checkbox-label { display: flex; align-items: flex-start; gap: .65rem; }
+.modal .checkbox-label input { width: 1.1rem; height: 1.1rem; margin: .15rem 0 0; padding: 0; border-radius: 4px; box-shadow: none; flex: none; accent-color: var(--md-g7); }
+.modal .checkbox-label span { font-weight: 500; }
+.modal .field-link { font-size: .9rem; }
 .modal label { font-weight: 700; color: var(--md-g9); font-size: .95rem; }
 .modal input, .modal select, .modal textarea {
   width: 100%; font: inherit; color: var(--md-ink); background: rgba(255,255,255,.85); border: 1.5px solid rgba(22,105,47,.28); border-radius: 14px; padding: .75rem 1rem;
@@ -150,6 +179,10 @@ body.modal-open { overflow: hidden; }
   .modal-dialog { border-radius: 24px; }
   .modal .modal-btn { width: 100%; }
 }
+.modal.is-drawer { place-items: stretch end; padding: 0; }
+.modal.is-drawer .modal-dialog { width: min(560px, 100%); height: 100%; max-height: 100svh; border-radius: 24px 0 0 24px; animation: modal-drawer-in .3s var(--md-ease); }
+@keyframes modal-drawer-in { from { opacity: .7; transform: translateX(36px); } }
+@media (max-width: 600px) { .modal.is-drawer .modal-dialog { width: 100%; border-radius: 20px 0 0 20px; } }
 @media (prefers-reduced-motion: reduce) {
   .modal-backdrop, .modal-dialog { animation: none; }
   .modal .modal-btn, .modal-close { transition: none; }
@@ -195,12 +228,13 @@ body.modal-open { overflow: hidden; }
     const id = `m-${f.name}`;
     const req = f.required ? " required" : "";
     let control;
+    if (f.type === "checkbox") return `<div class="field checkbox-field"><label class="checkbox-label"><input id="${id}" name="${esc(f.name)}" type="checkbox"${req}><span>${esc(f.label)}</span></label>${f.link ? `<a class="field-link" href="${esc(f.link.href)}" target="_blank" rel="noopener">${esc(f.link.label)}</a>` : ""}</div>`;
     if (f.type === "phone") control = window.AIPISPhoneInput.markup({ id, name: f.name });
-    else if (f.type === "textarea") control = `<textarea id="${id}" name="${f.name}" rows="4"${req}></textarea>`;
+    else if (f.type === "textarea") control = `<textarea id="${id}" name="${f.name}" rows="4"${f.maxlength ? ` maxlength="${esc(f.maxlength)}"` : ""}${req}></textarea>`;
     else if (f.type === "select")
-      control = `<select id="${id}" name="${f.name}">${f.options.map((o) => `<option value="${esc(o)}">${esc(o)}</option>`).join("")}</select>`;
+      control = `<select id="${id}" name="${f.name}"${req}>${f.options.map((o, i) => `<option value="${i === 0 && f.required ? "" : esc(o)}">${esc(o)}</option>`).join("")}</select>`;
     else {
-      const extra = ["min", "max", "value", "autocomplete"].filter((k) => f[k] !== undefined).map((k) => ` ${k}="${esc(f[k])}"`).join("");
+      const extra = ["min", "max", "value", "autocomplete", "maxlength"].filter((k) => f[k] !== undefined).map((k) => ` ${k}="${esc(f[k])}"`).join("");
       control = `<input id="${id}" name="${f.name}" type="${f.type}"${extra}${req}>`;
     }
     return `<div class="field"><label for="${id}">${esc(f.label)}${f.required ? " *" : ""}</label>${control}</div>`;
@@ -213,6 +247,7 @@ body.modal-open { overflow: hidden; }
     if (!def) return;
     currentKind = kind;
     lastTrigger = trigger;
+    modal.classList.toggle("is-drawer", Boolean(def.drawer));
     $("#modalTitle").textContent = def.title;
     $("#modalIntro").textContent = def.intro;
     fieldsBox.innerHTML = def.fields.map(fieldHTML).join("");
@@ -262,8 +297,8 @@ body.modal-open { overflow: hidden; }
     submitForm(form, currentKind, FORMS[currentKind].subject, () => {
       fieldsBox.innerHTML = "";
       $("#modalIntro").textContent = "";
-      $("#modalTitle").textContent = "Thank you";
-      setStatus(form, "Your submission has been received. The AIPIS Secretariat will be in touch.", "ok");
+      $("#modalTitle").textContent = currentKind === "roundtable" ? "Request received" : "Thank you";
+      setStatus(form, FORMS[currentKind].success || "Your submission has been received. The AIPIS Secretariat will be in touch.", "ok");
       submitBtn.hidden = true;
       cancelBtn.textContent = "Close";
       cancelBtn.focus();

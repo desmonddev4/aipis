@@ -42,7 +42,7 @@
   background: radial-gradient(900px 420px at 85% -10%, rgba(244,162,76,.14), transparent 60%), radial-gradient(700px 380px at 5% 110%, rgba(31,138,62,.16), transparent 60%), linear-gradient(180deg, #0d1511, #070c09);
   font-family: var(--font-body, "Source Sans 3", system-ui, sans-serif);
 }
-.footer .container { position: relative; z-index: 1; width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+.footer .container { position: relative; z-index: 1; width: min(1320px, 100% - 2.5rem); margin-inline: auto; }
 .f-glass {
   border-radius: 28px; padding: clamp(1.4rem, 1rem + 1.8vw, 2.4rem);
   background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.03));

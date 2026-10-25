@@ -337,8 +337,7 @@ body.modal-open { overflow: hidden; }
   document.addEventListener("click", (e) => {
     const rolePickerLink = e.target.closest("[data-role-picker]");
     if (rolePickerLink) {
-      if (location.pathname.endsWith("speakers.html")) e.preventDefault();
-      else return;
+      e.preventDefault();
       openRolePicker(rolePickerLink);
       return;
     }

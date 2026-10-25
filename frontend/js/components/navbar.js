@@ -110,6 +110,7 @@
 .nav-menu .nav-register:hover::before { transform: translateX(120%); }
 .nav-menu .nav-register:hover, .nav-menu .nav-register.active { background: linear-gradient(135deg, #f7b36b, #f4a24c); color: #052013; transform: translateY(-2px); box-shadow: 0 12px 26px rgba(244,162,76,.55), inset 0 1px 0 rgba(255,255,255,.7); }
 .has-dropdown { position: relative; }
+.has-dropdown::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 14px; }
 .dropdown-toggle { display: inline-flex; align-items: center; gap: 0.35rem; }
 .dropdown-toggle svg { transition: transform .2s; }
 .dropdown-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }

@@ -196,7 +196,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
   .btn-row .btn, .cta-box .btn, .role .btn { width: 100%; }
   .table.stack td { grid-template-columns: 1fr; gap: .1rem; }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (min-width: 99999px) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js [data-rv] { opacity: 1; transform: none; }
@@ -304,7 +304,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
   }
 
   var blobs = document.querySelectorAll(".blob");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce = false;
   var ticking = false;
   function update() {
     var h = document.documentElement.scrollHeight - window.innerHeight;

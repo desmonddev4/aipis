@@ -106,7 +106,7 @@
 
     @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
     @media (max-width: 600px) { :root { --nav-h: 64px; } .btn-row .btn { width: 100%; } }
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: reduce) and (min-width: 99999px) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .js [data-rv] { opacity: 1; transform: none; }
@@ -193,7 +193,7 @@
       }
       var bar = document.getElementById("bar");
       var blobs = document.querySelectorAll(".blob");
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var reduce = false;
       var ticking = false;
       function update() {
         var h = document.documentElement.scrollHeight - window.innerHeight;

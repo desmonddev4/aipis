@@ -213,7 +213,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
   .table.stack td { grid-template-columns: 1fr; gap: .1rem; }
   .ph-chip { right: .6rem; }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (min-width: 99999px) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js [data-rv] { opacity: 1; transform: none; }
@@ -352,7 +352,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
   }
 
   var blobs = document.querySelectorAll(".blob");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce = false;
   var ticking = false;
   function update() {
     var h = document.documentElement.scrollHeight - window.innerHeight;
@@ -373,7 +373,7 @@ button[disabled] { opacity: .65; cursor: wait; transform: none; }
   var video = document.getElementById("phVideo");
   var tilt = document.getElementById("phTilt");
   if (!video) return;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = { matches: false };
   function play() { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
 
   if (reduce.matches) { video.removeAttribute("autoplay"); video.pause(); }

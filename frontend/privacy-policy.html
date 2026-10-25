@@ -49,7 +49,7 @@
     .js [data-rv="left"] { transform: translateX(-24px); }
     .js [data-rv="right"] { transform: translateX(24px); }
     .js [data-rv].in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .js [data-rv] { opacity: 1; transform: none; transition: none; } }
+    @media (prefers-reduced-motion: reduce) and (min-width: 99999px) { html { scroll-behavior: auto; } .js [data-rv] { opacity: 1; transform: none; transition: none; } }
   </style>
 </head>
 <body>

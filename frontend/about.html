@@ -166,7 +166,7 @@ button[disabled]{opacity:.65;cursor:wait}
 @media(max-width:1040px){.sdg-grid{grid-template-columns:repeat(3,1fr)}.timeline{grid-template-columns:repeat(3,1fr);row-gap:1.8rem}.timeline::before,.timeline::after{display:none}}
 @media(max-width:860px){.split,.hero-grid{grid-template-columns:1fr}.definitions{position:static}.page-hero{padding-top:calc(var(--nav-h) + 2rem)}.medallion{width:min(220px,54vw);order:-1;justify-self:start}.stats{grid-template-columns:repeat(2,1fr)}.gov-grid,.cols{grid-template-columns:1fr}.gov-map{display:none}}
 @media(max-width:600px){:root{--nav-h:64px}.container{width:min(1120px,100% - 2rem)}.sdg-grid{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:1fr}.subs{grid-template-columns:1fr}.def{padding-left:4.2rem}.btn{width:100%}.card:hover{transform:none}.medallion-disc{animation:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js [data-rv]{opacity:1;transform:none}.ring-draw{stroke-dashoffset:0}.section-head h2::after{width:84px}.gov-map *::before,.gov-map *::after{transform:none!important}}
+@media(prefers-reduced-motion:reduce) and (min-width:99999px){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js [data-rv]{opacity:1;transform:none}.ring-draw{stroke-dashoffset:0}.section-head h2::after{width:84px}.gov-map *::before,.gov-map *::after{transform:none!important}}
 @keyframes grow{from{transform:scaleX(0)}}@keyframes draw{to{stroke-dashoffset:0}}@keyframes float{50%{transform:translateY(-10px)}}
   </style>
 </head>
@@ -345,7 +345,7 @@ button[disabled]{opacity:.65;cursor:wait}
   <script src="js/components/form-modal.js"></script>
   <script>
 (function () {
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce = false;
   function count(el) {
     var end = +el.dataset.count, t0 = null;
     if (reduce) { el.textContent = end; return; }

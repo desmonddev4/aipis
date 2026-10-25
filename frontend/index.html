@@ -234,7 +234,7 @@
       .def { padding-left: 4rem; }
       .def-step { left: .9rem; }
     }
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: reduce) and (min-width: 99999px) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .js [data-rv] { opacity: 1; transform: none; }
@@ -453,7 +453,7 @@
       var label = document.getElementById("vnLabel");
       var tilt = document.getElementById("vnTilt");
       if (!section || !video) return;
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+      var reduce = { matches: false };
 
       /* entrance */
       if ("IntersectionObserver" in window) {
@@ -505,7 +505,7 @@
 
   <script>
     (function () {
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var reduce = false;
 
       /* reveal */
       var items = document.querySelectorAll("[data-rv]");

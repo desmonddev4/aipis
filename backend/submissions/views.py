@@ -4,7 +4,7 @@ import json
 import logging
 import uuid
 from datetime import date
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -54,6 +54,7 @@ REGISTRATION_PRICES_USD = {
     "Ghanaian delegate": (Decimal("400.00"), Decimal("340.00")),
     "Public sector and university staff (Ghana)": (Decimal("350.00"), Decimal("300.00")),
     "Student or young professional (under 35)": (Decimal("200.00"), Decimal("170.00")),
+    "Exhibitor": (Decimal("3000.00"), Decimal("3000.00")),
 }
 EARLY_REGISTRATION_DEADLINE = date(2027, 2, 28)
 
@@ -286,6 +287,7 @@ def registration_checkout(request):
     if not isinstance(attendees, list) or not 1 <= len(attendees) <= 50:
         errors["attendees"] = "Add between 1 and 50 attendees."
     cleaned_attendees = []
+    exhibitor_applications_requested = 0
     if isinstance(attendees, list):
         for index, attendee in enumerate(attendees[:50]):
             if not isinstance(attendee, dict):
@@ -296,6 +298,7 @@ def registration_checkout(request):
             attendee_phone = clean_text(attendee.get("phone"), 40)
             attendee_country = clean_text(attendee.get("country"), 100)
             category = clean_text(attendee.get("category"), 100)
+            exhibitor_details = {}
             if not attendee_name:
                 errors[f"attendee_name_{index}"] = f"Enter a name for attendee {index + 1}."
             if not valid_email(attendee_email):
@@ -306,24 +309,63 @@ def registration_checkout(request):
                 errors[f"attendee_category_{index}"] = f"Choose a category for attendee {index + 1}."
             if not attendee_country:
                 errors[f"attendee_country_{index}"] = f"Enter a country for attendee {index + 1}."
-            cleaned_attendees.append({
+            cleaned_attendee = {
                 "name": attendee_name,
                 "email": attendee_email,
                 "phone": attendee_phone,
                 "country": attendee_country,
                 "category": category,
-            })
+            }
+            if category == "Exhibitor":
+                exhibitor_applications_requested += 1
+                exhibitor_details = {
+                    "organisation": clean_text(attendee.get("organisation"), 200),
+                    "website": clean_text(attendee.get("website"), 250),
+                    "sector": clean_text(attendee.get("sector"), 120),
+                    "space_sqm": clean_text(attendee.get("space_sqm"), 12),
+                    "product_summary": clean_text(attendee.get("product_summary"), 2000),
+                    "space_requirements": clean_text(attendee.get("space_requirements"), 1000),
+                }
+                if not exhibitor_details["organisation"]:
+                    errors[f"attendee_organisation_{index}"] = f"Enter the organisation name for exhibitor {index + 1}."
+                if not exhibitor_details["sector"]:
+                    errors[f"attendee_sector_{index}"] = f"Enter the industry or sector for exhibitor {index + 1}."
+                if not exhibitor_details["product_summary"]:
+                    errors[f"attendee_product_summary_{index}"] = f"Describe what exhibitor {index + 1} will display."
+                try:
+                    space_sqm = Decimal(exhibitor_details["space_sqm"])
+                    if not space_sqm.is_finite() or space_sqm < Decimal("1") or space_sqm > Decimal("1000"):
+                        raise ValueError
+                    exhibitor_details["space_sqm"] = format(space_sqm.normalize(), "f")
+                except (InvalidOperation, TypeError, ValueError):
+                    errors[f"attendee_space_sqm_{index}"] = f"Enter between 1 and 1,000 square metres for exhibitor {index + 1}."
+                cleaned_attendee.update(exhibitor_details)
+            cleaned_attendees.append(cleaned_attendee)
     if errors:
         return JsonResponse({"ok": False, "errors": errors}, status=400)
+
+    if exhibitor_applications_requested:
+        active_registrations = Submission.objects.filter(
+            kind=Submission.Kind.REGISTRATION,
+            status__in=ACTIVE_APPLICATION_STATUSES,
+        ).only("details")
+        existing_exhibitor_applications = sum(
+            sum(1 for attendee in (submission.details or {}).get("attendees", []) if attendee.get("category") == "Exhibitor")
+            for submission in active_registrations
+        )
+        if existing_exhibitor_applications + exhibitor_applications_requested > 30:
+            return JsonResponse({"ok": False, "errors": {"capacity": "Exhibitor applications are now full. The maximum of 30 applications has been reached."}}, status=409)
 
     today = timezone.localdate()
     early = today <= EARLY_REGISTRATION_DEADLINE
     subtotal_usd = sum(
-        REGISTRATION_PRICES_USD[attendee["category"]][1 if early else 0]
+        (REGISTRATION_PRICES_USD[attendee["category"]][1 if early else 0] * Decimal(attendee["space_sqm"])
+         if attendee["category"] == "Exhibitor"
+         else REGISTRATION_PRICES_USD[attendee["category"]][1 if early else 0])
         for attendee in cleaned_attendees
     )
     discount_usd = Decimal("0.00")
-    if len(cleaned_attendees) >= 5:
+    if len(cleaned_attendees) >= 5 and not exhibitor_applications_requested:
         discount_usd = (subtotal_usd * Decimal("0.10")).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
     total_usd = subtotal_usd - discount_usd
     try:
@@ -337,6 +379,7 @@ def registration_checkout(request):
     details = {
         "category": next(iter(categories)) if len(categories) == 1 else "Multiple categories",
         "delegates": str(len(cleaned_attendees)),
+        "exhibitor_applications": str(exhibitor_applications_requested),
         "country": country,
         "attendees": cleaned_attendees,
         "early_rate": "yes" if early else "no",
@@ -352,7 +395,7 @@ def registration_checkout(request):
         kind=Submission.Kind.REGISTRATION,
         name=name,
         email=email,
-        organisation=organisation,
+        organisation=organisation or clean_text(first_attendee.get("organisation"), 200),
         phone=phone,
         details=details,
         ip_address=ip,
@@ -503,10 +546,10 @@ def submit(request):
         errors["name"] = "Please enter your name."
     if not valid_email(email):
         errors["email"] = "Please enter a valid email address."
-    if kind in MESSAGE_REQUIRED and not message:
+    if kind in MESSAGE_REQUIRED and kind != "exhibitor" and not message:
         errors["message"] = "Please add a message."
     if kind in {"partnership", "exhibitor"}:
-        if data.get("consent") is not True:
+        if data.get("consent") not in (True, "on", "1", "true"):
             errors["consent"] = "Please agree to the registration terms and privacy notice."
         if not clean_text(data.get("organisation_type"), 80):
             errors["organisation_type"] = "Please select an organisation type."

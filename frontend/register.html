@@ -211,6 +211,11 @@ body.registration-drawer-open { overflow:hidden; }
 .registration-form select[data-field="category"]:hover { border-color:rgba(22,105,47,.55); background-color:#fbfdfb; }
 .registration-form select[data-field="category"]:focus { outline:none; border-color:var(--gold-400); box-shadow:0 0 0 4px rgba(236,181,68,.26), 0 5px 16px rgba(5,32,19,.08); }
 .registration-form select[data-field="category"] option { color:var(--green-950); background:#fff; font-weight:500; }
+.exhibitor-fields { margin-top:1rem; padding:1rem; border:1px solid rgba(236,181,68,.55); border-radius:14px; background:linear-gradient(135deg,#fffdf5,#f8fbf8); }
+.exhibitor-fields[hidden] { display:none; }
+.exhibitor-fields-heading { margin:0 0 .8rem; color:var(--green-900); font-family:var(--font-head); font-weight:800; }
+.exhibitor-fields .note { margin:.8rem 0 0; }
+.exhibitor-fields .field-wide { grid-column:1 / -1; }
 .registration-form .registration-consent { display:flex; align-items:flex-start; gap:.7rem; padding:.9rem 1rem; border-radius:14px; background:var(--green-50); font-weight:500; }
 .registration-consent input { width:1.15rem; height:1.15rem; margin-top:.25rem; padding:0; accent-color:var(--green-700); flex:none; }
 
@@ -361,13 +366,12 @@ body.registration-drawer-open { overflow:hidden; }
                     <tr><td data-label="Category"><strong>Ghanaian delegate</strong></td><td data-label="Standard fee (USD)" class="num-cell">400</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell early">340</td></tr>
                     <tr><td data-label="Category"><strong>Public sector and university staff (Ghana)</strong></td><td data-label="Standard fee (USD)" class="num-cell">350</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell early">300</td></tr>
                     <tr><td data-label="Category"><strong>Student or young professional (under 35)</strong></td><td data-label="Standard fee (USD)" class="num-cell">200</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell early">170</td></tr>
-                    <tr><td data-label="Category"><strong>Exhibitor</strong></td><td data-label="Standard fee (USD)" class="num-cell">3,000 / m²</td><td data-label="Early fee (USD), paid by 28 February 2027" class="num-cell">No early rate</td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
               <p class="note" data-rv>Fees cover all conference sessions, lunches and refreshments, summit materials and the field day. Registrations for five or more attendees receive a 10 percent discount.</p>
-              <p class="note" data-rv>Exhibition space is priced separately at USD 3,000 per square metre. <a href="partner-registration.html?package=Exhibitor">Apply to exhibit</a>.</p>
+              <p class="note" data-rv>Exhibitors register through the shared application drawer. Choose the Exhibitor role to provide your organisation, booth and display requirements.</p>
               <div class="btn-row" data-rv>
                 <a class="btn btn-primary btn-lg" href="#online-registration">Register online <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></a>
               </div>
@@ -404,7 +408,7 @@ body.registration-drawer-open { overflow:hidden; }
         <header class="registration-drawer-header"><div class="registration-drawer-brand"><img src="assets/register%20and%20favicon%20logo.png" alt=""><span><strong>AIPIS 2027</strong><small>Africa Infrastructure, Prosperity and Industrialisation Summit</small></span></div><button class="registration-drawer-close" type="button" aria-label="Close registration form">&times;</button></header>
         <div class="container">
           <div class="section-head"><p class="eyebrow">Secure online registration</p><h2 id="registration-heading">Register attendees</h2><p>Enter each attendee’s details and registration category. Updates and payment information will be sent to the first attendee’s email address.</p></div>
-          <aside class="exhibitor-drawer-callout" aria-label="Exhibitor registration"><div><p class="eyebrow">Exhibition space</p><h3>Exhibit at AIPIS 2027</h3><p>Exhibition space is priced at <strong>USD 3,000 per square metre</strong>. Exhibitor applications are handled separately from delegate registration.</p></div><a class="btn btn-outline" href="partner-registration.html?package=Exhibitor">Apply as an exhibitor</a></aside>
+          <aside class="exhibitor-drawer-callout" aria-label="Exhibitor registration"><div><p class="eyebrow">Exhibition applications</p><h3>Are you exhibiting?</h3><p>Use the Exhibitor role in the shared application drawer to provide your organisation, products or services and booth requirements.</p></div><button class="btn btn-outline" type="button" data-role-picker>Open exhibitor form</button></aside>
           <form id="registration-form" class="registration-form" novalidate>
             <div class="registration-layout">
             <fieldset class="registration-panel"><legend>Attendee details</legend><p>Enter a name, email, phone number, country and registration category for each attendee. Choose a phone country calling code and enter the number. Updates go to the first attendee listed.</p><div id="delegate-list"></div><button class="btn btn-outline" type="button" id="add-delegate">Add attendee</button><p class="note">Registrations for five or more attendees receive a 10% discount.</p></fieldset>

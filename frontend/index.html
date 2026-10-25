@@ -109,6 +109,22 @@
     .scroll-cue { position: absolute; left: 50%; bottom: 18px; width: 22px; height: 34px; border: 2px solid rgba(255,255,255,.4); border-radius: 14px; transform: translateX(-50%); }
     .scroll-cue::after { content: ""; position: absolute; left: 50%; top: 6px; width: 4px; height: 7px; border-radius: 2px; background: var(--orange-400); transform: translateX(-50%); animation: wheel 1.8s infinite; }
 
+    /* hero side stack: brand + countdown */
+    .hero-side { display: flex; flex-direction: column; gap: 1.5rem; }
+    .brand { border-radius: 26px; padding: 1.8rem 1.5rem 1.5rem; text-align: center; overflow: hidden; animation: up .9s .15s var(--ease) both; }
+    .brand::before { content: ""; position: absolute; width: 260px; height: 260px; left: 50%; top: -90px; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle, rgba(244,162,76,.55), transparent 70%); filter: blur(20px); pointer-events: none; }
+    .brand > * { position: relative; }
+    .brand-logo { width: 104px; height: 104px; margin: 0 auto 1.1rem; padding: 12px; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fff, #f1ecde); box-shadow: 0 0 0 3px rgba(244,162,76,.75), 0 0 0 9px rgba(244,162,76,.15), 0 0 44px rgba(244,162,76,.55); animation: logoglow 3.6s ease-in-out infinite; }
+    .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .brand-name { font-family: var(--font-head); font-weight: 800; font-size: clamp(3rem, 2.2rem + 3vw, 4.4rem); letter-spacing: .06em; line-height: 1; padding-left: .06em;
+      background: linear-gradient(100deg, #fff 0%, var(--orange-300) 35%, var(--orange-500) 50%, var(--orange-300) 65%, #fff 100%); background-size: 220% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 5s linear infinite; filter: drop-shadow(0 4px 18px rgba(244,162,76,.35)); }
+    .brand-year { display: flex; align-items: center; justify-content: center; gap: .9rem; margin-top: .35rem; }
+    .brand-year span { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem); letter-spacing: .28em; padding-left: .28em; color: transparent; -webkit-text-stroke: 1.5px var(--orange-300); }
+    .brand-year i { flex: 1; max-width: 56px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--orange-500)); }
+    .brand-year i:last-child { transform: scaleX(-1); }
+    .brand-sub { margin: .9rem 0 0; font-size: .92rem; font-weight: 600; color: #cbd8ce; letter-spacing: .02em; }
+
     /* sections */
     .section { position: relative; overflow: hidden; padding: clamp(3rem, 2rem + 4vw, 5.5rem) 0; }
     .section .container { position: relative; z-index: 1; }
@@ -218,7 +234,7 @@
       .vn-copy h2 { max-width: 18ch; }
       .vn-info { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; } .count { max-width: 460px; } }
+    @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; } .hero-side { max-width: 460px; } }
     @media (max-width: 860px) { .split { grid-template-columns: 1fr; } .facts { grid-template-columns: 1fr; } }
     @media (max-width: 600px) {
       :root { --nav-h: 64px; }
@@ -248,6 +264,8 @@
     @keyframes bob { 50% { transform: translateY(6px); } }
     @keyframes vnspin { to { transform: rotate(360deg); } }
     @keyframes vnbob { 50% { translate: 0 -9px; } }
+    @keyframes shimmer { to { background-position: -220% 0; } }
+    @keyframes logoglow { 50% { box-shadow: 0 0 0 3px rgba(244,162,76,.9), 0 0 0 13px rgba(244,162,76,.08), 0 0 60px rgba(244,162,76,.75); } }
   </style>
 </head>
 <body>
@@ -280,16 +298,29 @@
             </div>
           </div>
 
-          <aside class="count glass-dark" aria-label="Countdown to AIPIS 2027">
-            <h2>Countdown to arrival day, 22 March 2027</h2>
-            <div class="count-grid" id="countdown" role="timer" aria-live="off">
-              <div><strong id="cd-d">--</strong><span>Days</span></div>
-              <div><strong id="cd-h">--</strong><span>Hours</span></div>
-              <div><strong id="cd-m">--</strong><span>Minutes</span></div>
-              <div><strong id="cd-s">--</strong><span>Seconds</span></div>
+          <div class="hero-side">
+
+            <div class="brand glass-dark" aria-label="AIPIS 2027">
+              <div class="brand-logo">
+                <img src="assets/register%20and%20favicon%20logo.png" alt="AIPIS logo" width="96" height="96">
+              </div>
+              <div class="brand-name">AIPIS</div>
+              <div class="brand-year"><i></i><span>2027</span><i></i></div>
+              <p class="brand-sub">Accra, Ghana &middot; 22 to 27 March</p>
             </div>
-            <p>Arrival on 22 March; conference sessions run 23–26 March.</p>
-          </aside>
+
+            <aside class="count glass-dark" aria-label="Countdown to AIPIS 2027">
+              <h2>Countdown to arrival day, 22 March 2027</h2>
+              <div class="count-grid" id="countdown" role="timer" aria-live="off">
+                <div><strong id="cd-d">--</strong><span>Days</span></div>
+                <div><strong id="cd-h">--</strong><span>Hours</span></div>
+                <div><strong id="cd-m">--</strong><span>Minutes</span></div>
+                <div><strong id="cd-s">--</strong><span>Seconds</span></div>
+              </div>
+              <p>Arrival on 22 March; conference sessions run 23–26 March.</p>
+            </aside>
+
+          </div>
         </div>
 
         <ul class="facts hero-facts" data-rv>

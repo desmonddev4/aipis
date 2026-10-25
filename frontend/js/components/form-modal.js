@@ -39,6 +39,16 @@
     "Session Partner", "Gala Dinner Partner", "Field Day Partner",
     "Student and Young Professional Bursary Partner", "Delegate Kit and Digital Partner", "General partnership enquiry",
   ];
+  const ORGANISATION_TYPES = [
+    "Contractor or construction company",
+    "Manufacturer or supplier",
+    "Consultancy or professional services",
+    "Public agency or government institution",
+    "University or research institution",
+    "Technology provider",
+    "Development or finance institution",
+    "Other",
+  ];
 
   const FORMS = {
     keynote: {
@@ -77,10 +87,20 @@
       fields: speakerBase,
     },
     exhibitor: {
-      title: "Book an exhibition booth",
+      title: "Register as an exhibitor",
       subject: "AIPIS 2027 exhibition booking",
-      intro: "A 6 sq m booth costs USD 3,000 and includes 2 delegate passes and a listing in the exhibitor directory. Thirty booths are available.",
-      fields: [...base, text("booths", "Number of booths", { type: "number", min: 1, max: 30, value: 1 }), area("message", "Anything we should know? (optional)")],
+      intro: "Tell us about your organisation and what you plan to exhibit. The AIPIS team will confirm space, booth arrangements and the applicable fee.",
+      drawer: true,
+      fields: [
+        ...base,
+        { name: "organisation_type", label: "Organisation type", type: "select", required: true, options: ORGANISATION_TYPES },
+        text("country", "Organisation country", { required: true, autocomplete: "country-name" }),
+        text("website", "Organisation website (optional)", { type: "url", autocomplete: "url" }),
+        text("booths", "Number of 6 m² booths", { type: "number", min: 1, max: 30, value: 1, required: true }),
+        area("product_summary", "Products, services or projects to exhibit", { required: true, maxlength: 2000 }),
+        area("space_requirements", "Stand, power or technical requirements (optional)", { maxlength: 1000 }),
+        { name: "consent", label: "I agree that AIPIS may use these details to review my exhibitor registration and contact me about it.", type: "checkbox", required: true, link: { href: "privacy-policy.html", label: "Read the privacy notice" } },
+      ],
     },
     partnership: {
       title: "Request the partnership prospectus",
@@ -259,7 +279,7 @@ body.modal-open { overflow: hidden; }
         <button type="button" data-form="guest" data-role="Special Guest Speaker">Special Guest Speaker <small>· Up to 6 applications</small></button>
         <button type="button" data-form="keynote" data-role="Distinguished Keynote Speaker">Distinguished Keynote Speaker <small>· Up to 6 applications</small></button>
         <button type="button" data-form="panelist" data-role="Panelist">Panelist</button>
-        <button type="button" data-redirect="partner-registration.html?package=Exhibitor">Exhibitor</button>
+        <button type="button" data-form="exhibitor">Exhibitor</button>
         <button type="button" data-form="technical" data-role="Technical Keynote Presenter">Technical Keynote Presenter <small>· Up to 12 applications</small></button>
         <button type="button" data-form="poster" data-role="Poster Presenter">Poster Presenter <small>· Up to 20 applications</small></button>
       </div>
